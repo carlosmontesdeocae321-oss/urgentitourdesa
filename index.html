@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>URGENTITO URDESA</title>
+    <link rel="icon" href="assets/logo300u.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- palms-left and palms-right removed (palmera.png references deleted) -->
+  <main class="poster" role="main">
+    <header class="brand" aria-label="Marca URGENTITO URDESA">
+      <div class="brand-line">URGENTITO</div>
+      <div class="brand-sub">URDESA</div>
+      <img src="assets/logo300u.ico" alt="Logo Urgentito Urdesa" class="brand-emoji" aria-hidden="true">
+    </header>
+
+    <!-- decorative mountain divider: thin white stroked SVG positioned at the split -->
+    <svg class="divider" viewBox="0 0 1440 320" preserveAspectRatio="none" aria-hidden="true">
+      <!-- mountain-like peaks (stroke only) -->
+      <path d="M0,160 C240,60 480,260 720,160 C960,60 1200,260 1440,160" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.98" />
+    </svg>
+
+    <!-- Subtle texture only in the yellow area -->
+    <div class="yellow-texture" aria-hidden="true"></div>
+
+    <!-- Car section (hero) -->
+    <section class="scene" aria-hidden="true">
+      <img src="assets/sol-alegre-gafas-sol-sosteniendo-sombrilla-dibujos-animados-3d-fondo-transparente.png" alt="Sol" class="sun">
+      <!-- decorative palm behind the car -->
+      <img src="assets/palmeraparacarro.png" srcset="assets/palmeraparacarro@2x.png 2x" sizes="(max-width:700px) 75vw, 57vw" alt="" class="palm-car" aria-hidden="true">
+      <img src="assets/viaje-carretera-verano.png" alt="Carretera" class="car">
+
+      <!-- Car-area emoji pairs (two pairs, displayed above the car) -->
+      <img src="assets/sol-alegre-gafas-sol-sosteniendo-sombrilla-dibujos-animados-3d-fondo-transparente.png" alt="Sol" class="car-emoji car-pair1-a">
+      <img src="assets/smiling-face-with-sunglasses-3d-ilustration.png" alt="Smiling" class="car-emoji car-pair1-b">
+      <img src="assets/sol-alegre-gafas-sol-sosteniendo-sombrilla-dibujos-animados-3d-fondo-transparente.png" alt="Sol" class="car-emoji car-pair2-a">
+      <img src="assets/smiling-face-with-sunglasses-3d-ilustration.png" alt="Smiling" class="car-emoji car-pair2-b">
+    </section>
+
+    <!-- Buttons section: stacked under the car -->
+    <section class="buttons-stage" aria-label="Acciones principales">
+      <div class="ctas">
+        <img src="assets/icono_rojo.png" alt="rojo" class="icon icon-red">
+        <img src="assets/icono_verde.png" alt="verde" class="icon icon-green">
+        <img src="assets/icono_azul.png" alt="azul" class="icon icon-blue">
+      </div>
+
+      <!-- Button-area emoji pairs (two pairs) placed around the CTAs but below them -->
+      <img src="assets/smiling-face-with-sunglasses-3d-ilustration.png" alt="Smiling" class="btn-emoji btn-pair1-a">
+      <img src="assets/sol-alegre-gafas-sol-sosteniendo-sombrilla-dibujos-animados-3d-fondo-transparente.png" alt="Sol" class="btn-emoji btn-pair1-b">
+      <img src="assets/smiling-face-with-sunglasses-3d-ilustration.png" alt="Smiling" class="btn-emoji btn-pair2-a">
+      <img src="assets/sol-alegre-gafas-sol-sosteniendo-sombrilla-dibujos-animados-3d-fondo-transparente.png" alt="Sol" class="btn-emoji btn-pair2-b">
+      <!-- Hotspots: transparent anchors above the images to ensure correct click targets -->
+      <div class="hotspots" aria-hidden="false">
+        <a href="https://example.com/catalogo" class="hotspot hotspot-red" aria-label="Acción roja"></a>
+        <a href="https://wa.me/message/HQSDXCG5IHIXA1" class="hotspot hotspot-green" aria-label="Acción verde"></a>
+        <a href="https://www.google.com/maps?q=10.0000,-84.0000" class="hotspot hotspot-blue" aria-label="Acción azul"></a>
+      </div>
+    </section>
+    <!-- spacer to allow scrolling to lower CTAs when needed -->
+      <div class="spacer" aria-hidden="true"></div>
+    </main>
+
+    <!-- Claim removed per user request -->
+
+    <!-- Footer fixed at bottom -->
+    <footer class="site-footer" aria-label="Mensaje inferior">
+      <div class="footer-brand">
+        <div class="footer-line">Compramos tu carro</div>
+        <div class="footer-sub">y en 10 minutos</div>
+        <div class="footer-separator" aria-hidden="true"></div>
+        <div class="footer-copy">2026 @ Urgentito Urdesa - Todos los derechos reservados.</div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+  </html>

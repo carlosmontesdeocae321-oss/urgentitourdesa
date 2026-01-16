@@ -1,0 +1,342 @@
+:root{
+  --orange:#ff7a00;
+  --yellow:#ffd400;
+  --white:#ffffff;
+  --split:39vh; /* vertical position where orange -> yellow should switch */
+  /* CTA sizing: green = 70% of red, blue = 70% of green */
+  --btn-red-w: clamp(140px,28vw,360px);
+  --btn-green-w: calc(var(--btn-red-w) * 0.7);
+  --btn-blue-w: calc(var(--btn-green-w) * 0.7);
+  --btn-size: clamp(220px,30vw,420px); /* unified button size */
+  --accent-blue:#0b3b8f;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;background:var(--yellow)}
+.poster{
+  position:relative;
+  min-height:100vh;
+  display:block;
+  padding:12px;
+  overflow:visible; /* allow page to scroll to elements placed below */
+  /* clean split background: orange top / yellow bottom using --split.
+     Image overlay is placed via ::before so the split remains consistent across sizes */
+  background: linear-gradient(to bottom, var(--orange) 0 calc(var(--split)), var(--yellow) calc(var(--split)) 100%);
+  background-attachment: fixed; /* keep the split fixed to the viewport so both colors remain visible */
+}
+
+/* Dotted texture confined to the yellow area (below --split) */
+.yellow-texture{
+  position:fixed;
+  left:0;
+  right:0;
+  top: calc(var(--split) + 0.5vh);
+  bottom:0;
+  pointer-events:none;
+  z-index:6; /* above overlay/waves but far below main content */
+  background-image:
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.20) 0 2px, rgba(255,255,255,0) 2px 18px),
+    repeating-linear-gradient(45deg, rgba(0,0,0,0.05) 0 1px, rgba(0,0,0,0) 1px 18px);
+  background-position: 0 0, 8px 8px;
+}
+
+.poster::before{
+  content: "";
+  position:fixed; /* fixed so overlay stays with viewport */
+  inset:0;
+  /* Keep a subtle sheen overlay only; palms removed to eliminate the large image */
+  background-image: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* Keep the overlay fixed to the viewport */
+  background-attachment: fixed;
+  opacity: 0.28; /* overall visibility for palms; tweak if too strong */
+  pointer-events: none;
+  z-index:4; /* below waves (5) but above base gradient of poster */
+}
+
+/* Subtle shaded waves in the orange area (keeps layout responsive, no extra images needed) */
+.poster::after{
+  content: "";
+  position:fixed; /* fixed so waves stay aligned with viewport split */
+  left: 0;
+  right: 0;
+  /* cover both orange and the upper part of yellow; positioning is responsive via --split */
+  top: calc(var(--split) * 0.02);
+  height: calc(var(--split) * 1.25);
+  pointer-events: none;
+  z-index: 5; /* above base gradient but below main content */
+  background-repeat: no-repeat, no-repeat;
+  /* first image: richer orange-area waves (top), second image: stronger yellow-area waves (lower) */
+  background-position: center top, center calc(var(--split) + 1vh);
+  background-size: cover, cover;
+  opacity: 1;
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 300' preserveAspectRatio='none'><defs><linearGradient id='g' x1='0' x2='0' y1='0' y2='1'><stop offset='0' stop-color='%23ffffff' stop-opacity='0.10'/><stop offset='1' stop-color='%23000000' stop-opacity='0.01'/></linearGradient></defs><path d='M0,80 C180,160 360,20 600,80 C840,140 960,60 1200,100 L1200,300 L0,300 Z' fill='url(%23g)'/><path d='M0,110 C220,200 420,50 600,110 C780,170 980,80 1200,130 L1200,300 L0,300 Z' fill='%23ffffff' fill-opacity='0.04'/><path d='M0,150 C240,220 480,100 600,150 C720,200 960,120 1200,170 L1200,300 L0,300 Z' fill='%23000000' fill-opacity='0.005'/></svg>"),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 240' preserveAspectRatio='none'><path d='M0,30 C150,80 350,0 600,40 C850,80 1000,10 1200,50 L1200,240 L0,240 Z' fill='%23ffffff' fill-opacity='0.05'/><path d='M0,70 C200,120 400,40 600,80 C800,120 1000,40 1200,90 L1200,240 L0,240 Z' fill='%23000000' fill-opacity='0.008'/></svg>");
+}
+/* Palm visuals removed: all rules referencing palmera.png and palms-left/right removed */
+/* removed poster pseudo-element (white bar) to keep poster clean */
+.brand{position:relative;z-index:400;text-align:center;margin-top:0}
+.brand-emoji{display:block;margin:6px auto 0;width:clamp(40px,10vw,72px);height:auto;pointer-events:none;z-index:410;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.25)}
+.brand-line{font-family:'Baloo 2', Inter, sans-serif;font-weight:800;font-size:clamp(30px,6.5vw,74px);color:#fff;text-shadow:0 5px 0 rgba(11,59,143,0.95),0 10px 14px rgba(0,0,0,0.18);padding:4px 8px}
+.brand-sub{font-weight:800;color:#00ff5a;font-size:clamp(18px,3.5vw,38px);text-shadow:0 4px 0 rgba(0,80,0,0.18);margin-top:-6px}
+.scene{position:relative;z-index:300;pointer-events:none;padding-top:0.25rem;padding-bottom:0.5rem;display:flex;justify-content:center;align-items:center;flex-direction:column}
+
+/* Decorative wave separator placed in the background */
+.divider{position:fixed;left:0;right:0;width:100%;height:12vh;top:calc(var(--split) - 6vh);display:block;z-index:20;pointer-events:none;opacity:1}
+.divider path{vector-effect:non-scaling-stroke;stroke-width:3}
+/* removed unused .wave styles */
+.car{
+  position:relative; /* place car in normal flow between header and buttons */
+  /* increase base size by +50% while keeping responsive behavior */
+  width: clamp(495px, 58vw, 1080px);
+  max-width: 92%;
+  z-index:350;
+  margin: -38vh auto 0; /* lift the car further so header text can overlay (3 lines more) */
+  transform: none; /* no scaling that would affect layout */
+}
+
+/* Decorative palm behind the car: fixed position, centered via transform.
+   JS will set left/top to keep alignment consistent across resolutions. */
+.scene .palm-car{
+  position:fixed;
+  left:auto;
+  top:auto;
+  right:auto;
+  bottom:auto;
+  transform:translate(-50%, -50%);
+  width: clamp(360px,56vw,900px);
+  max-width:900px;
+  z-index: 240; /* below .car (350) and emoji layers */
+  pointer-events:none;
+  opacity:0.95;
+  object-fit:contain;
+  transform-origin: 50% 100%;
+  will-change: transform;
+  animation: palm-sway 4.8s ease-in-out infinite;
+}
+
+@keyframes palm-sway{
+  0%   { transform: translate(-50%, -50%) rotate(-1.4deg) translateY(0px) }
+  50%  { transform: translate(-50%, -50%) rotate(1.6deg) translateY(-6px) translateX(2px) }
+  100% { transform: translate(-50%, -50%) rotate(-1.4deg) translateY(0px) }
+}
+
+/* `.palm-car` rules removed — decorative palm for car has been deleted */
+
+/* Allow car animation but keep it non-interactive */
+.car, .car img, .car * {
+  transition: none !important;
+  pointer-events: none;
+}
+@keyframes car-vibrate{
+  0%{ transform: translateY(0) rotate(0.08deg) }
+  50%{ transform: translateY(-1.6px) rotate(-0.08deg) }
+  100%{ transform: translateY(0) rotate(0.08deg) }
+}
+.car{
+  animation: car-vibrate 1.8s ease-in-out infinite;
+}
+.scene img{pointer-events:none}
+.sun{position:absolute;top:8px;right:6vw;width:clamp(60px,10vw,140px);z-index:9}
+/* New emoji pairs: removed previous single emojis. */
+/* Car-area emoji pairs (two pairs, each pair = two images) positioned above the car */
+.car-emoji{position:absolute;pointer-events:none;width:clamp(48px,8.5vw,120px);z-index:360;display:block}
+.car-pair1-a{left:calc(50% - 30vw); top: 18vh; animation:emoji-float 4.6s ease-in-out infinite; animation-delay:0s}
+.car-pair1-b{left:calc(50% - 25vw); top: 30vh; animation:emoji-float 4.8s ease-in-out infinite; animation-delay:0.2s}
+.car-pair2-a{left:calc(50% - 8vw); top: 5vh; animation:emoji-float 4.2s ease-in-out infinite; animation-delay:0.15s}
+.car-pair2-b{left:calc(50% + 15vw); top: 30vh; animation:emoji-float 4.4s ease-in-out infinite; animation-delay:0.35s}
+
+/* Button-area emoji pairs (two pairs) placed around the CTAs but below them (not on top) */
+.buttons-stage{display:flex;flex-direction:column;align-items:center;gap:12px;padding:8px 0 6px 0;margin-top:0;position:relative}
+.btn-emoji{position:absolute;pointer-events:none;width:clamp(40px,7vw,100px);z-index:130}
+.btn-pair1-a{left:calc(50% - 30vw); top: 15vh; animation:emoji-float 4.8s ease-in-out infinite; animation-delay:0.1s}
+.btn-pair1-b{left:calc(50% - 20vw); top: 28vh; animation:emoji-float 4.6s ease-in-out infinite; animation-delay:0.3s}
+.btn-pair2-a{left:calc(50% + 20vw); top: 26vh; animation:emoji-float 4.9s ease-in-out infinite; animation-delay:0.15s}
+.btn-pair2-b{left:calc(50% + 16vw); top: 15vh; animation:emoji-float 4.7s ease-in-out infinite; animation-delay:0.35s}
+
+@keyframes emoji-float{
+  0%{transform:translateY(0) rotate(-4deg)}
+ 50%{transform:translateY(-8px) rotate(4deg)}
+ 100%{transform:translateY(0) rotate(-4deg)}
+}
+/* Overlapped stacked CTAs: centered absolutely, buttons positioned by top offsets */
+/* (deduped: base .buttons-stage defined above with position:relative) */
+/* CTAs: stacked vertically so each button is visible one below another */
+.ctas{position:relative;z-index:150;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:2px;padding:2px 0}
+/* Each button is absolutely positioned inside .ctas so they overlap visually
+   but remain individual anchors and clickable. .ctas has pointer-events:none
+   to avoid blocking, while buttons have pointer-events:auto. */
+.btn{display:block;border-radius:34px;overflow:hidden;padding:0;background:transparent;border:0;position:relative;left:auto;transform:none;pointer-events:auto;margin:0 auto}
+
+/* Icons: images are kept in the DOM but specific img sizing/animation for the previous
+  button system has been removed so they can be repositioned freely. Use the
+  `.icon`, `.icon-red`, `.icon-green`, `.icon-blue` classes for future positioning. */
+
+/* Regular icon sizing for normal display; responsive downscale on small screens */
+.icon{
+  width: clamp(240px, 24vw, 390px); /* 1.5x larger */
+  height: auto;
+  display:block;
+  pointer-events:auto;
+}
+
+/* Use negative margin-top for vertical offsets so transforms can be used for animations
+   without clobbering positioning. Icons will animate independently via transform. */
+.icon-green{ display:inline-block; margin-top: -44px; }
+.icon-blue{ display:inline-block; margin-top: -120px; }
+
+/* Icon animations: subtle bob/scale to add life without interfering with clicks. */
+@keyframes icon-bob{
+  0%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-8px) scale(1.035)}
+  100%{transform:translateY(0) scale(1)}
+}
+.icon{
+  animation-name: icon-bob;
+  animation-duration: 4.2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  transform-origin: center;
+  z-index:130; /* keep icons below hotspots */
+}
+.icon-red{ animation-duration:4.0s; animation-delay:0s }
+.icon-green{ animation-duration:4.5s; animation-delay:0.12s }
+.icon-blue{ animation-duration:3.8s; animation-delay:0.28s }
+
+/* Hover/vibrate interaction: apply a short vibration-like animation when hovered
+   and keep the bobbing animation running. Use the .hover class added by JS
+   (or :hover) to trigger the stronger effect without interrupting the bob. */
+@keyframes icon-vibrate{
+  0%{transform:translateY(0) rotate(0deg) scale(1)}
+  10%{transform:translateY(-3px) rotate(-1deg) scale(1.02)}
+  20%{transform:translateY(3px) rotate(1deg) scale(1.02)}
+  30%{transform:translateY(-2px) rotate(-0.5deg) scale(1.01)}
+  40%{transform:translateY(2px) rotate(0.5deg) scale(1.01)}
+  100%{transform:translateY(0) rotate(0deg) scale(1)}
+}
+
+.icon.hover, .icon:hover {
+  animation: icon-vibrate 360ms ease-in-out 1, icon-bob 4.2s ease-in-out infinite;
+}
+
+@media (max-width:700px){
+  /* Mobile: scaled up by ~1.5x as well, but smaller absolute sizes; offsets reduced */
+  .icon{ width: clamp(150px, 30vw, 240px); }
+  .icon-green{ margin-top: -16px; }
+  .icon-blue{ margin-top: -60px; }
+}
+
+@media (max-width:700px){
+  /* Removed per-icon responsive sizing to allow manual repositioning */
+  .buttons-stage{margin-top:0}
+  .scene{padding-top: calc(clamp(180px,44vw,420px) * 0.9 + 2vh)}
+  .car{
+    /* mobile: increase by +50% as well */
+    position:relative;
+    width: clamp(405px, 66vw, 945px);
+    max-width: 92%;
+    margin: -36vh auto 0; /* slightly lift on small screens so header overlays (3 lines more) */
+    transform: none;
+    z-index:350;
+  }
+  .ctas{position:relative;height:auto}
+  /* removed .wave height (unused) */
+}
+
+/* Bottom spacing above the footer */
+.buttons-stage{margin-bottom:0}
+
+@media (max-width:700px){
+  .buttons-stage{margin-bottom:0}
+}
+
+/* Gentle floating animation for CTAs */
+/* removed unused keyframes: float */
+/* Per-button image animation and hover-specific image rules removed so icons
+   can be repositioned independently. Reintroduce custom icon animations later
+   via the .icon-* classes if needed. */
+
+/* removed unused keyframes: btn-bob */
+
+.hotspots{position:relative;left:auto;transform:none;width:100%;height:auto;z-index:140;pointer-events:auto;display:block}
+.hotspot{position:absolute;display:block;pointer-events:auto;background:transparent;border:0}
+.hotspot-red{width:clamp(140px,28vw,360px);height:42px;z-index:260}
+.hotspot-green{width:clamp(140px,28vw,360px);height:42px;z-index:270}
+.hotspot-blue{width:clamp(140px,28vw,360px);height:42px;z-index:280}
+.hotspot:focus{outline:2px solid rgba(0,0,0,0.12)}
+
+@media (max-width:700px){
+  .hotspot-red{height:96px}
+  .hotspot-green{height:96px;top:80px}
+  .hotspot-blue{height:96px;top:120px}
+}
+/* spacer to allow scrolling so lower pills are reachable */
+.spacer{height:0;background:transparent}
+/* removed .more section styles (section eliminated) */
+
+/* Claim removed */
+
+@media (max-width:700px){
+  .hotspots{bottom:auto}
+  .ctas{bottom:auto;height:auto}
+  /* mobile: position CTAs fixed above the claim/footer */
+  /* Removed fixed-bottom override to keep CTAs in normal flow on mobile */
+  /* Claim removed */
+  /* removed unused extra emoji positioning classes */
+}
+
+@media (max-width:420px){
+  /* removed unused extra emoji positions on very small screens */
+}
+
+/* Footer (end of document, not sticky) */
+.site-footer{
+  position:static;
+  text-align:center;
+  opacity:1;
+  padding:6px 0 16px 0;
+  margin:0;
+}
+
+.footer-brand{display:inline-block}
+.footer-line{
+  font-family:'Baloo 2', Inter, sans-serif;
+  font-weight:800;
+  text-transform:uppercase;
+  color:#ffffff; /* como URGENTITO */
+  text-shadow:0 5px 0 rgba(11,59,143,0.95), 0 10px 14px rgba(0,0,0,0.18);
+  font-size:clamp(30px,6.5vw,74px);
+  padding:4px 8px;
+}
+.footer-sub{
+  font-family:'Baloo 2', Inter, sans-serif;
+  font-weight:800;
+  text-transform:uppercase;
+  color:#00ff5a; /* como URDESA */
+  text-shadow:0 4px 0 rgba(0,80,0,0.18);
+  font-size:clamp(18px,3.5vw,38px);
+  margin-top:-6px;
+  line-height:1;
+}
+
+/* speed-lines removed per user request */
+
+.footer-separator{
+  width: clamp(160px, 36vw, 420px);
+  height: 2px;
+  margin: 10px auto 8px auto;
+  background: rgba(255,255,255,0.85);
+  border-radius: 2px;
+}
+
+.footer-copy{
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-weight:600;
+  color:#ffffff;
+  text-shadow:0 2px 0 rgba(11,59,143,0.45);
+  font-size:clamp(12px,1.4vw,14px);
+}
+
+/* removed unused palms-related rules and legacy comments */
