@@ -180,14 +180,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const top = Math.round(btnRect.top - parentRect.top);
         const left = Math.round(btnRect.left - parentRect.left);
         const width = Math.round(btnRect.width);
-        // Use the full visible image height for the hotspot so the
-        // clickable area matches what the user sees.
         let height = Math.round(btnRect.height);
-        // Use fixed positioning so hotspots align to viewport coordinates
-        // (avoids issues when the .hotspots container is offset or resized).
-        hot.style.position = 'fixed';
-        hot.style.top = `${Math.round(btnRect.top)}px`;
-        hot.style.left = `${Math.round(btnRect.left)}px`;
+        // Position hotspots relative to their container so they track layout changes
+        hot.style.position = 'absolute';
+        hot.style.top = `${top}px`;
+        hot.style.left = `${left}px`;
         hot.style.width = `${width}px`;
         hot.style.height = `${height}px`;
         hot.style.transform = 'none';

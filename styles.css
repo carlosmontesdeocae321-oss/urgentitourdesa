@@ -35,6 +35,7 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
   left:0;
   right:0;
   top: calc(var(--split) + 0.5vh);
+  top: calc(var(--split) + 0.5dvh);
   bottom:0;
   pointer-events:none;
   z-index:6; /* above overlay/waves but far below main content */
@@ -74,6 +75,7 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
   background-repeat: no-repeat, no-repeat;
   /* first image: richer orange-area waves (top), second image: stronger yellow-area waves (lower) */
   background-position: center top, center calc(var(--split) + 1vh);
+  background-position: center top, center calc(var(--split) + 1dvh);
   background-size: cover, cover;
   opacity: 1;
   background-image:
@@ -112,6 +114,7 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 
 /* Decorative wave separator placed in the background */
 .divider{position:fixed;left:0;right:0;width:100%;height:12vh;top:calc(var(--split) - 6vh);display:block;z-index:20;pointer-events:none;opacity:1}
+.divider{height:12dvh; top:calc(var(--split) - 6dvh)}
 .divider path{vector-effect:non-scaling-stroke;stroke-width:3}
 /* removed unused .wave styles */
 .car{
@@ -121,6 +124,7 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
   max-width: 92%;
   z-index:800; /* car above emojis and other images */
   margin: -38vh auto 0; /* lift the car further so header text can overlay (3 lines more) */
+  margin: -38dvh auto 0;
   transform: none; /* no scaling that would affect layout */
 }
 
@@ -145,17 +149,25 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 /* Car-area emoji pairs (two pairs, each pair = two images) positioned above the car */
 .car-emoji{position:absolute;pointer-events:none;width:clamp(48px,8.5vw,120px);z-index:360;display:block}
 .car-pair1-a{left:calc(50% - 30vw); top: 18vh; animation:emoji-float 4.6s ease-in-out infinite; animation-delay:0s}
+.car-pair1-a{top: 18dvh}
 .car-pair1-b{left:calc(50% - 25vw); top: 30vh; animation:emoji-float 4.8s ease-in-out infinite; animation-delay:0.2s}
+.car-pair1-b{top: 30dvh}
 .car-pair2-a{left:calc(50% - 8vw); top: 5vh; animation:emoji-float 4.2s ease-in-out infinite; animation-delay:0.15s}
+.car-pair2-a{top: 5dvh}
 .car-pair2-b{left:calc(50% + 15vw); top: 30vh; animation:emoji-float 4.4s ease-in-out infinite; animation-delay:0.35s}
+.car-pair2-b{top: 30dvh}
 
 /* Button-area emoji pairs (two pairs) placed around the CTAs but below them (not on top) */
 .buttons-stage{display:flex;flex-direction:column;align-items:center;gap:10px;padding:6px 0 0 0;margin-top:0;position:relative}
 .btn-emoji{position:absolute;pointer-events:none;width:clamp(40px,7vw,100px);z-index:130}
 .btn-pair1-a{left:calc(50% - 30vw); top: 15vh; animation:emoji-float 4.8s ease-in-out infinite; animation-delay:0.1s}
+.btn-pair1-a{top: 15dvh}
 .btn-pair1-b{left:calc(50% - 20vw); top: 28vh; animation:emoji-float 4.6s ease-in-out infinite; animation-delay:0.3s}
+.btn-pair1-b{top: 28dvh}
 .btn-pair2-a{left:calc(50% + 20vw); top: 26vh; animation:emoji-float 4.9s ease-in-out infinite; animation-delay:0.15s}
+.btn-pair2-a{top: 26dvh}
 .btn-pair2-b{left:calc(50% + 16vw); top: 15vh; animation:emoji-float 4.7s ease-in-out infinite; animation-delay:0.35s}
+.btn-pair2-b{top: 15dvh}
 
 @keyframes emoji-float{
   0%{transform:translateY(0) rotate(-4deg)}
@@ -235,7 +247,7 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
   /* Removed per-icon responsive sizing to allow manual repositioning */
   .buttons-stage{margin-top:0}
   /* Keep car below logo but reduce separation to match desktop rhythm */
-  .scene{margin-top: clamp(54px, 7.2vh, 84px); padding-top: calc(clamp(180px,44vw,420px) * 0.45)}
+  .scene{margin-top: clamp(54px, 7.2vh, 84px); margin-top: clamp(54px, 7.2dvh, 84px); padding-top: calc(clamp(180px,44vw,420px) * 0.45)}
   .car{
     /* mobile: increase by +50% as well */
     position:relative;
@@ -244,6 +256,7 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
     max-width: 92%;
     /* raise car a bit so buttons sit closer */
     margin: -36vh auto 0;
+    margin: -36dvh auto 0;
     transform: none;
     z-index:800;
   }
@@ -331,6 +344,7 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
   :root{ --footer-lift-m: clamp(180px, 26vw, 300px); }
   .scene{ padding-top: calc(clamp(180px,44vw,420px) * 0.42) }
   .car{ margin: -46vh auto 0 }
+  .car{ margin: -46dvh auto 0 }
   .icon{ width: clamp(160px, 30vw, 248px) }
   .icon-green{ margin-top: -22px }
   .icon-blue{ margin-top: -54px }
@@ -338,6 +352,7 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
   .hotspot-blue{ top: 180px }
   /* Keep footer below buttons; add small gap */
   .buttons-stage{ margin-bottom: clamp(10px, 2.2vh, 16px); }
+  .buttons-stage{ margin-bottom: clamp(10px, 2.2dvh, 16px); }
   .site-footer{ margin-top: 0; }
 }
 
@@ -345,6 +360,7 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
   :root{ --footer-lift-m: clamp(160px, 24vw, 280px); }
   .scene{ padding-top: calc(clamp(180px,44vw,420px) * 0.40) }
   .car{ margin: -48vh auto 0 }
+  .car{ margin: -48dvh auto 0 }
   .icon{ width: clamp(152px, 28vw, 236px) }
   .icon-green{ margin-top: -22px }
   .icon-blue{ margin-top: -56px }
@@ -352,6 +368,7 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
   .hotspot-blue{ top: 170px }
   /* Ensure footer remains below buttons */
   .buttons-stage{ margin-bottom: clamp(12px, 2.6vh, 20px); }
+  .buttons-stage{ margin-bottom: clamp(12px, 2.6dvh, 20px); }
   .site-footer{ margin-top: 0; }
 }
 
@@ -359,6 +376,7 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
   :root{ --footer-lift-m: clamp(140px, 22vw, 250px); }
   .scene{ padding-top: calc(clamp(180px,44vw,420px) * 0.40) }
   .car{ margin: -36vh auto 0 }
+  .car{ margin: -36dvh auto 0 }
   .icon{ width: clamp(144px, 26vw, 226px) }
   .icon-green{ margin-top: -20px }
   .icon-blue{ margin-top: -56px }
@@ -366,6 +384,7 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
   .hotspot-blue{ top: 168px }
   /* On very small heights, avoid any overlap: keep footer below buttons */
   .buttons-stage{ margin-bottom: clamp(10px, 2.4vh, 16px); }
+  .buttons-stage{ margin-bottom: clamp(10px, 2.4dvh, 16px); }
   .site-footer{ margin-top: 0; }
 }
 /* Base footer container styles (previously malformed block fixed) */
