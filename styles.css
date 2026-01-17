@@ -12,7 +12,7 @@
   /* Mobile footer lift baseline (can be overridden by height breakpoints) */
   --footer-lift-m: clamp(200px, 28vw, 320px);
   /* Optional background photo URL + opacity */
-  --bg-photo-url: url('assets/background.png');
+  --bg-photo-url: none; /* default: no background photo */
   --bg-photo-opacity: 1;
 }
 *{box-sizing:border-box}
@@ -93,6 +93,7 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
   background-repeat: no-repeat;
   opacity: var(--bg-photo-opacity, 1);
   transition: opacity 200ms ease;
+  display: none; /* hidden unless has-bg-photo is active */
 }
 
 /* When a background photo is active, hide curve divider, yellow texture and poster overlays */
@@ -100,6 +101,7 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 .has-bg-photo .yellow-texture{ display: none !important; }
 .has-bg-photo .poster::before{ opacity: 0 !important; background-image: none !important; }
 .has-bg-photo .poster::after{ opacity: 0 !important; background-image: none !important; }
+.has-bg-photo .bg-photo{ display: block; }
 /* Palm visuals removed: all rules referencing palmera.png and palms-left/right removed */
 /* removed poster pseudo-element (white bar) to keep poster clean */
 .brand{position:relative;z-index:400;text-align:center;margin-top:0}
