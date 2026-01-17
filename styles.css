@@ -14,6 +14,8 @@
   /* Optional background photo URL + opacity */
   --bg-photo-url: url('assets/background.png');
   --bg-photo-opacity: 1;
+  /* Consistent CTA → footer gap (avoid vh differences) */
+  --cta-gap: clamp(8px, 2.2vw, 16px);
 }
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;background:var(--yellow)}
@@ -440,7 +442,8 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
 
 @media (max-width:700px){
   /* Footer immediately below the blue button with a small gap and lifted closer */
-  .buttons-stage{ margin-bottom: clamp(10px, 2vh, 16px); }
+  /* Footer below blue button with a consistent small gap */
+  .buttons-stage{ margin-bottom: var(--cta-gap) !important; }
   .site-footer{ margin-top: calc(-1 * clamp(110px, 12vw, 160px)); padding-top: 2px; z-index:500; }
   /* Enforce footer formatting and center on small screens */
   .footer-brand{ display:block; text-align:center; }
