@@ -103,6 +103,15 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
   display: none; /* hidden unless has-bg-photo is active */
 }
 
+/* Desktop/laptop: fill the screen but keep good contrast */
+@media (hover: hover) and (pointer: fine) {
+  .has-bg-photo .bg-photo{
+    background-size: cover;                 /* expand to fill */
+    background-color: rgba(0,0,0,0.20);     /* gentle dark overlay */
+    background-blend-mode: multiply;        /* improves contrast without distorting colors */
+  }
+}
+
 /* When a background photo is active, hide curve divider, yellow texture and poster overlays */
 .has-bg-photo .divider{ display: none !important; }
 .has-bg-photo .yellow-texture{ display: none !important; }
