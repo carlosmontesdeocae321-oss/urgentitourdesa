@@ -317,4 +317,10 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
   font-size:clamp(12px,1.4vw,14px);
 }
 
+@media (max-width:700px){
+  /* Keep the footer close to the blue button: about 5 stripes gap */
+  .buttons-stage{ margin-bottom: clamp(60px, 7vh, 96px); }
+  .site-footer{ margin-top: -140px; }
+}
+
 /* removed unused palms-related rules and legacy comments */
