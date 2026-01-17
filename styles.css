@@ -271,11 +271,12 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 
 /* Footer (end of document, not sticky) */
 .site-footer{
-  position:static;
+  position:relative; /* allow z-index to overlay other layers */
+  z-index:500;       /* above emojis, hotspots and textures */
   text-align:center;
   opacity:1;
   padding:4px 0 10px 0;
-  margin: -18px 0 0 0; /* pull footer further up on mobile */
+  margin: -18px 0 0 0; /* pull footer slightly up on mobile too */
 }
 
 .footer-brand{display:inline-block}
@@ -320,7 +321,7 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 @media (max-width:700px){
   /* Footer should appear right below the blue button with a small gap */
   .buttons-stage{ margin-bottom: clamp(14px, 2.6vh, 24px); }
-  .site-footer{ margin-top: -40px; padding-top: 2px; }
+  .site-footer{ margin-top: -68px; padding-top: 2px; z-index:500; }
 }
 
 /* removed unused palms-related rules and legacy comments */
