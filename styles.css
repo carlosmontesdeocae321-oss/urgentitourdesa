@@ -278,24 +278,30 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 /* Height-based mobile adjustments for consistent layout across devices */
 @media (max-width:700px) and (max-height:740px){
   :root{ --footer-lift-m: clamp(180px, 26vw, 300px); }
-  .scene{ padding-top: calc(clamp(180px,44vw,420px) * 0.46) }
-  .car{ margin: -32vh auto 0 }
+  .scene{ padding-top: calc(clamp(180px,44vw,420px) * 0.42) }
+  .car{ margin: -38vh auto 0 }
   .icon{ width: clamp(160px, 30vw, 248px) }
-  .icon-green{ margin-top: -16px }
-  .icon-blue{ margin-top: -48px }
-  .hotspot-green{ top: 100px }
-  .hotspot-blue{ top: 188px }
+  .icon-green{ margin-top: -22px }
+  .icon-blue{ margin-top: -54px }
+  .hotspot-green{ top: 96px }
+  .hotspot-blue{ top: 180px }
+  /* Keep footer below buttons; add small gap */
+  .buttons-stage{ margin-bottom: clamp(10px, 2.2vh, 16px); }
+  .site-footer{ margin-top: 0; }
 }
 
 @media (max-width:700px) and (max-height:660px){
   :root{ --footer-lift-m: clamp(160px, 24vw, 280px); }
-  .scene{ padding-top: calc(clamp(180px,44vw,420px) * 0.44) }
-  .car{ margin: -34vh auto 0 }
+  .scene{ padding-top: calc(clamp(180px,44vw,420px) * 0.40) }
+  .car{ margin: -40vh auto 0 }
   .icon{ width: clamp(152px, 28vw, 236px) }
-  .icon-green{ margin-top: -18px }
-  .icon-blue{ margin-top: -52px }
-  .hotspot-green{ top: 92px }
-  .hotspot-blue{ top: 176px }
+  .icon-green{ margin-top: -22px }
+  .icon-blue{ margin-top: -56px }
+  .hotspot-green{ top: 90px }
+  .hotspot-blue{ top: 170px }
+  /* Ensure footer remains below buttons */
+  .buttons-stage{ margin-bottom: clamp(12px, 2.6vh, 20px); }
+  .site-footer{ margin-top: 0; }
 }
 
 @media (max-width:700px) and (max-height:580px){
