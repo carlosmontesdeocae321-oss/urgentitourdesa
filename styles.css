@@ -197,7 +197,8 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 
 @media (max-width:700px){
   /* Mobile: scaled up by ~1.5x as well, but smaller absolute sizes; offsets reduced */
-  .icon{ width: clamp(150px, 30vw, 240px); }
+  /* Slightly smaller icons to free vertical space */
+  .icon{ width: clamp(136px, 26vw, 212px); }
   .icon-green{ margin-top: -28px; }
   .icon-blue{ margin-top: -60px; }
 }
@@ -205,16 +206,16 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 @media (max-width:700px){
   /* Removed per-icon responsive sizing to allow manual repositioning */
   .buttons-stage{margin-top:0}
-  /* Reserve space below the header logo and reduce overall top padding */
-  .scene{margin-top: clamp(56px, 8vh, 84px); padding-top: calc(clamp(180px,44vw,420px) * 0.66)}
+  /* Reserve space below the header logo and reduce overall top padding further */
+  .scene{margin-top: clamp(56px, 7.5vh, 84px); padding-top: calc(clamp(180px,44vw,420px) * 0.58)}
   .car{
     /* mobile: increase by +50% as well */
     position:relative;
     /* slightly smaller to avoid overlapping the top logo */
-    width: clamp(360px, 58vw, 820px);
+    width: clamp(360px, 56vw, 800px);
     max-width: 92%;
-    /* lift, but less aggressive so it sits below the logo */
-    margin: -34vh auto 0;
+    /* lift a bit more so footer is visible without scroll */
+    margin: -37vh auto 0;
     transform: none;
     z-index:350;
   }
@@ -274,7 +275,7 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
   text-align:center;
   opacity:1;
   padding:4px 0 10px 0;
-  margin: -6px 0 0 0; /* pull footer slightly up on mobile too */
+  margin: -18px 0 0 0; /* pull footer further up on mobile */
 }
 
 .footer-brand{display:inline-block}
