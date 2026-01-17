@@ -95,22 +95,17 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
   z-index: 250; /* above divider(20)/texture(6) and poster overlays, below scene(300)+brand(400) */
   pointer-events: none;
   background-image: var(--bg-photo-url, none);
-  background-size: contain;
+  background-size: cover; /* fill toda la pantalla en móvil y escritorio */
   background-position: center;
   background-repeat: no-repeat;
+  background-color: rgba(0,0,0,0.20); /* overlay sutil para contraste */
+  background-blend-mode: multiply;
   opacity: var(--bg-photo-opacity, 1);
   transition: opacity 200ms ease;
   display: none; /* hidden unless has-bg-photo is active */
 }
 
-/* Desktop/laptop: fill the screen but keep good contrast */
-@media (hover: hover) and (pointer: fine) {
-  .has-bg-photo .bg-photo{
-    background-size: cover;                 /* expand to fill */
-    background-color: rgba(0,0,0,0.20);     /* gentle dark overlay */
-    background-blend-mode: multiply;        /* improves contrast without distorting colors */
-  }
-}
+/* Overlay de contraste ya aplicado arriba de forma global */
 
 /* When a background photo is active, hide curve divider, yellow texture and poster overlays */
 .has-bg-photo .divider{ display: none !important; }
