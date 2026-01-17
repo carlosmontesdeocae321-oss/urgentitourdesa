@@ -258,6 +258,25 @@ a, img{ -webkit-tap-highlight-color: transparent; }
 /* remove stray focus outline rule to prevent visible square */
 /* (accessibility maintained via keyboard navigation styles elsewhere if needed) */
 
+/* Cross-browser: fully hide tap/click highlight and focus ring on hotspots */
+.hotspot,
+.hotspot:link,
+.hotspot:visited{
+  -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -ms-user-select: none;
+  touch-action: manipulation;
+  outline: none !important;
+  box-shadow: none !important;
+}
+.hotspot:focus,
+.hotspot:active{ outline: none !important; box-shadow: none !important; }
+.hotspot::-moz-focus-inner{ border: 0; }
+.hotspot:-moz-focusring{ outline: none; }
+a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
+
 @media (max-width:700px){
   .hotspot-red{height:112px}
   .hotspot-green{height:112px;top:96px}
