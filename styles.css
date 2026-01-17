@@ -321,7 +321,8 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 @media (max-width:700px){
   /* Footer immediately below the blue button with minimal gap */
   .buttons-stage{ margin-bottom: 0; }
-  .site-footer{ margin-top: calc(-1 * clamp(110px, 12vw, 160px)); padding-top: 2px; z-index:500; }
+  /* Raise footer about ~15 stripes (~270px) above prior setting */
+  .site-footer{ margin-top: calc(-1 * clamp(240px, 34vw, 380px)); padding-top: 2px; z-index:500; }
 }
 
 /* removed unused palms-related rules and legacy comments */
