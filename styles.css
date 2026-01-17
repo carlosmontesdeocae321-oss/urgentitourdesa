@@ -378,8 +378,8 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
 
 @media (max-width:700px){
   .hotspot-red{height:112px}
-  .hotspot-green{height:112px;top:96px}
-  .hotspot-blue{height:112px;top:184px}
+  .hotspot-green{height:120px;top:104px}
+  .hotspot-blue{height:120px;top:204px}
 }
 /* spacer to allow scrolling so lower pills are reachable */
 .spacer{height:0;background:transparent}
@@ -402,13 +402,17 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
 
 /* Móvil: usar tokens estables (sin depender de height/vh) */
 @media (max-width:700px){
-  .icon{ width: clamp(168px, 32vw, 260px) }
+  /* Botones un poco más grandes en móvil */
+  .icon{ width: clamp(190px, 36vw, 300px) }
   .icon-green{ margin-top: -20px !important }
   .icon-blue{ margin-top: calc(-1 * var(--cta-offset)) !important }
-  .hotspot-green{ top: 96px !important }
-  .hotspot-blue{ top: 184px !important }
-  .scene{ padding-top: calc(clamp(180px,44vw,420px) * 0.42) !important }
-  .car{ margin: calc(-1 * var(--car-lift)) auto 0 !important }
+  /* Hotspots: acompaña el nuevo tamaño de los botones */
+  .hotspot-red,.hotspot-green,.hotspot-blue{ width: clamp(190px, 36vw, 300px) !important }
+  .hotspot-green{ top: 104px !important }
+  .hotspot-blue{ top: 204px !important }
+  /* Subir el carro en móvil (menos aire entre logo y carro) */
+  .scene{ margin-top: clamp(18px, 4vw, 40px) !important; padding-top: calc(clamp(150px,38vw,340px) * 0.30) !important }
+  .car{ margin: calc(-1 * (var(--car-lift) + 44px)) auto 0 !important }
 }
 /* Base footer container styles (previously malformed block fixed) */
 .site-footer{
