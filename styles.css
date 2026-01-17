@@ -123,7 +123,7 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 .car-pair2-b{left:calc(50% + 15vw); top: 30vh; animation:emoji-float 4.4s ease-in-out infinite; animation-delay:0.35s}
 
 /* Button-area emoji pairs (two pairs) placed around the CTAs but below them (not on top) */
-.buttons-stage{display:flex;flex-direction:column;align-items:center;gap:6px;padding:6px 0 0 0;margin-top:0;position:relative}
+.buttons-stage{display:flex;flex-direction:column;align-items:center;gap:10px;padding:6px 0 0 0;margin-top:0;position:relative}
 .btn-emoji{position:absolute;pointer-events:none;width:clamp(40px,7vw,100px);z-index:130}
 .btn-pair1-a{left:calc(50% - 30vw); top: 15vh; animation:emoji-float 4.8s ease-in-out infinite; animation-delay:0.1s}
 .btn-pair1-b{left:calc(50% - 20vw); top: 28vh; animation:emoji-float 4.6s ease-in-out infinite; animation-delay:0.3s}
@@ -150,7 +150,7 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 
 /* Regular icon sizing for normal display; responsive downscale on small screens */
 .icon{
-  width: clamp(240px, 24vw, 390px); /* 1.5x larger */
+  width: clamp(280px, 28vw, 460px); /* larger default size */
   height: auto;
   display:block;
   pointer-events:auto;
@@ -158,8 +158,8 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 
 /* Use negative margin-top for vertical offsets so transforms can be used for animations
    without clobbering positioning. Icons will animate independently via transform. */
-.icon-green{ display:inline-block; margin-top: -44px; }
-.icon-blue{ display:inline-block; margin-top: -120px; }
+.icon-green{ display:inline-block; margin-top: -28px; }
+.icon-blue{ display:inline-block; margin-top: -96px; }
 
 /* Icon animations: subtle bob/scale to add life without interfering with clicks. */
 @keyframes icon-bob{
@@ -197,10 +197,10 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 
 @media (max-width:700px){
   /* Mobile: scaled up by ~1.5x as well, but smaller absolute sizes; offsets reduced */
-  /* Slightly smaller icons to free vertical space */
-  .icon{ width: clamp(136px, 26vw, 212px); }
-  .icon-green{ margin-top: -28px; }
-  .icon-blue{ margin-top: -60px; }
+  /* Larger buttons on mobile */
+  .icon{ width: clamp(168px, 32vw, 260px); }
+  .icon-green{ margin-top: -18px; }
+  .icon-blue{ margin-top: -40px; }
 }
 
 @media (max-width:700px){
@@ -240,15 +240,15 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 
 .hotspots{position:relative;left:auto;transform:none;width:100%;height:auto;z-index:140;pointer-events:auto;display:block}
 .hotspot{position:absolute;display:block;pointer-events:auto;background:transparent;border:0}
-.hotspot-red{width:clamp(140px,28vw,360px);height:42px;z-index:260}
-.hotspot-green{width:clamp(140px,28vw,360px);height:42px;z-index:270}
-.hotspot-blue{width:clamp(140px,28vw,360px);height:42px;z-index:280}
+.hotspot-red{width:clamp(160px,32vw,420px);height:42px;z-index:260}
+.hotspot-green{width:clamp(160px,32vw,420px);height:42px;z-index:270}
+.hotspot-blue{width:clamp(160px,32vw,420px);height:42px;z-index:280}
 .hotspot:focus{outline:2px solid rgba(0,0,0,0.12)}
 
 @media (max-width:700px){
-  .hotspot-red{height:96px}
-  .hotspot-green{height:96px;top:80px}
-  .hotspot-blue{height:96px;top:120px}
+  .hotspot-red{height:112px}
+  .hotspot-green{height:112px;top:104px}
+  .hotspot-blue{height:112px;top:208px}
 }
 /* spacer to allow scrolling so lower pills are reachable */
 .spacer{height:0;background:transparent}
