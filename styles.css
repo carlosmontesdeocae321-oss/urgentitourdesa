@@ -205,13 +205,16 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 @media (max-width:700px){
   /* Removed per-icon responsive sizing to allow manual repositioning */
   .buttons-stage{margin-top:0}
-  .scene{padding-top: calc(clamp(180px,44vw,420px) * 0.72)}
+  /* Reserve space below the header logo and reduce overall top padding */
+  .scene{margin-top: clamp(56px, 8vh, 84px); padding-top: calc(clamp(180px,44vw,420px) * 0.66)}
   .car{
     /* mobile: increase by +50% as well */
     position:relative;
-    width: clamp(405px, 66vw, 945px);
+    /* slightly smaller to avoid overlapping the top logo */
+    width: clamp(360px, 58vw, 820px);
     max-width: 92%;
-    margin: -42vh auto 0; /* lift further to reduce scroll on phones */
+    /* lift, but less aggressive so it sits below the logo */
+    margin: -34vh auto 0;
     transform: none;
     z-index:350;
   }
