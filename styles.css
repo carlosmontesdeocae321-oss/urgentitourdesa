@@ -95,7 +95,7 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
   z-index: 250; /* above divider(20)/texture(6) and poster overlays, below scene(300)+brand(400) */
   pointer-events: none;
   background-image: var(--bg-photo-url, none);
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   opacity: var(--bg-photo-opacity, 1);
