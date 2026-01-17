@@ -13,7 +13,7 @@
   --footer-lift-m: clamp(200px, 28vw, 320px);
   /* Optional background photo URL + opacity */
   --bg-photo-url: url('assets/background.png');
-  --bg-photo-opacity: 0.88;
+  --bg-photo-opacity: 1;
 }
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;background:var(--yellow)}
@@ -85,7 +85,7 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 .bg-photo{
   position: fixed;
   inset: 0;
-  z-index: 200; /* above divider(20)/texture(6), below scene(300)+brand(400) */
+  z-index: 250; /* above divider(20)/texture(6) and poster overlays, below scene(300)+brand(400) */
   pointer-events: none;
   background-image: var(--bg-photo-url, none);
   background-size: cover;
@@ -94,6 +94,12 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
   opacity: var(--bg-photo-opacity, 1);
   transition: opacity 200ms ease;
 }
+
+/* When a background photo is active, hide curve divider, yellow texture and poster overlays */
+.has-bg-photo .divider{ display: none !important; }
+.has-bg-photo .yellow-texture{ display: none !important; }
+.has-bg-photo .poster::before{ opacity: 0 !important; background-image: none !important; }
+.has-bg-photo .poster::after{ opacity: 0 !important; background-image: none !important; }
 /* Palm visuals removed: all rules referencing palmera.png and palms-left/right removed */
 /* removed poster pseudo-element (white bar) to keep poster clean */
 .brand{position:relative;z-index:400;text-align:center;margin-top:0}
