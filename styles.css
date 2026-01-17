@@ -205,13 +205,13 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 @media (max-width:700px){
   /* Removed per-icon responsive sizing to allow manual repositioning */
   .buttons-stage{margin-top:0}
-  .scene{padding-top: calc(clamp(180px,44vw,420px) * 0.9 + 2vh)}
+  .scene{padding-top: calc(clamp(180px,44vw,420px) * 0.72)}
   .car{
     /* mobile: increase by +50% as well */
     position:relative;
     width: clamp(405px, 66vw, 945px);
     max-width: 92%;
-    margin: -36vh auto 0; /* slightly lift on small screens so header overlays (3 lines more) */
+    margin: -42vh auto 0; /* lift further to reduce scroll on phones */
     transform: none;
     z-index:350;
   }
