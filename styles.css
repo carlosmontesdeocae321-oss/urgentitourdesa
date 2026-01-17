@@ -247,8 +247,11 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 .hotspot:focus{outline:2px solid rgba(0,0,0,0.12)}
 .hotspot:focus{outline:none}
 .hotspot:active{outline:none}
-/* Keep accessibility for keyboard users only */
-.hotspot:focus-visible{outline:2px solid rgba(0,0,0,0.12)}
+/* Remove any visible focus ring for touch/click completely */
+.hotspot:focus-visible{outline:none}
+/* Suppress selection/tap highlight globally around CTAs */
+.ctas, .hotspots, .buttons-stage{ -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select:none; -ms-user-select:none; }
+a, img{ -webkit-tap-highlight-color: transparent; }
 .hotspot-red{width:clamp(160px,32vw,420px);height:42px;z-index:860}
 .hotspot-green{width:clamp(160px,32vw,420px);height:42px;z-index:870}
 .hotspot-blue{width:clamp(160px,32vw,420px);height:42px;z-index:880}
