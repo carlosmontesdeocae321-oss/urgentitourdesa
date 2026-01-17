@@ -12,8 +12,8 @@
   /* Mobile footer lift baseline (can be overridden by height breakpoints) */
   --footer-lift-m: clamp(200px, 28vw, 320px);
   /* Optional background photo URL + opacity */
-  --bg-photo-url: none;
-  --bg-photo-opacity: 1;
+  --bg-photo-url: url('assets/background.png');
+  --bg-photo-opacity: 0.88;
 }
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;background:var(--yellow)}
