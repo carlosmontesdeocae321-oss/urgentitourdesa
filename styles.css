@@ -169,6 +169,14 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
 /* Button-area emoji pairs (two pairs) placed around the CTAs but below them (not on top) */
 .buttons-stage{display:flex;flex-direction:column;align-items:center;gap:10px;padding:6px 0 0 0;margin-top:0;position:relative}
 .btn-emoji{position:absolute;pointer-events:none;width:clamp(40px,7vw,100px);z-index:130}
+.mobile-emoji-belt{ display:none; position:relative; z-index:135; pointer-events:none; }
+.mobile-emoji-belt{ gap:8px; align-items:center; justify-content:center; padding:6px 0 2px 0; }
+.belt-emoji{ width:clamp(32px, 9vw, 56px); height:auto; animation:emoji-float 4.6s ease-in-out infinite; }
+
+/* Mostrar la banda de emojis sólo en móvil (pantallas táctiles) */
+@media (pointer: coarse) {
+  .mobile-emoji-belt{ display:flex; }
+}
 .btn-pair1-a{left:calc(50% - 30vw); top: 15vh; animation:emoji-float 4.8s ease-in-out infinite; animation-delay:0.1s}
 .btn-pair1-a{top: 15dvh}
 .btn-pair1-b{left:calc(50% - 20vw); top: 28vh; animation:emoji-float 4.6s ease-in-out infinite; animation-delay:0.3s}
