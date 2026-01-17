@@ -273,6 +273,7 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 
 /* Height-based mobile adjustments for consistent layout across devices */
 @media (max-width:700px) and (max-height:740px){
+}
   :root{ --footer-lift-m: clamp(180px, 26vw, 300px); }
   .scene{ padding-top: calc(clamp(180px,44vw,420px) * 0.42) }
   .car{ margin: -46vh auto 0 }
@@ -313,6 +314,8 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
   .buttons-stage{ margin-bottom: clamp(10px, 2.4vh, 16px); }
   .site-footer{ margin-top: 0; }
 }
+/* Base footer container styles (previously malformed block fixed) */
+.site-footer{
   position:relative; /* allow z-index to overlay other layers */
   z-index:500;       /* above emojis, hotspots and textures */
   text-align:center;
@@ -341,6 +344,9 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
   margin-top:-6px;
   line-height:1;
 }
+
+/* Hide headline and subline sitewide per request */
+.footer-line, .footer-sub{ display:none !important; }
 
 /* speed-lines removed per user request */
 
