@@ -28,13 +28,21 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
   position:relative;
   min-height:100vh;
   min-height:100dvh;
-  display:block;
+  /* desktop can scroll if content overflows */
+  display:flex;
+  flex-direction:column;
   padding:12px;
-  overflow:visible; /* allow page to scroll to elements placed below */
+  overflow:visible;
   /* clean split background: orange top / yellow bottom using --split.
      Image overlay is placed via ::before so the split remains consistent across sizes */
   background: linear-gradient(to bottom, var(--orange) 0 calc(var(--split)), var(--yellow) calc(var(--split)) 100%);
   background-attachment: fixed; /* keep the split fixed to the viewport so both colors remain visible */
+}
+
+/* Móvil/tablet (touch): una sola pantalla, sin scroll vertical */
+@media (hover: none) and (pointer: coarse){
+  html, body{ overflow:hidden; }
+  .poster{ height:100dvh; overflow:hidden; }
 }
 
 /* Dotted texture confined to the yellow area (below --split) */
@@ -120,7 +128,7 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
 .brand-emoji{display:block;margin:6px auto 0;width:clamp(40px,10vw,72px);height:auto;pointer-events:none;z-index:410;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.25)}
 .brand-line{font-family:'Baloo 2', Inter, sans-serif;font-weight:800;font-size:clamp(30px,6.5vw,74px);color:#fff;text-shadow:0 5px 0 rgba(11,59,143,0.95),0 10px 14px rgba(0,0,0,0.18);padding:4px 8px}
 .brand-sub{font-weight:800;color:#00ff5a;font-size:clamp(18px,3.5vw,38px);text-shadow:0 4px 0 rgba(0,80,0,0.18);margin-top:-6px}
-.scene{position:relative;z-index:300;pointer-events:none;padding-top:0.25rem;padding-bottom:0.5rem;display:flex;justify-content:center;align-items:center;flex-direction:column}
+.scene{position:relative;z-index:300;pointer-events:none;padding-top:0.25rem;padding-bottom:0.5rem;display:flex;justify-content:center;align-items:center;flex-direction:column;flex:1 1 auto}
 
 /* Decorative wave separator placed in the background */
 .divider{position:fixed;left:0;right:0;width:100%;height:12vh;top:calc(var(--split) - 6vh);display:block;z-index:20;pointer-events:none;opacity:1}
@@ -169,11 +177,34 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
 .car-pair2-b{top: 30dvh}
 
 /* Button-area emoji pairs (two pairs) placed around the CTAs but below them (not on top) */
-.buttons-stage{display:flex;flex-direction:column;align-items:center;gap:10px;padding:6px 0 0 0;margin-top:0;position:relative}
+.buttons-stage{display:flex;flex-direction:column;align-items:center;gap:10px;padding:6px 0 0 0;margin-top:auto;position:relative;margin-bottom:var(--cta-gap)}
 .btn-emoji{position:absolute;pointer-events:none;width:clamp(40px,7vw,100px);z-index:130}
 .mobile-emoji-cloud{ display:none; position:absolute; left:0; right:0; z-index:500; pointer-events:none; }
 .mobile-emoji-cloud{ top: clamp(40px, 18dvh, 120px); height: clamp(160px, 30dvh, 280px); }
 .cloud-emoji{ position:absolute; width:clamp(32px, 9vw, 56px); height:auto; animation:emoji-float 4.6s ease-in-out infinite; }
+
+/* Emojis extra para escritorio: encima del background (incluida la foto), pero debajo del contenido principal */
+.desktop-emoji-cloud{ display:none; position:absolute; inset:0; pointer-events:none; z-index:260; }
+.desktop-emoji{ position:absolute; width:clamp(44px, 4.2vw, 88px); height:auto; animation:emoji-float 5.2s ease-in-out infinite; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.20)); }
+
+/* Desktop/laptop: mostrar la nube (evita ocultarse en algunos dispositivos) */
+@media (min-width:701px) and (any-hover:hover), (min-width:701px) and (pointer:fine){
+  .desktop-emoji-cloud{ display:block; }
+  /* Parasol (4–6) +0.5 = 50% más grande */
+  .desktop-emoji-cloud .desktop-emoji:nth-child(4),
+  .desktop-emoji-cloud .desktop-emoji:nth-child(5),
+  .desktop-emoji-cloud .desktop-emoji:nth-child(6){
+    width: clamp(66px, 6.3vw, 132px);
+  }
+  /* 1–3 = smiling, 4–6 = sol-alegre. Posiciones alborotadas en los bordes */
+  .desktop-emoji-cloud .desktop-emoji:nth-child(1){ top: 10%; left: 6%;  transform: rotate(-10deg); animation-delay:0.10s }
+  /* Intercambio: smiling (2) abajo, sol (6) arriba */
+  .desktop-emoji-cloud .desktop-emoji:nth-child(2){ top: 74%; left: 12%; transform: rotate(10deg);  animation-delay:0.40s }
+  .desktop-emoji-cloud .desktop-emoji:nth-child(3){ top: 24%; left: 88%; transform: rotate(-6deg);  animation-delay:0.22s }
+  .desktop-emoji-cloud .desktop-emoji:nth-child(4){ top: 44%; left: 4%;  transform: rotate(8deg);   animation-delay:0.28s }
+  .desktop-emoji-cloud .desktop-emoji:nth-child(5){ top: 62%; left: 90%; transform: rotate(-14deg); animation-delay:0.16s }
+  .desktop-emoji-cloud .desktop-emoji:nth-child(6){ top: 6%;  left: 78%; transform: rotate(12deg);  animation-delay:0.35s }
+}
 
 /* Posiciones dispersas para los 6 emojis (3 parasol + 3 smiling) */
 .mobile-emoji-cloud .cloud-emoji:nth-child(1){ top: 8%;  left: 12%; animation-delay:0.10s }
@@ -298,7 +329,7 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
 .buttons-stage{margin-bottom:0}
 
 @media (max-width:700px){
-  .buttons-stage{margin-bottom:0}
+  .buttons-stage{margin-bottom: var(--cta-gap)}
 }
 
 /* Gentle floating animation for CTAs */
@@ -367,9 +398,9 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
 
 @media (max-width:420px){
   /* removed unused extra emoji positions on very small screens */
+}
 
-/* Height-based mobile adjustments for consistent layout across devices */
-/* Eliminar overrides por altura: usar tokens estables en móvil */
+/* Móvil: usar tokens estables (sin depender de height/vh) */
 @media (max-width:700px){
   .icon{ width: clamp(168px, 32vw, 260px) }
   .icon-green{ margin-top: -20px !important }
@@ -381,14 +412,14 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
 }
 /* Base footer container styles (previously malformed block fixed) */
 .site-footer{
-  position:fixed; /* siempre visible al fondo */
-  left:0; right:0; bottom: env(safe-area-inset-bottom); /* subir sobre la barra del sistema */
-  z-index:900;       /* por encima de botones y hotspots */
+  position:relative; /* en flujo, debajo de los botones */
+  z-index:500;       /* suficiente para estar sobre fondos fijos */
   text-align:center;
   opacity:1;
-  padding:4px 0 10px 0;
-  padding-bottom: 6px; /* pequeño padding extra */
+  padding:8px 0 12px 0;
   margin: 0;
+  flex: 0 0 auto;
+  background: transparent; /* sin oscurecer: similar al encabezado */
 }
 
 .footer-brand{display:inline-block}
@@ -428,7 +459,7 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   font-weight:600;
   color:#ffffff;
-  text-shadow:0 2px 0 rgba(11,59,143,0.45);
+  text-shadow:0 3px 0 rgba(11,59,143,0.75), 0 8px 14px rgba(0,0,0,0.22);
   font-size:clamp(12px,1.4vw,14px);
 }
 
@@ -445,4 +476,3 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
 }
 
 /* removed unused palms-related rules and legacy comments */
-}
