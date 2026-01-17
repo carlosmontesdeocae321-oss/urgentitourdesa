@@ -273,6 +273,11 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
   .buttons-stage{ margin-bottom: clamp(12px, 2.2vh, 18px); }
   /* Base mobile: pull footer up moderately; height-specific blocks may override */
   .site-footer{ margin-top: calc(-1 * clamp(70px, 9vw, 120px)); padding-top: 2px; z-index:500; }
+  /* Enforce footer formatting and center on small screens */
+  .footer-brand{ display:block; text-align:center; }
+  .footer-line{ font-size: clamp(26px, 7.8vw, 64px); text-transform: uppercase; text-align:center; }
+  .footer-sub{ font-size: clamp(16px, 5.4vw, 30px); text-transform: uppercase; text-align:center; }
+  .footer-copy{ text-align:center; }
 .site-footer{
 
 /* Height-based mobile adjustments for consistent layout across devices */
