@@ -141,8 +141,8 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
   width: clamp(495px, 58vw, 1080px);
   max-width: 92%;
   z-index:800; /* car above emojis and other images */
-  margin: -34vh auto 0; /* slightly lower to avoid covering logo/buttons */
-  margin: -34dvh auto 0;
+  margin: -38vh auto 0; /* lift the car further so header text can overlay (3 lines more) */
+  margin: -38dvh auto 0;
   transform: none; /* no scaling that would affect layout */
 }
 
@@ -317,7 +317,7 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
     width: clamp(352px, 55vw, 780px);
     max-width: 92%;
     /* levantar carro con valor estable (vw) para todas pantallas */
-    margin: calc(-1 * (var(--car-lift) - 28px)) auto 0;
+    margin: calc(-1 * var(--car-lift)) auto 0;
     transform: none;
     z-index:800;
   }
@@ -411,8 +411,8 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
   .hotspot-green{ top: 104px !important }
   .hotspot-blue{ top: 204px !important }
   /* Subir el carro en móvil (menos aire entre logo y carro) */
-  .scene{ margin-top: clamp(28px, 6vw, 56px) !important; padding-top: calc(clamp(150px,38vw,340px) * 0.34) !important }
-  .car{ margin: calc(-1 * (var(--car-lift) - 28px)) auto 0 !important }
+  .scene{ margin-top: clamp(18px, 4vw, 40px) !important; padding-top: calc(clamp(150px,38vw,340px) * 0.30) !important }
+  .car{ margin: calc(-1 * (var(--car-lift) + 44px)) auto 0 !important }
 }
 /* Base footer container styles (previously malformed block fixed) */
 .site-footer{
