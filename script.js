@@ -75,8 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isHovering = true;
         console.log('hotspot pixel enter ->', pair.hot);
         btn.classList.add('hover');
-        // trigger a short vibration if supported (useful on mobile devices)
-        try{ if (navigator.vibrate) navigator.vibrate && navigator.vibrate([20,30]); }catch(e){}
+        // no vibration on hover: Chrome/Safari require a user gesture
       } else if (!ok && isHovering) {
         isHovering = false;
         console.log('hotspot pixel leave ->', pair.hot);
@@ -94,6 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Prevent default on both hotspot and button and handle navigation explicitly
     hot.addEventListener('click', (e) => {
       e.preventDefault();
+      // vibrate only on explicit user gesture (click/tap)
+      try{ if (navigator.vibrate) navigator.vibrate(20); }catch(e){}
       if (isOpaqueAt(e.clientX, e.clientY)) {
         console.log('hotspot clicked ->', pair.hot, '-> forwarding to hotspot href');
         // Use the hotspot's own href for navigation (anchors in the DOM)
@@ -106,6 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('mouseleave', () => console.log('icon mouseleave ->', pair.btn));
     btn.addEventListener('click', (e) => {
       e.preventDefault();
+      // vibrate only on explicit user gesture (click/tap)
+      try{ if (navigator.vibrate) navigator.vibrate(20); }catch(e){}
       const ok = isOpaqueAt(e.clientX, e.clientY);
       if (ok) {
         console.log('icon clicked ->', pair.btn);
