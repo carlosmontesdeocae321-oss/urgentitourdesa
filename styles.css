@@ -206,16 +206,16 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 @media (max-width:700px){
   /* Removed per-icon responsive sizing to allow manual repositioning */
   .buttons-stage{margin-top:0}
-  /* Reserve space below the header logo and reduce overall top padding further */
-  .scene{margin-top: clamp(52px, 7vh, 80px); padding-top: calc(clamp(180px,44vw,420px) * 0.48)}
+  /* Reserve space below the header logo and reduce overall top padding to match desktop flow */
+  .scene{margin-top: clamp(50px, 6.5vh, 76px); padding-top: calc(clamp(180px,44vw,420px) * 0.42)}
   .car{
     /* mobile: increase by +50% as well */
     position:relative;
     /* slightly smaller to avoid overlapping the top logo */
     width: clamp(352px, 55vw, 780px);
     max-width: 92%;
-    /* lift a bit more so footer is visible without scroll */
-    margin: -39vh auto 0;
+    /* lift but keep below logo, reduce extra page height */
+    margin: -36vh auto 0;
     transform: none;
     z-index:350;
   }
@@ -319,9 +319,9 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 }
 
 @media (max-width:700px){
-  /* Footer should appear right below the blue button with a small gap */
-  .buttons-stage{ margin-bottom: clamp(14px, 2.6vh, 24px); }
-  .site-footer{ margin-top: -68px; padding-top: 2px; z-index:500; }
+  /* Footer immediately below the blue button with minimal gap */
+  .buttons-stage{ margin-bottom: clamp(6px, 1.6vh, 12px); }
+  .site-footer{ margin-top: calc(-1 * clamp(80px, 9vw, 120px)); padding-top: 2px; z-index:500; }
 }
 
 /* removed unused palms-related rules and legacy comments */
