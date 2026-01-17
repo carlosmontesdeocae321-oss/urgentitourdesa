@@ -199,24 +199,24 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
   /* Mobile: scaled up by ~1.5x as well, but smaller absolute sizes; offsets reduced */
   /* Larger buttons on mobile */
   .icon{ width: clamp(168px, 32vw, 260px); }
-  /* Lower buttons so they sit near the car */
-  .icon-green{ margin-top: 16px; }
-  .icon-blue{ margin-top: -12px; }
+  /* Bring buttons closer to the car */
+  .icon-green{ margin-top: -12px; }
+  .icon-blue{ margin-top: -44px; }
 }
 
 @media (max-width:700px){
   /* Removed per-icon responsive sizing to allow manual repositioning */
   .buttons-stage{margin-top:0}
-  /* Ensure the car sits clearly below the logo; move scene down a bit */
-  .scene{margin-top: clamp(60px, 8.4vh, 96px); padding-top: calc(clamp(180px,44vw,420px) * 0.56)}
+  /* Keep car below logo but reduce separation to tighten layout */
+  .scene{margin-top: clamp(54px, 7.2vh, 84px); padding-top: calc(clamp(180px,44vw,420px) * 0.48)}
   .car{
     /* mobile: increase by +50% as well */
     position:relative;
     /* slightly smaller to avoid overlapping the top logo */
     width: clamp(352px, 55vw, 780px);
     max-width: 92%;
-    /* place car lower so it's clearly under the logo */
-    margin: -18vh auto 0;
+    /* raise car a bit so buttons sit closer */
+    margin: -30vh auto 0;
     transform: none;
     z-index:350;
   }
@@ -248,8 +248,8 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 
 @media (max-width:700px){
   .hotspot-red{height:112px}
-  .hotspot-green{height:112px;top:140px}
-  .hotspot-blue{height:112px;top:260px}
+  .hotspot-green{height:112px;top:96px}
+  .hotspot-blue{height:112px;top:184px}
 }
 /* spacer to allow scrolling so lower pills are reachable */
 .spacer{height:0;background:transparent}
@@ -321,9 +321,9 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 
 @media (max-width:700px){
   /* Footer immediately below the blue button with minimal gap */
-  .buttons-stage{ margin-bottom: 0; }
-  /* Raise footer about ~15 stripes (~270px) above prior setting */
-  .site-footer{ margin-top: calc(-1 * clamp(240px, 34vw, 380px)); padding-top: 2px; z-index:500; }
+  .buttons-stage{ margin-bottom: 4px; }
+  /* Moderate lift so footer sits closer to buttons */
+  .site-footer{ margin-top: calc(-1 * clamp(200px, 28vw, 320px)); padding-top: 2px; z-index:500; }
 }
 
 /* removed unused palms-related rules and legacy comments */
