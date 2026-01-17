@@ -307,6 +307,9 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
   .icon-blue{ margin-top: -56px }
   .hotspot-green{ top: 88px }
   .hotspot-blue{ top: 168px }
+  /* On very small heights, avoid any overlap: keep footer below buttons */
+  .buttons-stage{ margin-bottom: clamp(10px, 2.4vh, 16px); }
+  .site-footer{ margin-top: 0; }
 }
   position:relative; /* allow z-index to overlay other layers */
   z-index:500;       /* above emojis, hotspots and textures */
