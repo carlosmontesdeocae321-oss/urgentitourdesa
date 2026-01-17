@@ -192,35 +192,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const split = Math.round(rect.bottom + gap);
       document.documentElement.style.setProperty('--split', `${split}px`);
     }
-    // Position palm relative to the car so it stays consistent across resolutions
-    function alignPalmToCar(){
-      const palm = document.querySelector('.palm-car');
-      const car = document.querySelector('.car');
-      if (!palm || !car) return;
-      const rect = car.getBoundingClientRect();
-      // Anchor palm around right-lower side of the car
-      let cx = Math.round(rect.left + rect.width * 0.82); // near right side
-      let cy = Math.round(rect.top + rect.height * 0.72); // lower area
-      // Apply user-requested offsets: 3 lines up, 2 lines left (use rem as a line unit)
-      const rootStyles = getComputedStyle(document.documentElement);
-      const rem = parseFloat(rootStyles.fontSize || '16');
-      // Increase offsets further: +2 lines more left and +3 more up
-      // New total: 10rem left, 12rem up from the car anchor
-      cx -= Math.round(10 * rem);
-      cy -= Math.round(12 * rem);
-      palm.style.left = `${cx}px`;
-      palm.style.top = `${cy}px`;
-      palm.style.position = 'fixed';
-      palm.style.transform = 'translate(-50%, -50%)';
-      palm.style.right = 'auto';
-      palm.style.bottom = 'auto';
-      // Scale palm size relative to car width but keep within bounds
-      const w = Math.round(Math.min(900, Math.max(270, rect.width * 0.66)));
-      palm.style.width = `${w}px`;
-    }
-
     alignSplitToCar();
-    alignPalmToCar();
+    
     let resizeTick = false;
     window.addEventListener('resize', () => {
       if (resizeTick) return;
@@ -229,7 +202,6 @@ document.addEventListener('DOMContentLoaded', () => {
         redrawCanvases();
         positionHotspots();
         alignSplitToCar();
-        alignPalmToCar();
         resizeTick = false;
       });
     }, {passive:true});
@@ -242,7 +214,6 @@ document.addEventListener('DOMContentLoaded', () => {
       requestAnimationFrame(() => {
         positionHotspots();
         alignSplitToCar();
-        alignPalmToCar();
         scrollTick = false;
       });
     }, {passive:true});
@@ -252,7 +223,6 @@ document.addEventListener('DOMContentLoaded', () => {
         redrawCanvases();
         positionHotspots();
         alignSplitToCar();
-        alignPalmToCar();
       });
     });
 
@@ -275,7 +245,6 @@ document.addEventListener('DOMContentLoaded', () => {
         redrawCanvases();
         positionHotspots();
         alignSplitToCar();
-        alignPalmToCar();
       });
     });
 

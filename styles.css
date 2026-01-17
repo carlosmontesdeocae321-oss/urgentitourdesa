@@ -97,33 +97,7 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
   transform: none; /* no scaling that would affect layout */
 }
 
-/* Decorative palm behind the car: fixed position, centered via transform.
-   JS will set left/top to keep alignment consistent across resolutions. */
-.scene .palm-car{
-  position:fixed;
-  left:auto;
-  top:auto;
-  right:auto;
-  bottom:auto;
-  transform:translate(-50%, -50%);
-  width: clamp(360px,56vw,900px);
-  max-width:900px;
-  z-index: 240; /* below .car (350) and emoji layers */
-  pointer-events:none;
-  opacity:0.95;
-  object-fit:contain;
-  transform-origin: 50% 100%;
-  will-change: transform;
-  animation: palm-sway 4.8s ease-in-out infinite;
-}
-
-@keyframes palm-sway{
-  0%   { transform: translate(-50%, -50%) rotate(-1.4deg) translateY(0px) }
-  50%  { transform: translate(-50%, -50%) rotate(1.6deg) translateY(-6px) translateX(2px) }
-  100% { transform: translate(-50%, -50%) rotate(-1.4deg) translateY(0px) }
-}
-
-/* `.palm-car` rules removed — decorative palm for car has been deleted */
+/* palm-car removed per user request */
 
 /* Allow car animation but keep it non-interactive */
 .car, .car img, .car * {
@@ -149,7 +123,7 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 .car-pair2-b{left:calc(50% + 15vw); top: 30vh; animation:emoji-float 4.4s ease-in-out infinite; animation-delay:0.35s}
 
 /* Button-area emoji pairs (two pairs) placed around the CTAs but below them (not on top) */
-.buttons-stage{display:flex;flex-direction:column;align-items:center;gap:12px;padding:8px 0 6px 0;margin-top:0;position:relative}
+.buttons-stage{display:flex;flex-direction:column;align-items:center;gap:6px;padding:6px 0 0 0;margin-top:0;position:relative}
 .btn-emoji{position:absolute;pointer-events:none;width:clamp(40px,7vw,100px);z-index:130}
 .btn-pair1-a{left:calc(50% - 30vw); top: 15vh; animation:emoji-float 4.8s ease-in-out infinite; animation-delay:0.1s}
 .btn-pair1-b{left:calc(50% - 20vw); top: 28vh; animation:emoji-float 4.6s ease-in-out infinite; animation-delay:0.3s}
@@ -224,7 +198,7 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 @media (max-width:700px){
   /* Mobile: scaled up by ~1.5x as well, but smaller absolute sizes; offsets reduced */
   .icon{ width: clamp(150px, 30vw, 240px); }
-  .icon-green{ margin-top: -16px; }
+  .icon-green{ margin-top: -28px; }
   .icon-blue{ margin-top: -60px; }
 }
 
@@ -296,8 +270,8 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
   position:static;
   text-align:center;
   opacity:1;
-  padding:6px 0 16px 0;
-  margin:0;
+  padding:4px 0 10px 0;
+  margin: -6px 0 0 0; /* pull footer slightly up on mobile too */
 }
 
 .footer-brand{display:inline-block}
@@ -326,7 +300,7 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 .footer-separator{
   width: clamp(160px, 36vw, 420px);
   height: 2px;
-  margin: 10px auto 8px auto;
+  margin: 6px auto 6px auto;
   background: rgba(255,255,255,0.85);
   border-radius: 2px;
 }
