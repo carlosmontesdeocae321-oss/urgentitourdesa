@@ -381,13 +381,14 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
 }
 /* Base footer container styles (previously malformed block fixed) */
 .site-footer{
-  position:relative; /* allow z-index to overlay other layers */
-  z-index:500;       /* above emojis, hotspots and textures */
+  position:fixed; /* siempre visible al fondo */
+  left:0; right:0; bottom:0;
+  z-index:900;       /* por encima de botones y hotspots */
   text-align:center;
   opacity:1;
   padding:4px 0 10px 0;
   padding-bottom: env(safe-area-inset-bottom);
-  margin: -18px 0 0 0; /* pull footer slightly up on mobile too */
+  margin: 0;
 }
 
 .footer-brand{display:inline-block}
@@ -435,7 +436,7 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
   /* Footer immediately below the blue button with a small gap and lifted closer */
   /* Footer below blue button with a consistent small gap */
   .buttons-stage{ margin-bottom: var(--cta-gap) !important; }
-  .site-footer{ margin-top: 0; padding-top: 2px; z-index:500; }
+  .site-footer{ margin-top: 0; padding-top: 2px; }
   /* Enforce footer formatting and center on small screens */
   .footer-brand{ display:block; text-align:center; }
   .footer-line{ font-size: clamp(26px, 7.8vw, 64px); text-transform: uppercase; text-align:center; }
