@@ -201,16 +201,16 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
   /* Mobile: scaled up by ~1.5x as well, but smaller absolute sizes; offsets reduced */
   /* Larger buttons on mobile */
   .icon{ width: clamp(168px, 32vw, 260px); }
-  /* Bring buttons closer to the car */
-  .icon-green{ margin-top: -12px; }
-  .icon-blue{ margin-top: -44px; }
+  /* Bring buttons slightly closer to the car */
+  .icon-green{ margin-top: -20px; }
+  .icon-blue{ margin-top: -56px; }
 }
 
 @media (max-width:700px){
   /* Removed per-icon responsive sizing to allow manual repositioning */
   .buttons-stage{margin-top:0}
-  /* Keep car below logo but reduce separation to tighten layout */
-  .scene{margin-top: clamp(54px, 7.2vh, 84px); padding-top: calc(clamp(180px,44vw,420px) * 0.48)}
+  /* Keep car below logo but reduce separation to match desktop rhythm */
+  .scene{margin-top: clamp(54px, 7.2vh, 84px); padding-top: calc(clamp(180px,44vw,420px) * 0.45)}
   .car{
     /* mobile: increase by +50% as well */
     position:relative;
@@ -218,7 +218,7 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
     width: clamp(352px, 55vw, 780px);
     max-width: 92%;
     /* raise car a bit so buttons sit closer */
-    margin: -30vh auto 0;
+    margin: -36vh auto 0;
     transform: none;
     z-index:350;
   }
@@ -270,15 +270,6 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 
 @media (max-width:420px){
   /* removed unused extra emoji positions on very small screens */
-  .buttons-stage{ margin-bottom: clamp(12px, 2.2vh, 18px); }
-  /* Base mobile: pull footer up moderately; height-specific blocks may override */
-  .site-footer{ margin-top: calc(-1 * clamp(70px, 9vw, 120px)); padding-top: 2px; z-index:500; }
-  /* Enforce footer formatting and center on small screens */
-  .footer-brand{ display:block; text-align:center; }
-  .footer-line{ font-size: clamp(26px, 7.8vw, 64px); text-transform: uppercase; text-align:center; }
-  .footer-sub{ font-size: clamp(16px, 5.4vw, 30px); text-transform: uppercase; text-align:center; }
-  .footer-copy{ text-align:center; }
-.site-footer{
 
 /* Height-based mobile adjustments for consistent layout across devices */
 @media (max-width:700px) and (max-height:740px){
@@ -370,10 +361,14 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 }
 
 @media (max-width:700px){
-  /* Footer immediately below the blue button with minimal gap */
-  .buttons-stage{ margin-bottom: 4px; }
-  /* Moderate lift so footer sits closer to buttons */
-  .site-footer{ margin-top: calc(-1 * clamp(200px, 28vw, 320px)); padding-top: 2px; z-index:500; }
+  /* Footer immediately below the blue button with a small gap and lifted closer */
+  .buttons-stage{ margin-bottom: clamp(10px, 2vh, 16px); }
+  .site-footer{ margin-top: calc(-1 * clamp(110px, 12vw, 160px)); padding-top: 2px; z-index:500; }
+  /* Enforce footer formatting and center on small screens */
+  .footer-brand{ display:block; text-align:center; }
+  .footer-line{ font-size: clamp(26px, 7.8vw, 64px); text-transform: uppercase; text-align:center; }
+  .footer-sub{ font-size: clamp(16px, 5.4vw, 30px); text-transform: uppercase; text-align:center; }
+  .footer-copy{ text-align:center; }
 }
 
 /* removed unused palms-related rules and legacy comments */
