@@ -94,7 +94,7 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
   /* increase base size by +50% while keeping responsive behavior */
   width: clamp(495px, 58vw, 1080px);
   max-width: 92%;
-  z-index:350;
+  z-index:800; /* car above emojis and other images */
   margin: -38vh auto 0; /* lift the car further so header text can overlay (3 lines more) */
   transform: none; /* no scaling that would affect layout */
 }
@@ -140,7 +140,7 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 /* Overlapped stacked CTAs: centered absolutely, buttons positioned by top offsets */
 /* (deduped: base .buttons-stage defined above with position:relative) */
 /* CTAs: stacked vertically so each button is visible one below another */
-.ctas{position:relative;z-index:150;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:2px;padding:2px 0}
+.ctas{position:relative;z-index:640;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:2px;padding:2px 0}
 /* Each button is absolutely positioned inside .ctas so they overlap visually
    but remain individual anchors and clickable. .ctas has pointer-events:none
    to avoid blocking, while buttons have pointer-events:auto. */
@@ -175,7 +175,7 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   transform-origin: center;
-  z-index:130; /* keep icons below hotspots */
+  z-index:820; /* icons above decorative emojis */
 }
 .icon-red{ animation-duration:4.0s; animation-delay:0s }
 .icon-green{ animation-duration:4.5s; animation-delay:0.12s }
@@ -220,7 +220,7 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
     /* raise car a bit so buttons sit closer */
     margin: -36vh auto 0;
     transform: none;
-    z-index:350;
+    z-index:800;
   }
   .ctas{position:relative;height:auto}
   /* removed .wave height (unused) */
@@ -241,11 +241,11 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 
 /* removed unused keyframes: btn-bob */
 
-.hotspots{position:relative;left:auto;transform:none;width:100%;height:auto;z-index:140;pointer-events:auto;display:block}
+.hotspots{position:relative;left:auto;transform:none;width:100%;height:auto;z-index:840;pointer-events:auto;display:block}
 .hotspot{position:absolute;display:block;pointer-events:auto;background:transparent;border:0}
-.hotspot-red{width:clamp(160px,32vw,420px);height:42px;z-index:260}
-.hotspot-green{width:clamp(160px,32vw,420px);height:42px;z-index:270}
-.hotspot-blue{width:clamp(160px,32vw,420px);height:42px;z-index:280}
+.hotspot-red{width:clamp(160px,32vw,420px);height:42px;z-index:860}
+.hotspot-green{width:clamp(160px,32vw,420px);height:42px;z-index:870}
+.hotspot-blue{width:clamp(160px,32vw,420px);height:42px;z-index:880}
 .hotspot:focus{outline:2px solid rgba(0,0,0,0.12)}
 
 @media (max-width:700px){
@@ -345,8 +345,7 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
   line-height:1;
 }
 
-/* Hide headline and subline sitewide per request */
-.footer-line, .footer-sub{ display:none !important; }
+/* Footer headline and subline visible */
 
 /* speed-lines removed per user request */
 
