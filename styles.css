@@ -382,12 +382,12 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
 /* Base footer container styles (previously malformed block fixed) */
 .site-footer{
   position:fixed; /* siempre visible al fondo */
-  left:0; right:0; bottom:0;
+  left:0; right:0; bottom: env(safe-area-inset-bottom); /* subir sobre la barra del sistema */
   z-index:900;       /* por encima de botones y hotspots */
   text-align:center;
   opacity:1;
   padding:4px 0 10px 0;
-  padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: 6px; /* pequeño padding extra */
   margin: 0;
 }
 
@@ -445,3 +445,4 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
 }
 
 /* removed unused palms-related rules and legacy comments */
+}
