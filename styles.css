@@ -11,6 +11,9 @@
   --accent-blue:#0b3b8f;
   /* Mobile footer lift baseline (can be overridden by height breakpoints) */
   --footer-lift-m: clamp(200px, 28vw, 320px);
+  /* Optional background photo URL + opacity */
+  --bg-photo-url: none;
+  --bg-photo-opacity: 1;
 }
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;background:var(--yellow)}
@@ -76,6 +79,20 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
   background-image:
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 300' preserveAspectRatio='none'><defs><linearGradient id='g' x1='0' x2='0' y1='0' y2='1'><stop offset='0' stop-color='%23ffffff' stop-opacity='0.10'/><stop offset='1' stop-color='%23000000' stop-opacity='0.01'/></linearGradient></defs><path d='M0,80 C180,160 360,20 600,80 C840,140 960,60 1200,100 L1200,300 L0,300 Z' fill='url(%23g)'/><path d='M0,110 C220,200 420,50 600,110 C780,170 980,80 1200,130 L1200,300 L0,300 Z' fill='%23ffffff' fill-opacity='0.04'/><path d='M0,150 C240,220 480,100 600,150 C720,200 960,120 1200,170 L1200,300 L0,300 Z' fill='%23000000' fill-opacity='0.005'/></svg>"),
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 240' preserveAspectRatio='none'><path d='M0,30 C150,80 350,0 600,40 C850,80 1000,10 1200,50 L1200,240 L0,240 Z' fill='%23ffffff' fill-opacity='0.05'/><path d='M0,70 C200,120 400,40 600,80 C800,120 1000,40 1200,90 L1200,240 L0,240 Z' fill='%23000000' fill-opacity='0.008'/></svg>");
+}
+
+/* Background photo overlay: sits above split + divider, below main content */
+.bg-photo{
+  position: fixed;
+  inset: 0;
+  z-index: 200; /* above divider(20)/texture(6), below scene(300)+brand(400) */
+  pointer-events: none;
+  background-image: var(--bg-photo-url, none);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: var(--bg-photo-opacity, 1);
+  transition: opacity 200ms ease;
 }
 /* Palm visuals removed: all rules referencing palmera.png and palms-left/right removed */
 /* removed poster pseudo-element (white bar) to keep poster clean */
