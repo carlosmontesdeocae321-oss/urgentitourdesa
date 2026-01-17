@@ -1,5 +1,13 @@
 // No se requiere JS para el fondo dividido; placeholder.
 document.addEventListener('DOMContentLoaded', () => {
+  // Toggle background photo mode based on CSS variable
+  function applyBgPhotoMode(){
+    const root = document.documentElement;
+    const url = getComputedStyle(root).getPropertyValue('--bg-photo-url').trim();
+    const hasPhoto = url && url !== 'none' && url.includes('url(');
+    document.body.classList.toggle('has-bg-photo', !!hasPhoto);
+  }
+  applyBgPhotoMode();
   // Map hotspots to buttons so hover and clicks work when buttons overlap
   // Map hotspots to icon images (buttons were replaced by plain images)
   const map = [
@@ -248,6 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
         redrawCanvases();
         positionHotspots();
         alignSplitToCar();
+        applyBgPhotoMode();
       });
     });
 
