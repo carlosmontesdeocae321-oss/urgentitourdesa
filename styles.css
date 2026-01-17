@@ -318,9 +318,9 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 }
 
 @media (max-width:700px){
-  /* Keep the footer close to the blue button: about 5 stripes gap */
-  .buttons-stage{ margin-bottom: clamp(60px, 7vh, 96px); }
-  .site-footer{ margin-top: -140px; }
+  /* Footer should appear right below the blue button with a small gap */
+  .buttons-stage{ margin-bottom: clamp(24px, 3.6vh, 36px); }
+  .site-footer{ margin-top: 0; padding-top: 2px; }
 }
 
 /* removed unused palms-related rules and legacy comments */
