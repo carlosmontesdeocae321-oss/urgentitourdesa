@@ -98,8 +98,6 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
   background-size: cover; /* fill toda la pantalla en móvil y escritorio */
   background-position: center;
   background-repeat: no-repeat;
-  background-color: rgba(0,0,0,0.20); /* overlay sutil para contraste */
-  background-blend-mode: multiply;
   opacity: var(--bg-photo-opacity, 1);
   transition: opacity 200ms ease;
   display: none; /* hidden unless has-bg-photo is active */
@@ -169,7 +167,7 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
 /* Button-area emoji pairs (two pairs) placed around the CTAs but below them (not on top) */
 .buttons-stage{display:flex;flex-direction:column;align-items:center;gap:10px;padding:6px 0 0 0;margin-top:0;position:relative}
 .btn-emoji{position:absolute;pointer-events:none;width:clamp(40px,7vw,100px);z-index:130}
-.mobile-emoji-belt{ display:none; position:relative; z-index:135; pointer-events:none; }
+.mobile-emoji-belt{ display:none; position:relative; z-index:500; pointer-events:none; }
 .mobile-emoji-belt{ gap:8px; align-items:center; justify-content:center; padding:6px 0 2px 0; }
 .belt-emoji{ width:clamp(32px, 9vw, 56px); height:auto; animation:emoji-float 4.6s ease-in-out infinite; }
 
