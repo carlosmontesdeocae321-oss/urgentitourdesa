@@ -255,7 +255,8 @@ a, img{ -webkit-tap-highlight-color: transparent; }
 .hotspot-red{width:clamp(160px,32vw,420px);height:42px;z-index:860}
 .hotspot-green{width:clamp(160px,32vw,420px);height:42px;z-index:870}
 .hotspot-blue{width:clamp(160px,32vw,420px);height:42px;z-index:880}
-.hotspot:focus{outline:2px solid rgba(0,0,0,0.12)}
+/* remove stray focus outline rule to prevent visible square */
+/* (accessibility maintained via keyboard navigation styles elsewhere if needed) */
 
 @media (max-width:700px){
   .hotspot-red{height:112px}
