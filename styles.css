@@ -435,7 +435,7 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
   /* Footer immediately below the blue button with a small gap and lifted closer */
   /* Footer below blue button with a consistent small gap */
   .buttons-stage{ margin-bottom: var(--cta-gap) !important; }
-  .site-footer{ margin-top: calc(-1 * clamp(110px, 12vw, 160px)); padding-top: 2px; z-index:500; }
+  .site-footer{ margin-top: 0; padding-top: 2px; z-index:500; }
   /* Enforce footer formatting and center on small screens */
   .footer-brand{ display:block; text-align:center; }
   .footer-line{ font-size: clamp(26px, 7.8vw, 64px); text-transform: uppercase; text-align:center; }
