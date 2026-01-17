@@ -155,6 +155,7 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
 /* New emoji pairs: removed previous single emojis. */
 /* Car-area emoji pairs (two pairs, each pair = two images) positioned above the car */
 .car-emoji{position:absolute;pointer-events:none;width:clamp(48px,8.5vw,120px);z-index:360;display:block}
+.car-cloud1,.car-cloud2{ display:none }
 .car-pair1-a{left:calc(50% - 30vw); top: 18vh; animation:emoji-float 4.6s ease-in-out infinite; animation-delay:0s}
 .car-pair1-a{top: 18dvh}
 .car-pair1-b{left:calc(50% - 25vw); top: 30vh; animation:emoji-float 4.8s ease-in-out infinite; animation-delay:0.2s}
@@ -182,6 +183,10 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
 /* Mostrar nube de emojis sólo en móvil (pantallas táctiles) */
 @media (pointer: coarse) {
   .mobile-emoji-cloud{ display:block; }
+  /* Mostrar los 2 emojis alrededor del carro en móvil */
+  .car-cloud1,.car-cloud2{ display:block }
+  .car-cloud1{ top: clamp(28px, 12vh, 120px); left: 8%; animation-delay: 0.35s }
+  .car-cloud2{ top: clamp(46px, 16vh, 140px); left: 74%; animation-delay: 0.55s }
 }
 .btn-pair1-a{left:calc(50% - 30vw); top: 15vh; animation:emoji-float 4.8s ease-in-out infinite; animation-delay:0.1s}
 .btn-pair1-a{top: 15dvh}
