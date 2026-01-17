@@ -4,8 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function applyBgPhotoMode(){
     const root = document.documentElement;
     const url = getComputedStyle(root).getPropertyValue('--bg-photo-url').trim();
-    const hasPhoto = url && url !== 'none' && url.includes('url(');
-    document.body.classList.toggle('has-bg-photo', !!hasPhoto);
+    const bgEl = document.querySelector('.bg-photo');
+    const bgStyle = bgEl ? getComputedStyle(bgEl) : null;
+    const imgVal = bgStyle ? bgStyle.backgroundImage : 'none';
+    const opVal = bgStyle ? parseFloat(bgStyle.opacity || '0') : 0;
+    const hasUrl = url && url !== 'none' && url.includes('url(');
+    const hasImg = imgVal && imgVal !== 'none';
+    const visible = (hasUrl || hasImg) && opVal > 0.02; // treat near-zero opacity as disabled
+    document.body.classList.toggle('has-bg-photo', visible);
   }
   applyBgPhotoMode();
   // Map hotspots to buttons so hover and clicks work when buttons overlap
