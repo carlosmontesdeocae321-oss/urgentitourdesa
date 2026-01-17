@@ -167,13 +167,21 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
 /* Button-area emoji pairs (two pairs) placed around the CTAs but below them (not on top) */
 .buttons-stage{display:flex;flex-direction:column;align-items:center;gap:10px;padding:6px 0 0 0;margin-top:0;position:relative}
 .btn-emoji{position:absolute;pointer-events:none;width:clamp(40px,7vw,100px);z-index:130}
-.mobile-emoji-belt{ display:none; position:relative; z-index:500; pointer-events:none; }
-.mobile-emoji-belt{ gap:8px; align-items:center; justify-content:center; padding:6px 0 2px 0; }
-.belt-emoji{ width:clamp(32px, 9vw, 56px); height:auto; animation:emoji-float 4.6s ease-in-out infinite; }
+.mobile-emoji-cloud{ display:none; position:absolute; left:0; right:0; z-index:500; pointer-events:none; }
+.mobile-emoji-cloud{ top: clamp(40px, 18dvh, 120px); height: clamp(160px, 30dvh, 280px); }
+.cloud-emoji{ position:absolute; width:clamp(32px, 9vw, 56px); height:auto; animation:emoji-float 4.6s ease-in-out infinite; }
 
-/* Mostrar la banda de emojis sólo en móvil (pantallas táctiles) */
+/* Posiciones dispersas para los 6 emojis (3 parasol + 3 smiling) */
+.mobile-emoji-cloud .cloud-emoji:nth-child(1){ top: 8%;  left: 12%; animation-delay:0.10s }
+.mobile-emoji-cloud .cloud-emoji:nth-child(2){ top: 35%; left: 78%; animation-delay:0.30s }
+.mobile-emoji-cloud .cloud-emoji:nth-child(3){ top: 0%;  left: 50%; animation-delay:0.20s }
+.mobile-emoji-cloud .cloud-emoji:nth-child(4){ top: 62%; left: 10%; animation-delay:0.40s }
+.mobile-emoji-cloud .cloud-emoji:nth-child(5){ top: 70%; left: 65%; animation-delay:0.15s }
+.mobile-emoji-cloud .cloud-emoji:nth-child(6){ top: 18%; left: 37%; animation-delay:0.25s }
+
+/* Mostrar nube de emojis sólo en móvil (pantallas táctiles) */
 @media (pointer: coarse) {
-  .mobile-emoji-belt{ display:flex; }
+  .mobile-emoji-cloud{ display:block; }
 }
 .btn-pair1-a{left:calc(50% - 30vw); top: 15vh; animation:emoji-float 4.8s ease-in-out infinite; animation-delay:0.1s}
 .btn-pair1-a{top: 15dvh}
