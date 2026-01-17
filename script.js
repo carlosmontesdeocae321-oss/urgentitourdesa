@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const x = Math.floor(clientX - rect.left);
       const y = Math.floor(clientY - rect.top);
       const c = canvases.get(pair.btn);
-      const ctx = c.getContext && c.getContext('2d');
+      const ctx = c.getContext && c.getContext('2d', { willReadFrequently: true });
       // If we can't access canvas 2D context, fallback to top-30% hit test
       if (!ctx) {
         // If canvas is tainted or context unavailable, accept full bounding
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
           c.width = w;
           c.height = h;
         }
-        const ctx = c.getContext && c.getContext('2d');
+        const ctx = c.getContext && c.getContext('2d', { willReadFrequently: true });
         if (!ctx) return;
         // Avoid redrawing if already drawn at this size
         if (c._lastSize === sizeKey) return;
