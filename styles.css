@@ -480,3 +480,57 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
 }
 
 /* removed unused palms-related rules and legacy comments */
+/* Altura baja: asegurar que logo, carro, botones y texto inferior
+   siempre se vean. Reducimos elevación del carro y tamaños si la
+   pantalla es corta, y habilitamos scroll en casos extremos. */
+
+/* Viewports cortos: ajustes suaves */
+@media (max-height: 640px){
+  :root{
+    /* dar un poco más de aire abajo */
+    --split: 36vh;
+    /* bajar la elevación base del carro en móvil/mixto */
+    --car-lift: clamp(150px, 32vw, 460px);
+    --cta-offset: clamp(44px, 8vw, 90px);
+  }
+  /* más margen arriba de la escena para proteger el logo */
+  .scene{ margin-top: clamp(22px, 5vh, 48px); }
+  /* escritorio: menor elevación por vh */
+  .car{ margin: -32vh auto 0; margin: -32dvh auto 0; }
+  /* móvil: anula la subida extra (+44px) si la altura es baja */
+  @media (max-width:700px){
+    .car{ margin: calc(-1 * (var(--car-lift) - 8px)) auto 0 !important }
+    .icon{ width: clamp(180px, 34vw, 300px) }
+    .hotspot-red,.hotspot-green,.hotspot-blue{ width: clamp(180px, 34vw, 300px) !important }
+  }
+}
+
+/* Viewports muy cortos: priorizar visibilidad y permitir scroll */
+@media (max-height: 520px){
+  :root{
+    --split: 34vh;
+    --car-lift: clamp(120px, 28vw, 380px);
+    --cta-offset: clamp(40px, 7.5vw, 84px);
+  }
+  /* habilitar scroll para no perder el texto inferior en pantallas muy bajas */
+  html, body{ overflow:auto; }
+  .poster{ height:auto; overflow:auto; }
+  /* proteger el logo y bajar ligeramente el carro */
+  .scene{ margin-top: clamp(18px, 4.5vh, 36px); padding-top: 0 }
+  /* escritorio: bajar menos el carro */
+  .car{ width: clamp(380px, 52vw, 820px); margin: -28vh auto 0; margin: -28dvh auto 0; }
+  /* móvil: anular subida extra y reducir un poco los botones */
+  @media (max-width:700px){
+    .car{ margin: calc(-1 * (var(--car-lift) - 16px)) auto 0 !important }
+    .icon{ width: clamp(170px, 32vw, 280px) }
+    .hotspot-red{ height: 100px !important }
+    .hotspot-green{ height: 108px !important; top: 94px !important }
+    .hotspot-blue{ height: 108px !important; top: 188px !important }
+  }
+}
+
+/* En móviles táctiles con altura muy baja, forzar scroll explícito */
+@media (hover: none) and (pointer: coarse) and (max-height: 520px){
+  html, body{ overflow:auto; }
+  .poster{ height:auto; overflow:auto; }
+}
