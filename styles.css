@@ -207,15 +207,15 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
   /* Removed per-icon responsive sizing to allow manual repositioning */
   .buttons-stage{margin-top:0}
   /* Reserve space below the header logo and reduce overall top padding further */
-  .scene{margin-top: clamp(56px, 7.5vh, 84px); padding-top: calc(clamp(180px,44vw,420px) * 0.58)}
+  .scene{margin-top: clamp(52px, 7vh, 80px); padding-top: calc(clamp(180px,44vw,420px) * 0.48)}
   .car{
     /* mobile: increase by +50% as well */
     position:relative;
     /* slightly smaller to avoid overlapping the top logo */
-    width: clamp(360px, 56vw, 800px);
+    width: clamp(352px, 55vw, 780px);
     max-width: 92%;
     /* lift a bit more so footer is visible without scroll */
-    margin: -37vh auto 0;
+    margin: -39vh auto 0;
     transform: none;
     z-index:350;
   }
@@ -319,8 +319,8 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Seg
 
 @media (max-width:700px){
   /* Footer should appear right below the blue button with a small gap */
-  .buttons-stage{ margin-bottom: clamp(24px, 3.6vh, 36px); }
-  .site-footer{ margin-top: 0; padding-top: 2px; }
+  .buttons-stage{ margin-bottom: clamp(14px, 2.6vh, 24px); }
+  .site-footer{ margin-top: -40px; padding-top: 2px; }
 }
 
 /* removed unused palms-related rules and legacy comments */
