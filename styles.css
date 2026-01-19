@@ -28,12 +28,11 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
   position:relative;
   min-height:100vh;
   min-height:100dvh;
-  height: 100vh;
   /* en escritorio puede haber desplazamiento si el contenido se desborda */
   display:flex;
   flex-direction:column;
   padding:12px;
-  overflow:hidden;
+  overflow:visible;
     /* fondo dividido limpio: naranja arriba / amarillo abajo usando --split.
       El overlay de imagen se coloca con ::before para que la división siga siendo consistente en todos los tamaños */
   background: linear-gradient(to bottom, var(--orange) 0 calc(var(--split)), var(--yellow) calc(var(--split)) 100%);
@@ -44,13 +43,6 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
 @media (hover: none) and (pointer: coarse){
   html, body{ overflow:hidden; }
   .poster{ height:100dvh; overflow:hidden; }
-}
-
-/* Escritorio: igual que móvil (sin scroll) */
-@media (min-width:701px){
-  html, body{ overflow:hidden; }
-  .poster{ height:100vh; overflow:hidden; padding:10px; }
-  .scene{ flex: 0 0 auto; }
 }
 
 /* Textura punteada confinada al área amarilla (debajo de --split) */
@@ -205,6 +197,22 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
 .car-pair2-b{top: 30dvh}
 .car-pair3-a{left:calc(50% + 28vw); top: 14vh; animation:emoji-float 4.7s ease-in-out infinite; animation-delay:0.28s}
 .car-pair3-a{top: 14dvh}
+
+/* Escritorio: recolocar emojis alrededor del carro (evitar que queden debajo/centrados) */
+@media (min-width:701px){
+  .car-pair1-a{ left: calc(50% - 38vw); top: 10vh; }
+  .car-pair1-a{ top: 10dvh; }
+  .car-pair1-b{ left: calc(50% - 30vw); top: 26vh; }
+  .car-pair1-b{ top: 26dvh; }
+
+  .car-pair2-a{ left: calc(50% + 26vw); top: 8vh; }
+  .car-pair2-a{ top: 8dvh; }
+  .car-pair2-b{ left: calc(50% + 34vw); top: 26vh; }
+  .car-pair2-b{ top: 26dvh; }
+
+  .car-pair3-a{ left: calc(50% + 10vw); top: 34vh; }
+  .car-pair3-a{ top: 34dvh; }
+}
 
 /* Pares de emojis en el área de botones (dos pares) colocados alrededor de los CTAs pero por debajo de ellos (no encima) */
 .buttons-stage{display:flex;flex-direction:column;align-items:center;gap:10px;padding:6px 0 0 0;margin-top:auto;position:relative;margin-bottom:var(--cta-gap)}
