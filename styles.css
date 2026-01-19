@@ -307,10 +307,10 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
 @media (max-width:700px){
   /* Móvil: escala ~1.5x también, pero con tamaños absolutos menores; offsets reducidos */
   /* Botones más grandes en móvil */
-  .icon{ width: clamp(240px, 82vw, 420px); }
-  /* Acercar ligeramente los botones al carro */
-  .icon-green{ margin-top: -26px; }
-  .icon-blue{ margin-top: -88px; }
+  .icon{ width: clamp(210px, 72vw, 360px); }
+  /* Pegarlos un poco más entre ellos (más solape = menos altura total) */
+  .icon-green{ margin-top: -34px; }
+  .icon-blue{ margin-top: -108px; }
 }
 
 @media (max-width:700px){
@@ -322,7 +322,7 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
     /* móvil: aumentar también en +50% */
     position:relative;
     /* un poco más pequeño para evitar superponerse al logo superior */
-    width: clamp(352px, 55vw, 780px);
+    width: clamp(300px, 88vw, 560px);
     max-width: 92%;
     /* levantar el carro con valor estable (vw) para todas las pantallas */
     margin: calc(-1 * var(--car-lift)) auto 0;
@@ -410,18 +410,23 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
 
 /* Móvil: usar tokens estables (sin depender de height/vh) */
 @media (max-width:700px){
-  :root{ --cta-offset: clamp(84px, 16vw, 160px); }
-  /* Botones un poco más grandes en móvil */
-  .icon{ width: clamp(240px, 82vw, 420px) !important }
-  .icon-green{ margin-top: calc(-1 * clamp(22px, 5vw, 34px)) !important }
+  :root{
+    --cta-gap: clamp(2px, 1vw, 6px);
+    --cta-offset: clamp(64px, 12vw, 110px);
+  }
+  /* Botones: un poco más pequeños, pero siguen grandes */
+  .icon{ width: clamp(210px, 72vw, 360px) !important }
+  .icon-green{ margin-top: calc(-1 * clamp(18px, 4.4vw, 30px)) !important }
   .icon-blue{ margin-top: calc(-1 * var(--cta-offset)) !important }
   /* Hotspots: acompaña el nuevo tamaño de los botones */
-  .hotspot-red,.hotspot-green,.hotspot-blue{ width: clamp(240px, 82vw, 420px) !important }
+  .hotspot-red,.hotspot-green,.hotspot-blue{ width: clamp(210px, 72vw, 360px) !important }
   .hotspot-green{ top: 104px !important }
   .hotspot-blue{ top: 204px !important }
   /* Subir el carro en móvil (menos aire entre logo y carro) */
   .scene{ margin-top: clamp(8px, 2vw, 22px) !important; padding-top: calc(clamp(140px,36vw,320px) * 0.18) !important }
   .car{ margin: calc(-1 * (var(--car-lift) + 64px)) auto 0 !important }
+  /* Compactar separación general */
+  .buttons-stage{ gap: 6px; padding-top: 4px; }
 }
 /* Estilos base del contenedor del pie de página (bloque malformado corregido anteriormente) */
 .site-footer{
@@ -488,7 +493,8 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
   /* Pie de página inmediatamente debajo del botón azul con un pequeño espacio */
   /* Pie de página debajo del botón azul con un espacio pequeño y consistente */
   .buttons-stage{ margin-bottom: var(--cta-gap) !important; }
-  .site-footer{ margin-top: 0; padding-top: 2px; }
+  .site-footer{ margin-top: 0; padding-top: 0; padding-bottom: 6px; }
+  .footer-title-img{ width: clamp(200px, 72vw, 520px); }
   /* Forzar formato del pie y centrar en pantallas pequeñas */
   .footer-brand{ display:block; text-align:center; }
   .footer-line{ font-size: clamp(26px, 7.8vw, 64px); text-transform: uppercase; text-align:center; }
