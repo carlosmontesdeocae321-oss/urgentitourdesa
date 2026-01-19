@@ -420,7 +420,8 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
   .icon-red{ margin-top: clamp(12px, 2.8vw, 18px) !important }
   /* Subir verde ~1 línea y que el azul suba con él */
   .icon-green{ margin-top: calc(-1 * (clamp(28px, 7vw, 48px) + 16px)) !important }
-  .icon-blue{ margin-top: calc(-1 * (var(--cta-offset) + 48px)) !important }
+  /* Bajar azul ~1 línea para no tapar el verde */
+  .icon-blue{ margin-top: calc(-1 * (var(--cta-offset) + 32px)) !important }
   /* Hotspots: acompaña el nuevo tamaño de los botones */
   .hotspot-red,.hotspot-green,.hotspot-blue{ width: clamp(210px, 72vw, 360px) !important }
   /* Subir el carro en móvil (menos aire entre logo y carro) */
