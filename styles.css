@@ -412,11 +412,11 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
 @media (max-width:700px){
   :root{
     --cta-gap: clamp(2px, 1vw, 6px);
-    --cta-offset: clamp(64px, 12vw, 110px);
+    --cta-offset: clamp(88px, 16vw, 150px);
   }
   /* Botones: un poco más pequeños, pero siguen grandes */
   .icon{ width: clamp(210px, 72vw, 360px) !important }
-  .icon-green{ margin-top: calc(-1 * clamp(18px, 4.4vw, 30px)) !important }
+  .icon-green{ margin-top: calc(-1 * clamp(28px, 7vw, 48px)) !important }
   .icon-blue{ margin-top: calc(-1 * var(--cta-offset)) !important }
   /* Hotspots: acompaña el nuevo tamaño de los botones */
   .hotspot-red,.hotspot-green,.hotspot-blue{ width: clamp(210px, 72vw, 360px) !important }
@@ -428,6 +428,9 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
   /* Compactar separación general */
   .buttons-stage{ gap: 6px; padding-top: 4px; }
 }
+
+/* Si el logo existiera por caché/HTML antiguo, ocultarlo */
+.brand-emoji{ display:none !important; }
 /* Estilos base del contenedor del pie de página (bloque malformado corregido anteriormente) */
 .site-footer{
   position:relative; /* en flujo, debajo de los botones */
