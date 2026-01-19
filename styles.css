@@ -225,8 +225,8 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
     position: fixed;
     left: auto;
     right: 58px;
-    top: calc(env(safe-area-inset-top) + 38px);
-    z-index: 952;
+    top: calc(env(safe-area-inset-top) + 6px);
+    z-index: 980;
     animation-name: emoji-float-tilt;
   }
 }
@@ -274,9 +274,9 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
 }
 
 @keyframes emoji-float-tilt{
-  0%{transform:translateY(0) rotate(15deg)}
-  50%{transform:translateY(-8px) rotate(19deg)}
-  100%{transform:translateY(0) rotate(15deg)}
+  0%{transform:translateY(0) rotate(-20deg)}
+  50%{transform:translateY(-8px) rotate(-24deg)}
+  100%{transform:translateY(0) rotate(-20deg)}
 }
 /* CTAs superpuestos en pila: centrados absolutamente, botones posicionados por offsets superiores */
 /* (deduplicado: base .buttons-stage definida arriba con position:relative) */
