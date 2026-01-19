@@ -218,7 +218,7 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
   /* Lado derecho */
   .car-pair2-a{ left: 82%; top: 14%; animation-name: emoji-float-tilt-right; }
   /* Parasol derecho: un poco más a la izquierda y más arriba (esquina del coche) */
-  .car-pair2-b{ left: 56%; top: 3%; width: clamp(96px, 22vw, 176px); animation-name: emoji-float-tilt-right; z-index: 920; }
+  .car-pair2-b{ left: 56%; top: 1%; width: clamp(96px, 22vw, 176px); animation-name: emoji-float-tilt-right; z-index: 920; }
 
   /* Emoji de gafas del lado derecho: subir hasta la zona del título */
   .car-pair3-a{
@@ -287,7 +287,9 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
 /* CTAs superpuestos en pila: centrados absolutamente, botones posicionados por offsets superiores */
 /* (deduplicado: base .buttons-stage definida arriba con position:relative) */
 /* CTAs: apilados verticalmente para que cada botón sea visible uno debajo del otro */
-.ctas{position:relative;z-index:640;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:2px;padding:2px 0}
+.ctas{position:relative;z-index:640;pointer-events:auto;display:flex;flex-direction:column;align-items:center;gap:2px;padding:2px 0}
+.cta-link{display:block;pointer-events:auto;text-decoration:none;}
+.cta-link:visited{color:inherit;}
 /* Cada botón está posicionado absolutamente dentro de .ctas para superponerse visualmente
   pero seguir siendo enlaces individuales y clicables. .ctas tiene pointer-events:none
   para no bloquear, mientras los botones tienen pointer-events:auto. */
