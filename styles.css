@@ -209,7 +209,7 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
 /* Desktop/laptop: mostrar la nube (evita ocultarse en algunos dispositivos) */
 @media (min-width:701px) and (any-hover:hover), (min-width:701px) and (pointer:fine){
   .desktop-emoji-cloud{ display:block; }
-  /* 5 caritas con gafas: posiciones al borde */
+  /* 3 con gafas + 2 con parasol: posiciones al borde */
   .desktop-emoji-cloud .desktop-emoji:nth-child(1){ top: 8%;  left: 6%;  transform: rotate(-10deg); animation-delay:0.10s }
   .desktop-emoji-cloud .desktop-emoji:nth-child(2){ top: 70%; left: 12%; transform: rotate(10deg);  animation-delay:0.40s }
   .desktop-emoji-cloud .desktop-emoji:nth-child(3){ top: 22%; left: 88%; transform: rotate(-6deg);  animation-delay:0.22s }
@@ -217,7 +217,7 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
   .desktop-emoji-cloud .desktop-emoji:nth-child(5){ top: 62%; left: 90%; transform: rotate(-14deg); animation-delay:0.16s }
 }
 
-/* Móvil: 5 caritas con gafas, ubicadas como en la referencia */
+/* Móvil: 3 con gafas + 2 con parasol, ubicadas como en la referencia */
 .mobile-emoji-cloud .cloud-emoji:nth-child(1){ top: 6%;  left: 2%;  animation-delay:0.10s }
 .mobile-emoji-cloud .cloud-emoji:nth-child(2){ top: 3%;  left: 86%; animation-delay:0.25s }
 .mobile-emoji-cloud .cloud-emoji:nth-child(3){ top: 24%; left: 6%;  animation-delay:0.35s }
@@ -227,7 +227,7 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
 /* Mostrar nube de emojis sólo en móvil (pantallas táctiles) */
 @media (pointer: coarse) {
   .mobile-emoji-cloud{ display:block; }
-  /* Desactivar emojis extra alrededor del carro (usamos la nube fija arriba) */
+  /* Desactivar emojis antiguos alrededor del carro (se reemplazaron por los nuevos car-pair*) */
   .car-cloud1,.car-cloud2{ display:none !important; }
 }
 .btn-pair1-a{left:calc(50% - 30vw); top: 15vh; animation:emoji-float 4.8s ease-in-out infinite; animation-delay:0.1s}
