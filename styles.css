@@ -201,16 +201,23 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
 /* Móvil: posiciones estables alrededor del carro (3 gafas + 2 parasol) */
 @media (max-width:700px){
   .car-emoji{ width: clamp(44px, 12vw, 92px); }
-  /* gafas (izq arriba) */
-  .car-pair1-a{ left: 6%; top: 18%; }
-  /* parasol (izq medio) */
-  .car-pair1-b{ left: 8%; top: 56%; }
-  /* gafas (der arriba) */
-  .car-pair2-a{ left: 84%; top: 16%; }
-  /* parasol (der medio) */
-  .car-pair2-b{ left: 86%; top: 54%; }
-  /* gafas (arriba centro, fuera del carro) */
-  .car-pair3-a{ left: 46%; top: 8%; }
+
+  /* Gafas: más grandes */
+  .car-pair1-a,
+  .car-pair2-a,
+  .car-pair3-a{ width: clamp(54px, 14vw, 110px); }
+
+  /* Lado izquierdo: subir un poco */
+  .car-pair1-a{ left: 6%; top: 14%; }
+  .car-pair1-b{ left: 8%; top: 52%; }
+
+  /* Lado derecho */
+  .car-pair2-a{ left: 84%; top: 14%; }
+  /* Parasol derecho: un poco más a la izquierda y más arriba (esquina del coche) */
+  .car-pair2-b{ left: 76%; top: 46%; }
+
+  /* El de gafas que estaba centrado: mover a esquina superior derecha */
+  .car-pair3-a{ left: 88%; top: 6%; }
 }
 
 /* Escritorio: recolocar emojis alrededor del carro (evitar que queden debajo/centrados) */
