@@ -258,6 +258,31 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
    Evitar reglas tipo móvil (fixed) que se ven raras en pantalla grande. */
 @media (min-width:701px){
   .poster-content{ max-width: 980px; width: 100%; margin: 0 auto; }
+
+  /* En escritorio: solo 2 emojis con gafas junto al título */
+  .car-pair2-a{ display:none !important; }
+  .car-pair1-a,
+  .car-pair3-a{
+    position: fixed;
+    top: 18px;
+    width: clamp(64px, 6vw, 96px);
+    z-index: 980;
+    animation-name: emoji-float-tilt;
+  }
+  /* Alinear con el centro del contenido (980px) sin que se vayan a los bordes */
+  .car-pair1-a{ left: clamp(16px, calc(50% - 490px + 18px), 180px); }
+  .car-pair3-a{ left: auto; right: clamp(16px, calc(50% - 490px + 18px), 180px); }
+
+  /* Parasol: +50% y acomodado alrededor del carro */
+  .car-pair1-b,
+  .car-pair2-b{
+    width: clamp(144px, 18vw, 264px);
+    z-index: 820;
+  }
+  .car-pair1-b{ left: calc(50% - 30vw); top: 28vh; }
+  .car-pair1-b{ top: 28dvh; }
+  .car-pair2-b{ left: calc(50% + 16vw); top: 22vh; }
+  .car-pair2-b{ top: 22dvh; }
 }
 
 /* Pares de emojis en el área de botones (dos pares) colocados alrededor de los CTAs pero por debajo de ellos (no encima) */
