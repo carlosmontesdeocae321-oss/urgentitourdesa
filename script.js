@@ -1,6 +1,6 @@
 // No se requiere JS para el fondo dividido; placeholder.
 document.addEventListener('DOMContentLoaded', () => {
-  // Toggle background photo mode based on CSS variable
+  // Alternar modo de foto de fondo basado en la variable CSS
   function applyBgPhotoMode(){
     const root = document.documentElement;
     const url = getComputedStyle(root).getPropertyValue('--bg-photo-url').trim();
@@ -14,15 +14,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.toggle('has-bg-photo', visible);
   }
   applyBgPhotoMode();
-  // Map hotspots to buttons so hover and clicks work when buttons overlap
-  // Map hotspots to icon images (buttons were replaced by plain images)
+  // Mapear hotspots a botones para que hover y clic funcionen cuando se superponen
+  // Mapear hotspots a imágenes de íconos (los botones fueron reemplazados por imágenes simples)
   const map = [
     {hot: '.hotspot-red', btn: '.icon-red'},
     {hot: '.hotspot-green', btn: '.icon-green'},
     {hot: '.hotspot-blue', btn: '.icon-blue'}
   ];
 
-  // canvases used for pixel-perfect hit testing (keyed by button selector)
+  // lienzos usados para pruebas de impacto píxel-perfect (indexados por selector de botón)
   const canvases = new Map();
 
   map.forEach(pair => {
@@ -31,13 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!hot || !btn) return;
 
     const handleAction = (el) => {
-      // If element is an anchor/image with an href or data-href, navigate to it.
+      // Si el elemento es un ancla/imagen con href o data-href, navegar a él.
       const href = (el && el.getAttribute) ? (el.getAttribute('href') || el.dataset.href) : null;
       if (!href || href === '#') return;
       window.location.href = href;
     };
 
-    // Pixel-perfect hover: draw the button image into an offscreen canvas
+    // Hover píxel-perfect: dibujar la imagen del botón en un canvas fuera de pantalla
     const img = (btn.tagName === 'IMG') ? btn : btn.querySelector && btn.querySelector('img');
     const canvas = document.createElement('canvas');
     canvases.set(pair.btn, canvas);
@@ -45,18 +45,18 @@ document.addEventListener('DOMContentLoaded', () => {
       img.addEventListener('load', () => redrawCanvases && redrawCanvases(), {once:true});
     }
 
-    // track hover state so we only add/remove class when it changes
+    // Rastrear estado de hover para agregar/quitar la clase solo cuando cambia
     let isHovering = false;
 
     const isOpaqueAt = (clientX, clientY) => {
-      // If we don't have the button image or canvas, fallback to a
-      // conservative bounding-area test: only the top 30% of the image
-      // is considered clickable. This prevents treating the whole
-      // image as clickable when pixel testing is unavailable (eg. CORS).
+      // Si no tenemos la imagen del botón o el canvas, usar una
+      // prueba conservadora de área de contorno: solo el 30% superior de la imagen
+      // se considera clicable. Esto evita tratar toda la imagen como clicable
+      // cuando las pruebas de píxeles no están disponibles (p. ej., CORS).
       const rect = img ? img.getBoundingClientRect() : null;
       if (!img || !canvases.has(pair.btn) || !rect) {
-        // Fallback: if we can't do pixel testing, consider the whole
-        // bounding rect as active so clicks on visible portions work.
+        // Alternativa: si no podemos hacer prueba por píxeles, considerar todo
+        // el rectángulo delimitador como activo para que funcionen los clics en zonas visibles.
         if (!rect) return false;
         const xx = Math.floor(clientX - rect.left);
         const yy = Math.floor(clientY - rect.top);
@@ -66,10 +66,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const y = Math.floor(clientY - rect.top);
       const c = canvases.get(pair.btn);
       const ctx = c.getContext && c.getContext('2d', { willReadFrequently: true });
-      // If we can't access canvas 2D context, fallback to top-30% hit test
+      // Si no podemos acceder al contexto 2D del canvas, usar la prueba del 30% superior
       if (!ctx) {
-        // If canvas is tainted or context unavailable, accept full bounding
-        // box to avoid blocking clicks on visible parts of the icon.
+        // Si el canvas está contaminado o el contexto no está disponible, aceptar todo el
+        // rectángulo delimitador para no bloquear clics en partes visibles del ícono.
         return (x >= 0 && y >= 0 && x < rect.width && y < rect.height);
       }
       if (x < 0 || y < 0 || x >= c.width || y >= c.height) return false;
@@ -77,8 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const d = ctx.getImageData(x, y, 1, 1).data;
         return d[3] > 10; // alpha > ~4%
       } catch (err) {
-        // If getImageData fails (tainted canvas), fallback to accepting the
-        // full bounding box so visible parts of the icon remain clickable.
+        // Si getImageData falla (canvas contaminado), aceptar el rectángulo
+        // delimitador completo para que las partes visibles del ícono sigan siendo clicables.
         return (x >= 0 && y >= 0 && x < rect.width && y < rect.height);
       }
     };
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isHovering = true;
         console.log('hotspot pixel enter ->', pair.hot);
         btn.classList.add('hover');
-        // no vibration on hover: Chrome/Safari require a user gesture
+        // sin vibración en hover: Chrome/Safari requieren un gesto del usuario
       } else if (!ok && isHovering) {
         isHovering = false;
         console.log('hotspot pixel leave ->', pair.hot);
@@ -104,14 +104,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Prevent default on both hotspot and button and handle navigation explicitly
+    // Prevenir el comportamiento por defecto en hotspot e ícono y manejar la navegación explícitamente
     hot.addEventListener('click', (e) => {
       e.preventDefault();
-      // vibrate only on explicit user gesture (click/tap)
+      // vibrar solo con un gesto explícito del usuario (clic/toque)
       try{ if (navigator.vibrate) navigator.vibrate(20); }catch(e){}
       if (isOpaqueAt(e.clientX, e.clientY)) {
         console.log('hotspot clicked ->', pair.hot, '-> forwarding to hotspot href');
-        // Use the hotspot's own href for navigation (anchors in the DOM)
+        // Usar el propio href del hotspot para la navegación (anclas en el DOM)
         handleAction(hot);
       } else {
         console.log('hotspot click ignored (transparent) ->', pair.hot);
@@ -121,12 +121,12 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('mouseleave', () => console.log('icon mouseleave ->', pair.btn));
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      // vibrate only on explicit user gesture (click/tap)
+      // vibrar solo con un gesto explícito del usuario (clic/toque)
       try{ if (navigator.vibrate) navigator.vibrate(20); }catch(e){}
       const ok = isOpaqueAt(e.clientX, e.clientY);
       if (ok) {
         console.log('icon clicked ->', pair.btn);
-        // Prefer hotspot href if present, otherwise use the icon's data-href
+        // Preferir el href del hotspot si está presente; de lo contrario usar el data-href del ícono
         const target = (hot && hot.getAttribute && hot.getAttribute('href') && hot.getAttribute('href') !== '#') ? hot : btn;
         handleAction(target);
       } else {
@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-    // Draw each button image into its offscreen canvas at the displayed size.
+    // Dibujar cada imagen de botón en su canvas fuera de pantalla al tamaño mostrado.
     function redrawCanvases(){
       map.forEach(pair => {
         const btn = document.querySelector(pair.btn);
@@ -153,20 +153,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         const ctx = c.getContext && c.getContext('2d', { willReadFrequently: true });
         if (!ctx) return;
-        // Avoid redrawing if already drawn at this size
+        // Evitar redibujar si ya se dibujó a este tamaño
         if (c._lastSize === sizeKey) return;
         try{
           ctx.clearRect(0,0,c.width,c.height);
           ctx.drawImage(img, 0, 0, c.width, c.height);
           c._lastSize = sizeKey;
         }catch(err){
-          // ignore cross-origin or other draw errors
+          // ignorar errores de origen cruzado u otros errores de dibujo
         }
       });
     }
 
-    // Position hotspots so they match the buttons. The blue hotspot
-    // will be limited to the top 30% of its button image.
+    // Posicionar los hotspots para que coincidan con los botones. El hotspot azul
+    // se limitará al 30% superior de su imagen de botón.
     function positionHotspots(){
       const hotspotsParent = document.querySelector('.hotspots');
       if (!hotspotsParent) return;
@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const left = Math.round(btnRect.left - parentRect.left);
         const width = Math.round(btnRect.width);
         let height = Math.round(btnRect.height);
-        // Position hotspots relative to their container so they track layout changes
+        // Posicionar hotspots relativos a su contenedor para que sigan los cambios de diseño
         hot.style.position = 'absolute';
         hot.style.top = `${top}px`;
         hot.style.left = `${left}px`;
@@ -192,16 +192,16 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // initial draw, position hotspots, and on resize only (no scroll handler)
+    // dibujo inicial, posicionar hotspots y solo en resize (sin manejador de scroll)
     redrawCanvases();
     positionHotspots();
-    // Align gradient split with car position so the line sits below the car
+    // Alinear la división del degradado con la posición del carro para que la línea quede debajo del carro
     function alignSplitToCar(){
       const car = document.querySelector('.car');
       if (!car) return;
       const rect = car.getBoundingClientRect();
-      // place the split a bit below the car bottom to keep the line between car and CTAs
-      // use a smaller gap so the line sits closer to the car (raised)
+      // colocar la división un poco debajo de la base del carro para mantener la línea entre carro y CTAs
+      // usar una separación menor para que la línea quede más cerca del carro (elevada)
       const gap = Math.max(6, Math.round(rect.height * 0.02));
       const split = Math.round(rect.bottom + gap);
       document.documentElement.style.setProperty('--split', `${split}px`);
@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }, {passive:true});
 
-    // Keep split aligned when the page is scrolled or device orientation changes.
+    // Mantener alineada la división cuando la página haga scroll o cambie la orientación del dispositivo.
     let scrollTick = false;
     window.addEventListener('scroll', () => {
       if (scrollTick) return;
@@ -240,11 +240,11 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Keep hotspots synced with animated icons at a throttled rate
+    // Mantener los hotspots sincronizados con los íconos animados a una tasa limitada
     (function startHotspotSync(){
       let last = 0;
       function loop(now){
-        if (!last || (now - last) > 80) { // ~12fps updates
+        if (!last || (now - last) > 80) { // ~12 fps de actualizaciones
           try{ positionHotspots(); }catch(e){}
           last = now;
         }
@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
       requestAnimationFrame(loop);
     }());
 
-    // Also ensure alignment after all images have loaded (car image may change layout)
+    // Asegurar la alineación después de que todas las imágenes carguen (la imagen del carro puede cambiar el diseño)
     window.addEventListener('load', () => {
       requestAnimationFrame(() => {
         redrawCanvases();
@@ -263,6 +263,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-  // Claim removed — no claim image to check
+  // Reclamo eliminado — no hay imagen de reclamo que verificar
 
 });

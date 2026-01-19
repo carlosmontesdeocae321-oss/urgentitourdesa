@@ -2,19 +2,19 @@
   --orange:#ff7a00;
   --yellow:#ffd400;
   --white:#ffffff;
-  --split:39vh; /* vertical position where orange -> yellow should switch */
-  /* CTA sizing: green = 70% of red, blue = 70% of green */
+  --split:39vh; /* posición vertical donde el naranja cambia a amarillo */
+  /* Tamaños de CTA: verde = 70% del rojo, azul = 70% del verde */
   --btn-red-w: clamp(140px,28vw,360px);
   --btn-green-w: calc(var(--btn-red-w) * 0.7);
   --btn-blue-w: calc(var(--btn-green-w) * 0.7);
-  --btn-size: clamp(220px,30vw,420px); /* unified button size */
+  --btn-size: clamp(220px,30vw,420px); /* tamaño unificado del botón */
   --accent-blue:#0b3b8f;
-  /* Mobile footer lift baseline (can be overridden by height breakpoints) */
+  /* Elevación base del pie de página en móvil (se puede sobrescribir por breakpoints de altura) */
   --footer-lift-m: clamp(200px, 28vw, 320px);
-  /* Optional background photo URL + opacity */
+  /* URL opcional de foto de fondo + opacidad */
   --bg-photo-url: url('assets/background.png');
   --bg-photo-opacity: 1;
-  /* Consistent CTA → footer gap (avoid vh differences) */
+  /* Espacio constante entre CTA y pie de página (evitar diferencias por vh) */
   --cta-gap: clamp(6px, 1.6vw, 12px);
   /* Layout tokens para móviles: alinear carro y CTAs de forma consistente */
   --car-lift: clamp(180px, 36vw, 520px);
@@ -28,15 +28,15 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
   position:relative;
   min-height:100vh;
   min-height:100dvh;
-  /* desktop can scroll if content overflows */
+  /* en escritorio puede haber desplazamiento si el contenido se desborda */
   display:flex;
   flex-direction:column;
   padding:12px;
   overflow:visible;
-  /* clean split background: orange top / yellow bottom using --split.
-     Image overlay is placed via ::before so the split remains consistent across sizes */
+    /* fondo dividido limpio: naranja arriba / amarillo abajo usando --split.
+      El overlay de imagen se coloca con ::before para que la división siga siendo consistente en todos los tamaños */
   background: linear-gradient(to bottom, var(--orange) 0 calc(var(--split)), var(--yellow) calc(var(--split)) 100%);
-  background-attachment: fixed; /* keep the split fixed to the viewport so both colors remain visible */
+  background-attachment: fixed; /* mantener la división fija al viewport para que ambos colores sigan visibles */
 }
 
 /* Móvil/tablet (touch): una sola pantalla, sin scroll vertical */
@@ -45,7 +45,7 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
   .poster{ height:100dvh; overflow:hidden; }
 }
 
-/* Dotted texture confined to the yellow area (below --split) */
+/* Textura punteada confinada al área amarilla (debajo de --split) */
 .yellow-texture{
   position:fixed;
   left:0;
@@ -54,7 +54,7 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
   top: calc(var(--split) + 0.5dvh);
   bottom:0;
   pointer-events:none;
-  z-index:6; /* above overlay/waves but far below main content */
+  z-index:6; /* por encima del overlay/olas pero muy por debajo del contenido principal */
   background-image:
     repeating-linear-gradient(45deg, rgba(255,255,255,0.20) 0 2px, rgba(255,255,255,0) 2px 18px),
     repeating-linear-gradient(45deg, rgba(0,0,0,0.05) 0 1px, rgba(0,0,0,0) 1px 18px);
@@ -63,33 +63,33 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
 
 .poster::before{
   content: "";
-  position:fixed; /* fixed so overlay stays with viewport */
+  position:fixed; /* fijo para que el overlay se mantenga con el viewport */
   inset:0;
-  /* Keep a subtle sheen overlay only; palms removed to eliminate the large image */
+  /* Mantener solo un brillo sutil; palmeras eliminadas para quitar la imagen grande */
   background-image: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  /* Keep the overlay fixed to the viewport */
+  /* Mantener el overlay fijo al viewport */
   background-attachment: fixed;
-  opacity: 0.28; /* overall visibility for palms; tweak if too strong */
+  opacity: 0.28; /* visibilidad general; ajustar si es muy fuerte */
   pointer-events: none;
-  z-index:4; /* below waves (5) but above base gradient of poster */
+  z-index:4; /* debajo de las olas (5) pero encima del degradado base del póster */
 }
 
-/* Subtle shaded waves in the orange area (keeps layout responsive, no extra images needed) */
+/* Olas sombreadas sutiles en el área naranja (diseño responsivo, sin imágenes extra) */
 .poster::after{
   content: "";
-  position:fixed; /* fixed so waves stay aligned with viewport split */
+  position:fixed; /* fijo para que las olas se alineen con la división del viewport */
   left: 0;
   right: 0;
-  /* cover both orange and the upper part of yellow; positioning is responsive via --split */
+  /* cubrir tanto el naranja como la parte superior del amarillo; la posición es responsiva vía --split */
   top: calc(var(--split) * 0.02);
   height: calc(var(--split) * 1.25);
   pointer-events: none;
-  z-index: 5; /* above base gradient but below main content */
+  z-index: 5; /* por encima del degradado base pero debajo del contenido principal */
   background-repeat: no-repeat, no-repeat;
-  /* first image: richer orange-area waves (top), second image: stronger yellow-area waves (lower) */
+  /* primera imagen: olas más marcadas en el área naranja (superior), segunda imagen: olas más visibles en el área amarilla (inferior) */
   background-position: center top, center calc(var(--split) + 1vh);
   background-position: center top, center calc(var(--split) + 1dvh);
   background-size: cover, cover;
@@ -99,56 +99,65 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 240' preserveAspectRatio='none'><path d='M0,30 C150,80 350,0 600,40 C850,80 1000,10 1200,50 L1200,240 L0,240 Z' fill='%23ffffff' fill-opacity='0.05'/><path d='M0,70 C200,120 400,40 600,80 C800,120 1000,40 1200,90 L1200,240 L0,240 Z' fill='%23000000' fill-opacity='0.008'/></svg>");
 }
 
-/* Background photo overlay: sits above split + divider, below main content */
+/* Foto de fondo: se coloca sobre la división + separador, debajo del contenido principal */
 .bg-photo{
   position: fixed;
   inset: 0;
-  z-index: 250; /* above divider(20)/texture(6) and poster overlays, below scene(300)+brand(400) */
+  z-index: 250; /* por encima del separador(20)/textura(6) y overlays del póster, debajo de escena(300)+marca(400) */
   pointer-events: none;
   background-image: var(--bg-photo-url, none);
-  background-size: cover; /* fill toda la pantalla en móvil y escritorio */
+  background-size: cover; /* llenar toda la pantalla en móvil y escritorio */
   background-position: center;
   background-repeat: no-repeat;
   opacity: var(--bg-photo-opacity, 1);
   transition: opacity 200ms ease;
-  display: none; /* hidden unless has-bg-photo is active */
+  display: none; /* oculto a menos que has-bg-photo esté activo */
 }
 
 /* Overlay de contraste ya aplicado arriba de forma global */
 
-/* When a background photo is active, hide curve divider, yellow texture and poster overlays */
+/* Cuando hay una foto de fondo activa, ocultar el divisor curvo, la textura amarilla y los overlays del póster */
 .has-bg-photo .divider{ display: none !important; }
 .has-bg-photo .yellow-texture{ display: none !important; }
 .has-bg-photo .poster::before{ opacity: 0 !important; background-image: none !important; }
 .has-bg-photo .poster::after{ opacity: 0 !important; background-image: none !important; }
 .has-bg-photo .bg-photo{ display: block; }
-/* Palm visuals removed: all rules referencing palmera.png and palms-left/right removed */
-/* removed poster pseudo-element (white bar) to keep poster clean */
+/* Visuales de palmeras eliminados: todas las reglas que referencian palmera.png y palmeras izquierda/derecha fueron removidas */
+/* Pseudo-elemento del póster (barra blanca) eliminado para mantener el póster limpio */
 .brand{position:relative;z-index:400;text-align:center;margin-top:0}
+.brand-title-img{
+  display:block;
+  margin: 2px auto 0;
+  width: clamp(220px, 56vw, 760px);
+  max-width: 94%;
+  height: auto;
+  pointer-events: none;
+  filter: drop-shadow(0 5px 0 rgba(11,59,143,0.95)) drop-shadow(0 10px 14px rgba(0,0,0,0.18));
+}
 .brand-emoji{display:block;margin:6px auto 0;width:clamp(40px,10vw,72px);height:auto;pointer-events:none;z-index:410;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.25)}
 .brand-line{font-family:'Baloo 2', Inter, sans-serif;font-weight:800;font-size:clamp(30px,6.5vw,74px);color:#fff;text-shadow:0 5px 0 rgba(11,59,143,0.95),0 10px 14px rgba(0,0,0,0.18);padding:4px 8px}
 .brand-sub{font-weight:800;color:#00ff5a;font-size:clamp(18px,3.5vw,38px);text-shadow:0 4px 0 rgba(0,80,0,0.18);margin-top:-6px}
 .scene{position:relative;z-index:300;pointer-events:none;padding-top:0.25rem;padding-bottom:0.5rem;display:flex;justify-content:center;align-items:center;flex-direction:column;flex:1 1 auto}
 
-/* Decorative wave separator placed in the background */
+/* Separador ondulado decorativo colocado en el fondo */
 .divider{position:fixed;left:0;right:0;width:100%;height:12vh;top:calc(var(--split) - 6vh);display:block;z-index:20;pointer-events:none;opacity:1}
 .divider{height:12dvh; top:calc(var(--split) - 6dvh)}
 .divider path{vector-effect:non-scaling-stroke;stroke-width:3}
-/* removed unused .wave styles */
+/* estilos .wave sin uso eliminados */
 .car{
-  position:relative; /* place car in normal flow between header and buttons */
-  /* increase base size by +50% while keeping responsive behavior */
+  position:relative; /* colocar el carro en el flujo normal entre el encabezado y los botones */
+  /* aumentar el tamaño base en +50% manteniendo el comportamiento responsivo */
   width: clamp(495px, 58vw, 1080px);
   max-width: 92%;
-  z-index:800; /* car above emojis and other images */
-  margin: -38vh auto 0; /* lift the car further so header text can overlay (3 lines more) */
+  z-index:800; /* carro por encima de emojis y otras imágenes */
+  margin: -38vh auto 0; /* elevar el carro más para que el texto del encabezado pueda superponerse (≈3 líneas más) */
   margin: -38dvh auto 0;
-  transform: none; /* no scaling that would affect layout */
+  transform: none; /* sin escalado que afecte el diseño */
 }
 
-/* palm-car removed per user request */
+/* carro con palmeras eliminado a solicitud del usuario */
 
-/* Allow car animation but keep it non-interactive */
+/* Permitir la animación del carro pero mantenerlo no interactivo */
 .car, .car img, .car * {
   transition: none !important;
   pointer-events: none;
@@ -163,8 +172,8 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
 }
 .scene img{pointer-events:none}
 .sun{position:absolute;top:8px;right:6vw;width:clamp(60px,10vw,140px);z-index:9}
-/* New emoji pairs: removed previous single emojis. */
-/* Car-area emoji pairs (two pairs, each pair = two images) positioned above the car */
+/* Nuevos pares de emojis: se eliminaron los emojis individuales anteriores. */
+/* Pares de emojis en el área del carro (dos pares, cada par = dos imágenes) posicionados sobre el carro */
 .car-emoji{position:absolute;pointer-events:none;width:clamp(48px,8.5vw,120px);z-index:360;display:block}
 .car-cloud1,.car-cloud2{ display:none }
 .car-pair1-a{left:calc(50% - 30vw); top: 18vh; animation:emoji-float 4.6s ease-in-out infinite; animation-delay:0s}
@@ -176,7 +185,7 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
 .car-pair2-b{left:calc(50% + 15vw); top: 30vh; animation:emoji-float 4.4s ease-in-out infinite; animation-delay:0.35s}
 .car-pair2-b{top: 30dvh}
 
-/* Button-area emoji pairs (two pairs) placed around the CTAs but below them (not on top) */
+/* Pares de emojis en el área de botones (dos pares) colocados alrededor de los CTAs pero por debajo de ellos (no encima) */
 .buttons-stage{display:flex;flex-direction:column;align-items:center;gap:10px;padding:6px 0 0 0;margin-top:auto;position:relative;margin-bottom:var(--cta-gap)}
 .btn-emoji{position:absolute;pointer-events:none;width:clamp(40px,7vw,100px);z-index:130}
 .mobile-emoji-cloud{ display:none; position:absolute; left:0; right:0; z-index:500; pointer-events:none; }
@@ -206,7 +215,7 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
   .desktop-emoji-cloud .desktop-emoji:nth-child(6){ top: 6%;  left: 78%; transform: rotate(12deg);  animation-delay:0.35s }
 }
 
-/* Posiciones dispersas para los 6 emojis (3 parasol + 3 smiling) */
+/* Posiciones dispersas para los 6 emojis (3 parasol + 3 sonrientes) */
 .mobile-emoji-cloud .cloud-emoji:nth-child(1){ top: 8%;  left: 12%; animation-delay:0.10s }
 .mobile-emoji-cloud .cloud-emoji:nth-child(2){ top: 35%; left: 78%; animation-delay:0.30s }
 .mobile-emoji-cloud .cloud-emoji:nth-child(3){ top: 0%;  left: 50%; animation-delay:0.20s }
@@ -236,33 +245,33 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
  50%{transform:translateY(-8px) rotate(4deg)}
  100%{transform:translateY(0) rotate(-4deg)}
 }
-/* Overlapped stacked CTAs: centered absolutely, buttons positioned by top offsets */
-/* (deduped: base .buttons-stage defined above with position:relative) */
-/* CTAs: stacked vertically so each button is visible one below another */
+/* CTAs superpuestos en pila: centrados absolutamente, botones posicionados por offsets superiores */
+/* (deduplicado: base .buttons-stage definida arriba con position:relative) */
+/* CTAs: apilados verticalmente para que cada botón sea visible uno debajo del otro */
 .ctas{position:relative;z-index:640;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:2px;padding:2px 0}
-/* Each button is absolutely positioned inside .ctas so they overlap visually
-   but remain individual anchors and clickable. .ctas has pointer-events:none
-   to avoid blocking, while buttons have pointer-events:auto. */
+/* Cada botón está posicionado absolutamente dentro de .ctas para superponerse visualmente
+  pero seguir siendo enlaces individuales y clicables. .ctas tiene pointer-events:none
+  para no bloquear, mientras los botones tienen pointer-events:auto. */
 .btn{display:block;border-radius:34px;overflow:hidden;padding:0;background:transparent;border:0;position:relative;left:auto;transform:none;pointer-events:auto;margin:0 auto}
 
-/* Icons: images are kept in the DOM but specific img sizing/animation for the previous
-  button system has been removed so they can be repositioned freely. Use the
-  `.icon`, `.icon-red`, `.icon-green`, `.icon-blue` classes for future positioning. */
+/* Iconos: las imágenes se mantienen en el DOM pero se eliminó el tamaño/animación
+  específico del sistema anterior de botones para poder reposicionarlas libremente.
+  Usa las clases `.icon`, `.icon-red`, `.icon-green`, `.icon-blue` para posicionamiento futuro. */
 
-/* Regular icon sizing for normal display; responsive downscale on small screens */
+/* Tamaño de icono normal; reducción responsiva en pantallas pequeñas */
 .icon{
-  width: clamp(280px, 28vw, 460px); /* larger default size */
+  width: clamp(280px, 28vw, 460px); /* tamaño predeterminado más grande */
   height: auto;
   display:block;
   pointer-events:auto;
 }
 
-/* Use negative margin-top for vertical offsets so transforms can be used for animations
-   without clobbering positioning. Icons will animate independently via transform. */
+/* Usa margin-top negativo para offsets verticales, así se pueden usar transforms
+  para animaciones sin afectar el posicionamiento. Los iconos animarán de forma independiente con transform. */
 .icon-green{ display:inline-block; margin-top: -28px; }
 .icon-blue{ display:inline-block; margin-top: -96px; }
 
-/* Icon animations: subtle bob/scale to add life without interfering with clicks. */
+/* Animaciones de iconos: vaivén/escala sutiles para dar vida sin interferir con clics. */
 @keyframes icon-bob{
   0%{transform:translateY(0) scale(1)}
   50%{transform:translateY(-8px) scale(1.035)}
@@ -274,15 +283,15 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   transform-origin: center;
-  z-index:820; /* icons above decorative emojis */
+  z-index:820; /* iconos por encima de los emojis decorativos */
 }
 .icon-red{ animation-duration:4.0s; animation-delay:0s }
 .icon-green{ animation-duration:4.5s; animation-delay:0.12s }
 .icon-blue{ animation-duration:3.8s; animation-delay:0.28s }
 
-/* Hover/vibrate interaction: apply a short vibration-like animation when hovered
-   and keep the bobbing animation running. Use the .hover class added by JS
-   (or :hover) to trigger the stronger effect without interrupting the bob. */
+/* Interacción hover/vibración: aplicar una animación breve tipo vibración al pasar el cursor
+  y mantener el vaivén en ejecución. Usa la clase .hover agregada por JS
+  (o :hover) para disparar el efecto más fuerte sin interrumpir el vaivén. */
 @keyframes icon-vibrate{
   0%{transform:translateY(0) rotate(0deg) scale(1)}
   10%{transform:translateY(-3px) rotate(-1deg) scale(1.02)}
@@ -297,48 +306,48 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
 }
 
 @media (max-width:700px){
-  /* Mobile: scaled up by ~1.5x as well, but smaller absolute sizes; offsets reduced */
-  /* Larger buttons on mobile */
+  /* Móvil: escala ~1.5x también, pero con tamaños absolutos menores; offsets reducidos */
+  /* Botones más grandes en móvil */
   .icon{ width: clamp(168px, 32vw, 260px); }
-  /* Bring buttons slightly closer to the car */
+  /* Acercar ligeramente los botones al carro */
   .icon-green{ margin-top: -20px; }
   .icon-blue{ margin-top: -56px; }
 }
 
 @media (max-width:700px){
-  /* Removed per-icon responsive sizing to allow manual repositioning */
+  /* Se eliminó el tamaño responsivo por icono para permitir reposicionamiento manual */
   .buttons-stage{margin-top:0}
-  /* Keep car below logo con separación estable */
+  /* Mantener el carro debajo del logo con separación estable */
   .scene{margin-top: clamp(36px, 8vw, 72px); padding-top: calc(clamp(180px,44vw,420px) * 0.42)}
   .car{
-    /* mobile: increase by +50% as well */
+    /* móvil: aumentar también en +50% */
     position:relative;
-    /* slightly smaller to avoid overlapping the top logo */
+    /* un poco más pequeño para evitar superponerse al logo superior */
     width: clamp(352px, 55vw, 780px);
     max-width: 92%;
-    /* levantar carro con valor estable (vw) para todas pantallas */
+    /* levantar el carro con valor estable (vw) para todas las pantallas */
     margin: calc(-1 * var(--car-lift)) auto 0;
     transform: none;
     z-index:800;
   }
   .ctas{position:relative;height:auto}
-  /* removed .wave height (unused) */
+  /* altura de .wave eliminada (sin uso) */
 }
 
-/* Bottom spacing above the footer */
+/* Espacio inferior sobre el pie de página */
 .buttons-stage{margin-bottom:0}
 
 @media (max-width:700px){
   .buttons-stage{margin-bottom: var(--cta-gap)}
 }
 
-/* Gentle floating animation for CTAs */
-/* removed unused keyframes: float */
-/* Per-button image animation and hover-specific image rules removed so icons
-   can be repositioned independently. Reintroduce custom icon animations later
-   via the .icon-* classes if needed. */
+/* Animación suave de flotación para CTAs */
+/* keyframes: float eliminados por no usarse */
+/* Se eliminaron animaciones por botón e imágenes específicas de hover para reposicionar
+  los iconos de forma independiente. Reintroducir animaciones personalizadas luego
+  mediante las clases .icon-* si es necesario. */
 
-/* removed unused keyframes: btn-bob */
+/* keyframes sin uso eliminados: btn-bob */
 
 .hotspots{position:relative;left:auto;transform:none;width:100%;height:auto;z-index:840;pointer-events:auto;display:block}
 .hotspot{position:absolute;display:block;pointer-events:auto;background:transparent;border:0}
@@ -346,18 +355,18 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
 .hotspot:focus{outline:2px solid rgba(0,0,0,0.12)}
 .hotspot:focus{outline:none}
 .hotspot:active{outline:none}
-/* Remove any visible focus ring for touch/click completely */
+/* Eliminar completamente cualquier contorno de foco visible en táctil/clic */
 .hotspot:focus-visible{outline:none}
-/* Suppress selection/tap highlight globally around CTAs */
+/* Suprimir globalmente la selección/resaltado de toque alrededor de los CTAs */
 .ctas, .hotspots, .buttons-stage{ -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select:none; -ms-user-select:none; }
 a, img{ -webkit-tap-highlight-color: transparent; }
 .hotspot-red{width:clamp(160px,32vw,420px);height:42px;z-index:860}
 .hotspot-green{width:clamp(160px,32vw,420px);height:42px;z-index:870}
 .hotspot-blue{width:clamp(160px,32vw,420px);height:42px;z-index:880}
-/* remove stray focus outline rule to prevent visible square */
-/* (accessibility maintained via keyboard navigation styles elsewhere if needed) */
+/* eliminar regla suelta de contorno de foco para evitar el recuadro visible */
+/* (la accesibilidad se mantiene con estilos de navegación por teclado en otro lugar si es necesario) */
 
-/* Cross-browser: fully hide tap/click highlight and focus ring on hotspots */
+/* Multi-navegador: ocultar completamente el resaltado de toque/clic y el contorno de foco en hotspots */
 .hotspot,
 .hotspot:link,
 .hotspot:visited{
@@ -381,23 +390,23 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
   .hotspot-green{height:120px;top:104px}
   .hotspot-blue{height:120px;top:204px}
 }
-/* spacer to allow scrolling so lower pills are reachable */
+/* separador para permitir scroll y alcanzar los botones inferiores */
 .spacer{height:0;background:transparent}
-/* removed .more section styles (section eliminated) */
+/* estilos de la sección .more eliminados (sección retirada) */
 
-/* Claim removed */
+/* Reclamo eliminado */
 
 @media (max-width:700px){
   .hotspots{bottom:auto}
   .ctas{bottom:auto;height:auto}
-  /* mobile: position CTAs fixed above the claim/footer */
-  /* Removed fixed-bottom override to keep CTAs in normal flow on mobile */
-  /* Claim removed */
-  /* removed unused extra emoji positioning classes */
+  /* móvil: posicionar CTAs por encima del pie de página */
+  /* Anulación de fixed-bottom eliminada para mantener CTAs en flujo normal en móvil */
+  /* Reclamo eliminado */
+  /* clases extra de posicionamiento de emojis eliminadas por no usarse */
 }
 
 @media (max-width:420px){
-  /* removed unused extra emoji positions on very small screens */
+  /* posiciones extra de emojis eliminadas en pantallas muy pequeñas */
 }
 
 /* Móvil: usar tokens estables (sin depender de height/vh) */
@@ -414,7 +423,7 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
   .scene{ margin-top: clamp(18px, 4vw, 40px) !important; padding-top: calc(clamp(150px,38vw,340px) * 0.30) !important }
   .car{ margin: calc(-1 * (var(--car-lift) + 44px)) auto 0 !important }
 }
-/* Base footer container styles (previously malformed block fixed) */
+/* Estilos base del contenedor del pie de página (bloque malformado corregido anteriormente) */
 .site-footer{
   position:relative; /* en flujo, debajo de los botones */
   z-index:500;       /* suficiente para estar sobre fondos fijos */
@@ -427,6 +436,15 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
 }
 
 .footer-brand{display:inline-block}
+.footer-title-img{
+  display:block;
+  margin: 0 auto;
+  width: clamp(220px, 56vw, 760px);
+  max-width: 94%;
+  height: auto;
+  pointer-events: none;
+  filter: drop-shadow(0 5px 0 rgba(11,59,143,0.95)) drop-shadow(0 10px 14px rgba(0,0,0,0.18));
+}
 .footer-line{
   font-family:'Baloo 2', Inter, sans-serif;
   font-weight:800;
@@ -447,9 +465,9 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
   line-height:1;
 }
 
-/* Footer headline and subline visible */
+/* Titular y subtítulo del pie de página visibles */
 
-/* speed-lines removed per user request */
+/* líneas de velocidad eliminadas a solicitud del usuario */
 
 .footer-separator{
   width: clamp(160px, 36vw, 420px);
@@ -463,23 +481,22 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   font-weight:600;
   color:#ffffff;
-  text-shadow:0 3px 0 rgba(11,59,143,0.75), 0 8px 14px rgba(0,0,0,0.22);
-  font-size:clamp(12px,1.4vw,14px);
+  font-size:clamp(13px,1.6vw,16px);
 }
 
 @media (max-width:700px){
-  /* Footer immediately below the blue button with a small gap and lifted closer */
-  /* Footer below blue button with a consistent small gap */
+  /* Pie de página inmediatamente debajo del botón azul con un pequeño espacio */
+  /* Pie de página debajo del botón azul con un espacio pequeño y consistente */
   .buttons-stage{ margin-bottom: var(--cta-gap) !important; }
   .site-footer{ margin-top: 0; padding-top: 2px; }
-  /* Enforce footer formatting and center on small screens */
+  /* Forzar formato del pie y centrar en pantallas pequeñas */
   .footer-brand{ display:block; text-align:center; }
   .footer-line{ font-size: clamp(26px, 7.8vw, 64px); text-transform: uppercase; text-align:center; }
   .footer-sub{ font-size: clamp(16px, 5.4vw, 30px); text-transform: uppercase; text-align:center; }
   .footer-copy{ text-align:center; }
 }
 
-/* removed unused palms-related rules and legacy comments */
+/* reglas relacionadas con palmeras y comentarios heredados eliminados */
 /* Altura baja: asegurar que logo, carro, botones y texto inferior
    siempre se vean. Reducimos elevación del carro y tamaños si la
    pantalla es corta, y habilitamos scroll en casos extremos. */
