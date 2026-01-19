@@ -221,7 +221,7 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
     animation-name: emoji-float-tilt-right;
   }
   /* Parasol izquierdo: misma altura que el parasol derecho */
-  .car-pair1-b{ left: -2%; top: 1%; width: clamp(96px, 22vw, 176px); animation-name: emoji-float-tilt-left15; z-index: 780; }
+  .car-pair1-b{ left: -2%; top: 2%; width: clamp(96px, 22vw, 176px); animation-name: emoji-float-tilt-left15; z-index: 780; }
 
   /* Lado derecho */
   .car-pair2-a{ left: 82%; top: 14%; animation-name: emoji-float-tilt-right; }
