@@ -28,11 +28,12 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
   position:relative;
   min-height:100vh;
   min-height:100dvh;
+  height: 100vh;
   /* en escritorio puede haber desplazamiento si el contenido se desborda */
   display:flex;
   flex-direction:column;
   padding:12px;
-  overflow:visible;
+  overflow:hidden;
     /* fondo dividido limpio: naranja arriba / amarillo abajo usando --split.
       El overlay de imagen se coloca con ::before para que la división siga siendo consistente en todos los tamaños */
   background: linear-gradient(to bottom, var(--orange) 0 calc(var(--split)), var(--yellow) calc(var(--split)) 100%);
@@ -43,6 +44,13 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
 @media (hover: none) and (pointer: coarse){
   html, body{ overflow:hidden; }
   .poster{ height:100dvh; overflow:hidden; }
+}
+
+/* Escritorio: igual que móvil (sin scroll) */
+@media (min-width:701px){
+  html, body{ overflow:hidden; }
+  .poster{ height:100vh; overflow:hidden; padding:10px; }
+  .scene{ flex: 0 0 auto; }
 }
 
 /* Textura punteada confinada al área amarilla (debajo de --split) */
@@ -182,54 +190,33 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
   animation: car-vibrate 1.8s ease-in-out infinite;
 }
 .scene img{pointer-events:none}
-.sun{position:absolute;top:8px;right:6vw;width:clamp(60px,10vw,140px);z-index:9}
+/* .sun eliminado del HTML */
 /* Nuevos pares de emojis: se eliminaron los emojis individuales anteriores. */
-/* Pares de emojis en el área del carro (dos pares, cada par = dos imágenes) posicionados sobre el carro */
-.car-emoji{position:absolute;pointer-events:none;width:clamp(48px,8.5vw,120px);z-index:360;display:block}
+/* Emojis alrededor del carro */
+.car-emoji{position:absolute;pointer-events:none;width:clamp(48px,8.5vw,120px);z-index:820;display:block}
 .car-cloud1,.car-cloud2{ display:none }
 .car-pair1-a{left:calc(50% - 30vw); top: 18vh; animation:emoji-float 4.6s ease-in-out infinite; animation-delay:0s}
 .car-pair1-a{top: 18dvh}
-.car-pair1-b{left:calc(50% - 25vw); top: 30vh; animation:emoji-float 4.8s ease-in-out infinite; animation-delay:0.2s}
+.car-pair1-b{left:calc(50% - 24vw); top: 30vh; animation:emoji-float 4.8s ease-in-out infinite; animation-delay:0.2s}
 .car-pair1-b{top: 30dvh}
 .car-pair2-a{left:calc(50% - 8vw); top: 5vh; animation:emoji-float 4.2s ease-in-out infinite; animation-delay:0.15s}
 .car-pair2-a{top: 5dvh}
-.car-pair2-b{left:calc(50% + 15vw); top: 30vh; animation:emoji-float 4.4s ease-in-out infinite; animation-delay:0.35s}
+.car-pair2-b{left:calc(50% + 16vw); top: 30vh; animation:emoji-float 4.4s ease-in-out infinite; animation-delay:0.35s}
 .car-pair2-b{top: 30dvh}
+.car-pair3-a{left:calc(50% + 28vw); top: 14vh; animation:emoji-float 4.7s ease-in-out infinite; animation-delay:0.28s}
+.car-pair3-a{top: 14dvh}
 
 /* Pares de emojis en el área de botones (dos pares) colocados alrededor de los CTAs pero por debajo de ellos (no encima) */
 .buttons-stage{display:flex;flex-direction:column;align-items:center;gap:10px;padding:6px 0 0 0;margin-top:auto;position:relative;margin-bottom:var(--cta-gap)}
 .btn-emoji{position:absolute;pointer-events:none;width:clamp(40px,7vw,100px);z-index:130}
-.mobile-emoji-cloud{ display:none; position:fixed; inset:0; z-index:350; pointer-events:none; }
+.mobile-emoji-cloud{ display:none; }
 .cloud-emoji{ position:absolute; width:clamp(56px, 14vw, 96px); height:auto; animation:emoji-float 4.8s ease-in-out infinite; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.18)); }
 
-/* Emojis extra para escritorio: encima del background (incluida la foto), pero debajo del contenido principal */
-.desktop-emoji-cloud{ display:none; position:absolute; inset:0; pointer-events:none; z-index:260; }
+/* Emojis extra para escritorio eliminados */
+.desktop-emoji-cloud{ display:none; }
 .desktop-emoji{ position:absolute; width:clamp(44px, 4.2vw, 88px); height:auto; animation:emoji-float 5.2s ease-in-out infinite; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.20)); }
 
-/* Desktop/laptop: mostrar la nube (evita ocultarse en algunos dispositivos) */
-@media (min-width:701px) and (any-hover:hover), (min-width:701px) and (pointer:fine){
-  .desktop-emoji-cloud{ display:block; }
-  /* 3 con gafas + 2 con parasol: posiciones al borde */
-  .desktop-emoji-cloud .desktop-emoji:nth-child(1){ top: 8%;  left: 6%;  transform: rotate(-10deg); animation-delay:0.10s }
-  .desktop-emoji-cloud .desktop-emoji:nth-child(2){ top: 70%; left: 12%; transform: rotate(10deg);  animation-delay:0.40s }
-  .desktop-emoji-cloud .desktop-emoji:nth-child(3){ top: 22%; left: 88%; transform: rotate(-6deg);  animation-delay:0.22s }
-  .desktop-emoji-cloud .desktop-emoji:nth-child(4){ top: 52%; left: 6%;  transform: rotate(8deg);   animation-delay:0.28s }
-  .desktop-emoji-cloud .desktop-emoji:nth-child(5){ top: 62%; left: 90%; transform: rotate(-14deg); animation-delay:0.16s }
-}
-
-/* Móvil: 3 con gafas + 2 con parasol, ubicadas como en la referencia */
-.mobile-emoji-cloud .cloud-emoji:nth-child(1){ top: 6%;  left: 2%;  animation-delay:0.10s }
-.mobile-emoji-cloud .cloud-emoji:nth-child(2){ top: 3%;  left: 86%; animation-delay:0.25s }
-.mobile-emoji-cloud .cloud-emoji:nth-child(3){ top: 24%; left: 6%;  animation-delay:0.35s }
-.mobile-emoji-cloud .cloud-emoji:nth-child(4){ top: 22%; left: 86%; animation-delay:0.18s }
-.mobile-emoji-cloud .cloud-emoji:nth-child(5){ top: 38%; left: 74%; animation-delay:0.42s }
-
-/* Mostrar nube de emojis sólo en móvil (pantallas táctiles) */
-@media (pointer: coarse) {
-  .mobile-emoji-cloud{ display:block; }
-  /* Desactivar emojis antiguos alrededor del carro (se reemplazaron por los nuevos car-pair*) */
-  .car-cloud1,.car-cloud2{ display:none !important; }
-}
+/* Nubes (desktop/mobile) eliminadas: solo emojis alrededor del carro */
 .btn-pair1-a{left:calc(50% - 30vw); top: 15vh; animation:emoji-float 4.8s ease-in-out infinite; animation-delay:0.1s}
 .btn-pair1-a{top: 15dvh}
 .btn-pair1-b{left:calc(50% - 20vw); top: 28vh; animation:emoji-float 4.6s ease-in-out infinite; animation-delay:0.3s}
