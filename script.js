@@ -120,24 +120,36 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('mouseenter', () => console.log('icon mouseenter ->', pair.btn));
     btn.addEventListener('mouseleave', () => console.log('icon mouseleave ->', pair.btn));
     btn.addEventListener('click', (e) => {
-      // Si el ícono está envuelto en un link real, dejar que el navegador navegue
-      // (evita fallos en móvil por la prueba de píxel/canvas y mantiene el tap natural).
-      const link = btn.closest && btn.closest('a');
-      if (link && link.classList && link.classList.contains('cta-link') && link.getAttribute('href')) {
-        return;
-      }
-
       e.preventDefault();
       // vibrar solo con un gesto explícito del usuario (clic/toque)
       try{ if (navigator.vibrate) navigator.vibrate(20); }catch(e){}
+
       const ok = isOpaqueAt(e.clientX, e.clientY);
+      const link = btn.closest && btn.closest('a.cta-link');
+
       if (ok) {
         console.log('icon clicked ->', pair.btn);
-        // Preferir el href del hotspot si está presente; de lo contrario usar el data-href del ícono
-        const target = (hot && hot.getAttribute && hot.getAttribute('href') && hot.getAttribute('href') !== '#') ? hot : btn;
+        // Prioridad: link real del CTA; si no existe, usar el href del hotspot (legacy)
+        const target = (link && link.getAttribute && link.getAttribute('href') && link.getAttribute('href') !== '#')
+          ? link
+          : ((hot && hot.getAttribute && hot.getAttribute('href') && hot.getAttribute('href') !== '#') ? hot : btn);
         handleAction(target);
-      } else {
-        console.log('icon click ignored (outside active area) ->', pair.btn);
+        return;
+      }
+
+      // Si el punto es transparente, NO dispares este botón.
+      // En su lugar, intenta “pasar” el toque al botón que esté debajo.
+      console.log('icon click ignored (transparent) ->', pair.btn);
+      if (link && typeof document.elementFromPoint === 'function') {
+        const prev = link.style.pointerEvents;
+        link.style.pointerEvents = 'none';
+        const under = document.elementFromPoint(e.clientX, e.clientY);
+        link.style.pointerEvents = prev;
+
+        const underLink = under && under.closest ? under.closest('a.cta-link') : null;
+        if (underLink && underLink !== link && underLink.getAttribute && underLink.getAttribute('href')) {
+          handleAction(underLink);
+        }
       }
     });
   });
