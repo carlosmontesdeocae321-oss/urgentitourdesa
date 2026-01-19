@@ -216,7 +216,7 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
   .car-pair1-b{ left: 8%; top: 52%; }
 
   /* Lado derecho */
-  .car-pair2-a{ left: 84%; top: 14%; }
+  .car-pair2-a{ left: 78%; top: 14%; }
   /* Parasol derecho: un poco más a la izquierda y más arriba (esquina del coche) */
   .car-pair2-b{ left: 76%; top: 46%; }
 
@@ -224,8 +224,8 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
   .car-pair3-a{
     position: fixed;
     left: auto;
-    right: 10px;
-    top: calc(env(safe-area-inset-top) + 6px);
+    right: 26px;
+    top: calc(env(safe-area-inset-top) + 70px);
     z-index: 952;
   }
 }
