@@ -15,6 +15,41 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   applyBgPhotoMode();
 
+  // Auto-fit en móvil: mantener el mismo layout en distintas resoluciones
+  // reduciendo (scale) el contenido si no cabe en alto.
+  const root = document.documentElement;
+  const posterEl = document.querySelector('.poster');
+  const posterContentEl = document.querySelector('.poster-content');
+  const isMobileCoarse = () => {
+    try{
+      return window.matchMedia && window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+    }catch(e){
+      return false;
+    }
+  };
+
+  function applyContentFitScale(){
+    if (!posterEl || !posterContentEl) return;
+
+    if (!isMobileCoarse()) {
+      root.style.setProperty('--content-scale', '1');
+      return;
+    }
+
+    // Medir el alto real del contenido sin depender del transform (scrollHeight no se escala)
+    const contentH = Math.max(1, posterContentEl.scrollHeight);
+    const viewportH = (window.visualViewport && window.visualViewport.height) ? window.visualViewport.height : window.innerHeight;
+    const posterStyle = getComputedStyle(posterEl);
+    const padTop = parseFloat(posterStyle.paddingTop || '0') || 0;
+    const padBottom = parseFloat(posterStyle.paddingBottom || '0') || 0;
+    const availableH = Math.max(1, viewportH - padTop - padBottom - 6);
+
+    let scale = Math.min(1, availableH / contentH);
+    // Evitar que se haga demasiado pequeño; si llega a este límite, aún se verá compacto.
+    scale = Math.max(0.65, scale);
+    root.style.setProperty('--content-scale', scale.toFixed(3));
+  }
+
   // Pixel-perfect para CTAs: un PNG con transparencia no debe “robar” el toque
   // si el usuario está tocando una zona transparente (ej: parte superior del azul).
   const imgCanvases = new WeakMap();
@@ -304,6 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // dibujo inicial, posicionar hotspots y solo en resize (sin manejador de scroll)
+    applyContentFitScale();
     redrawCanvases();
     positionHotspots();
     // Alinear la división del degradado con la posición del carro para que la línea quede debajo del carro
@@ -324,6 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (resizeTick) return;
       resizeTick = true;
       requestAnimationFrame(() => {
+        applyContentFitScale();
         redrawCanvases();
         positionHotspots();
         alignSplitToCar();
@@ -345,6 +382,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('orientationchange', () => {
       requestAnimationFrame(() => {
+        applyContentFitScale();
         redrawCanvases();
         positionHotspots();
         alignSplitToCar();
@@ -367,6 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Asegurar la alineación después de que todas las imágenes carguen (la imagen del carro puede cambiar el diseño)
     window.addEventListener('load', () => {
       requestAnimationFrame(() => {
+        applyContentFitScale();
         redrawCanvases();
         positionHotspots();
         alignSplitToCar();

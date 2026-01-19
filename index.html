@@ -12,10 +12,6 @@
 <body>
   <!-- palmeras-izquierda y palmeras-derecha eliminadas (referencias a palmera.png borradas) -->
   <main class="poster" role="main">
-    <header class="brand" aria-label="Marca URGENTITO URDESA">
-      <img src="assets/urgentito_urdesa_arriba.png" alt="Urgentito Urdesa" class="brand-title-img">
-    </header>
-
     <!-- separador de montañas decorativo: SVG de trazo blanco delgado posicionado en la división -->
     <svg class="divider" viewBox="0 0 1440 320" preserveAspectRatio="none" aria-hidden="true">
       <!-- picos tipo montaña (solo trazo) -->
@@ -28,59 +24,65 @@
     <!-- Foto de fondo opcional (sobre la división y el separador, debajo del contenido) -->
     <div class="bg-photo" aria-hidden="true"></div>
 
-    <!-- Nubes de emojis eliminadas: solo 5 emojis alrededor del carro -->
+    <div class="poster-content">
+      <header class="brand" aria-label="Marca URGENTITO URDESA">
+        <img src="assets/urgentito_urdesa_arriba.png" alt="Urgentito Urdesa" class="brand-title-img">
+      </header>
 
-    <!-- Sección del carro (hero) -->
-    <section class="scene" aria-hidden="true">
-      <!-- palmera decorativa eliminada a solicitud del usuario -->
-      <img src="assets/viaje-carretera-verano.png" alt="Carretera" class="car">
+      <!-- Nubes de emojis eliminadas: solo 5 emojis alrededor del carro -->
 
-      <!-- 5 emojis alrededor del carro: 3 con gafas + 2 con parasol -->
-      <img src="assets/smiling-face-with-sunglasses-3d-ilustration.png" alt="" class="car-emoji car-pair1-a">
-      <img src="assets/sol-alegre-gafas-sol-sosteniendo-sombrilla-dibujos-animados-3d-fondo-transparente.png" alt="" class="car-emoji car-pair1-b">
-      <img src="assets/smiling-face-with-sunglasses-3d-ilustration.png" alt="" class="car-emoji car-pair2-a">
-      <img src="assets/sol-alegre-gafas-sol-sosteniendo-sombrilla-dibujos-animados-3d-fondo-transparente.png" alt="" class="car-emoji car-pair2-b">
-      <img src="assets/smiling-face-with-sunglasses-3d-ilustration.png" alt="" class="car-emoji car-pair3-a">
-    </section>
+      <!-- Sección del carro (hero) -->
+      <section class="scene" aria-hidden="true">
+        <!-- palmera decorativa eliminada a solicitud del usuario -->
+        <img src="assets/viaje-carretera-verano.png" alt="Carretera" class="car">
 
-    <!-- Sección de botones: apilados debajo del carro -->
-    <section class="buttons-stage" aria-label="Acciones principales">
-      <div class="ctas">
-        <a class="cta-link cta-red" href="https://example.com/catalogo" aria-label="Acción roja">
-          <img src="assets/icono_rojo.png" alt="rojo" class="icon icon-red">
-        </a>
-        <a class="cta-link cta-green" href="https://wa.me/message/HQSDXCG5IHIXA1" aria-label="Acción verde">
-          <img src="assets/icono_verde.png" alt="verde" class="icon icon-green">
-        </a>
-        <a class="cta-link cta-blue" href="https://maps.app.goo.gl/gEtvRQ2gANAb5rfv8?g_st=ic" aria-label="Acción azul">
-          <img src="assets/icono_azul.png" alt="azul" class="icon icon-blue">
-        </a>
-      </div>
+        <!-- 5 emojis alrededor del carro: 3 con gafas + 2 con parasol -->
+        <img src="assets/smiling-face-with-sunglasses-3d-ilustration.png" alt="" class="car-emoji car-pair1-a">
+        <img src="assets/sol-alegre-gafas-sol-sosteniendo-sombrilla-dibujos-animados-3d-fondo-transparente.png" alt="" class="car-emoji car-pair1-b">
+        <img src="assets/smiling-face-with-sunglasses-3d-ilustration.png" alt="" class="car-emoji car-pair2-a">
+        <img src="assets/sol-alegre-gafas-sol-sosteniendo-sombrilla-dibujos-animados-3d-fondo-transparente.png" alt="" class="car-emoji car-pair2-b">
+        <img src="assets/smiling-face-with-sunglasses-3d-ilustration.png" alt="" class="car-emoji car-pair3-a">
+      </section>
 
-      <!-- Nube móvil eliminada: solo emojis alrededor del carro -->
+      <!-- Sección de botones: apilados debajo del carro -->
+      <section class="buttons-stage" aria-label="Acciones principales">
+        <div class="ctas">
+          <a class="cta-link cta-red" href="https://example.com/catalogo" aria-label="Acción roja">
+            <img src="assets/icono_rojo.png" alt="rojo" class="icon icon-red">
+          </a>
+          <a class="cta-link cta-green" href="https://wa.me/message/HQSDXCG5IHIXA1" aria-label="Acción verde">
+            <img src="assets/icono_verde.png" alt="verde" class="icon icon-green">
+          </a>
+          <a class="cta-link cta-blue" href="https://maps.app.goo.gl/gEtvRQ2gANAb5rfv8?g_st=ic" aria-label="Acción azul">
+            <img src="assets/icono_azul.png" alt="azul" class="icon icon-blue">
+          </a>
+        </div>
 
-      <!-- Eliminados emojis extra para dejar sólo banda móvil -->
-      <!-- Hotspots: enlaces transparentes sobre las imágenes para asegurar objetivos de clic correctos -->
-      <div class="hotspots" aria-hidden="false">
-        <a href="https://example.com/catalogo" class="hotspot hotspot-red" aria-label="Acción roja"></a>
-        <a href="https://wa.me/message/HQSDXCG5IHIXA1" class="hotspot hotspot-green" aria-label="Acción verde"></a>
-        <a href="https://maps.app.goo.gl/gEtvRQ2gANAb5rfv8?g_st=ic" class="hotspot hotspot-blue" aria-label="Acción azul"></a>
-      </div>
-    </section>
-    <!-- separador para permitir desplazamiento a CTAs inferiores cuando sea necesario -->
-    
-    <!-- Footer al final (en flujo dentro del layout) -->
-    <footer class="site-footer" aria-label="Mensaje inferior">
-      <div class="footer-brand">
-        <img src="assets/compramos_en_10%20minutos.png" alt="Compramos en 10 minutos" class="footer-title-img">
-        <div class="footer-separator" aria-hidden="true"></div>
-        <div class="footer-copy">2026 @ Urgentito Urdesa - Todos los derechos reservados.</div>
-      </div>
-    </footer>
+        <!-- Nube móvil eliminada: solo emojis alrededor del carro -->
+
+        <!-- Eliminados emojis extra para dejar sólo banda móvil -->
+        <!-- Hotspots: enlaces transparentes sobre las imágenes para asegurar objetivos de clic correctos -->
+        <div class="hotspots" aria-hidden="false">
+          <a href="https://example.com/catalogo" class="hotspot hotspot-red" aria-label="Acción roja"></a>
+          <a href="https://wa.me/message/HQSDXCG5IHIXA1" class="hotspot hotspot-green" aria-label="Acción verde"></a>
+          <a href="https://maps.app.goo.gl/gEtvRQ2gANAb5rfv8?g_st=ic" class="hotspot hotspot-blue" aria-label="Acción azul"></a>
+        </div>
+      </section>
+      <!-- separador para permitir desplazamiento a CTAs inferiores cuando sea necesario -->
+
+      <!-- Footer al final (en flujo dentro del layout) -->
+      <footer class="site-footer" aria-label="Mensaje inferior">
+        <div class="footer-brand">
+          <img src="assets/compramos_en_10%20minutos.png" alt="Compramos en 10 minutos" class="footer-title-img">
+          <div class="footer-separator" aria-hidden="true"></div>
+          <div class="footer-copy">2026 @ Urgentito Urdesa - Todos los derechos reservados.</div>
+        </div>
+      </footer>
+    </div>
   </main>
 
   <!-- Reclamo eliminado a solicitud del usuario -->
 
-    <script src="script.js?v=20260119-cta1"></script>
+    <script src="script.js?v=20260119-fit1"></script>
   </body>
   </html>

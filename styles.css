@@ -19,6 +19,8 @@
   /* Layout tokens para móviles: alinear carro y CTAs de forma consistente */
   --car-lift: clamp(180px, 36vw, 520px);
   --cta-offset: clamp(48px, 9vw, 96px);
+  /* Escala global del contenido (auto-fit en pantallas pequeñas) */
+  --content-scale: 1;
 }
 *{box-sizing:border-box}
 html{height:100%;background:#000}
@@ -37,6 +39,19 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
       El overlay de imagen se coloca con ::before para que la división siga siendo consistente en todos los tamaños */
   background: linear-gradient(to bottom, var(--orange) 0 calc(var(--split)), var(--yellow) calc(var(--split)) 100%);
   background-attachment: fixed; /* mantener la división fija al viewport para que ambos colores sigan visibles */
+}
+
+/* Contenedor del contenido principal (marca + carro + CTAs + footer).
+  Se escala en móvil para que en pantallas pequeñas todo se mantenga compacto. */
+.poster-content{
+  position: relative;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  transform: scale(var(--content-scale, 1));
+  transform-origin: top center;
+  will-change: transform;
 }
 
 /* Móvil/tablet (touch): una sola pantalla, sin scroll vertical */
