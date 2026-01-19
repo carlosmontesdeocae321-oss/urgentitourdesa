@@ -417,7 +417,7 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
   /* Botones: un poco más pequeños, pero siguen grandes */
   .icon{ width: clamp(210px, 72vw, 360px) !important }
   /* Ajustes finos solicitados: rojo baja, azul sube, verde igual */
-  .icon-red{ margin-top: 0px !important }
+  .icon-red{ margin-top: clamp(12px, 2.8vw, 18px) !important }
   /* Subir verde ~1 línea y que el azul suba con él */
   .icon-green{ margin-top: calc(-1 * (clamp(28px, 7vw, 48px) + 16px)) !important }
   .icon-blue{ margin-top: calc(-1 * (var(--cta-offset) + 48px)) !important }
