@@ -216,7 +216,7 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
   .car-pair1-b{ left: 8%; top: 52%; }
 
   /* Lado derecho */
-  .car-pair2-a{ left: 78%; top: 14%; }
+  .car-pair2-a{ left: 82%; top: 14%; animation-name: emoji-float-tilt-right; }
   /* Parasol derecho: un poco más a la izquierda y más arriba (esquina del coche) */
   .car-pair2-b{ left: 76%; top: 46%; }
 
@@ -277,6 +277,12 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
   0%{transform:translateY(0) rotate(-20deg)}
   50%{transform:translateY(-8px) rotate(-24deg)}
   100%{transform:translateY(0) rotate(-20deg)}
+}
+
+@keyframes emoji-float-tilt-right{
+  0%{transform:translateY(0) rotate(15deg)}
+  50%{transform:translateY(-8px) rotate(19deg)}
+  100%{transform:translateY(0) rotate(15deg)}
 }
 /* CTAs superpuestos en pila: centrados absolutamente, botones posicionados por offsets superiores */
 /* (deduplicado: base .buttons-stage definida arriba con position:relative) */
