@@ -279,10 +279,10 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
     width: clamp(144px, 18vw, 264px);
     z-index: 820;
   }
-  .car-pair1-b{ left: calc(50% - 30vw); top: 28vh; }
-  .car-pair1-b{ top: 28dvh; }
-  .car-pair2-b{ left: calc(50% + 16vw); top: 22vh; }
-  .car-pair2-b{ top: 22dvh; }
+  .car-pair1-b{ left: calc(50% - 30vw); top: 23vh; }
+  .car-pair1-b{ top: 23dvh; }
+  .car-pair2-b{ left: calc(50% + 12vw); top: 17vh; }
+  .car-pair2-b{ top: 17dvh; }
 }
 
 /* Pares de emojis en el área de botones (dos pares) colocados alrededor de los CTAs pero por debajo de ellos (no encima) */
