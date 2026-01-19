@@ -212,8 +212,16 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
   .car-pair2-b{ width: clamp(66px, 16vw, 132px); }
 
   /* Lado izquierdo: subir un poco */
-  .car-pair1-a{ left: 6%; top: -4%; animation-name: emoji-float-tilt-right; }
-  .car-pair1-b{ left: 8%; top: 34%; width: clamp(99px, 24vw, 198px); animation-name: emoji-float-tilt-left15; }
+  /* Gafas izquierda: a la altura del título (igual concepto que car-pair3-a) */
+  .car-pair1-a{
+    position: fixed;
+    left: 58px;
+    top: calc(env(safe-area-inset-top) + 6px);
+    z-index: 980;
+    animation-name: emoji-float-tilt-right;
+  }
+  /* Parasol izquierdo: misma altura que el parasol derecho */
+  .car-pair1-b{ left: 6%; top: -7%; width: clamp(96px, 22vw, 176px); animation-name: emoji-float-tilt-left15; z-index: 780; }
 
   /* Lado derecho */
   .car-pair2-a{ left: 82%; top: 14%; animation-name: emoji-float-tilt-right; }
