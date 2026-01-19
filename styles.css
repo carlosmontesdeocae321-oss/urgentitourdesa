@@ -417,7 +417,7 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
   /* Botones: un poco más pequeños, pero siguen grandes */
   .icon{ width: clamp(210px, 72vw, 360px) !important }
   /* Ajustes finos solicitados: rojo baja, azul sube, verde igual */
-  .icon-red{ margin-top: 32px !important }
+  .icon-red{ margin-top: 0px !important }
   .icon-green{ margin-top: calc(-1 * clamp(28px, 7vw, 48px)) !important }
   .icon-blue{ margin-top: calc(-1 * (var(--cta-offset) + 32px)) !important }
   /* Hotspots: acompaña el nuevo tamaño de los botones */
@@ -429,7 +429,10 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
   /* Bajar el carro ~2 líneas */
   .car{ margin: calc(-1 * (var(--car-lift) + 32px)) auto 0 !important }
   /* Compactar separación general */
-  .buttons-stage{ gap: 6px; padding-top: 4px; }
+  .buttons-stage{ gap: 4px; padding-top: 2px; margin-top: 0 !important; }
+  /* Evitar que la escena “se coma” el footer en pantallas bajas */
+  .scene{ flex: 0 0 auto; padding-bottom: 0 !important; }
+  .site-footer{ padding-top: 0 !important; padding-bottom: 4px !important; }
 }
 
 /* Si el logo existiera por caché/HTML antiguo, ocultarlo */
