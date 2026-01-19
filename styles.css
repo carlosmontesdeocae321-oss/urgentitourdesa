@@ -218,7 +218,7 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
   /* Lado derecho */
   .car-pair2-a{ left: 82%; top: 14%; animation-name: emoji-float-tilt-right; }
   /* Parasol derecho: un poco más a la izquierda y más arriba (esquina del coche) */
-  .car-pair2-b{ left: 76%; top: 46%; }
+  .car-pair2-b{ left: 66%; top: 38%; width: clamp(96px, 22vw, 176px); }
 
   /* Emoji de gafas del lado derecho: subir hasta la zona del título */
   .car-pair3-a{
