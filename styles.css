@@ -386,8 +386,8 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
 
 @media (max-width:700px){
   .hotspot-red{height:112px}
-  .hotspot-green{height:120px;top:104px}
-  .hotspot-blue{height:120px;top:204px}
+  .hotspot-green{height:120px}
+  .hotspot-blue{height:120px}
 }
 /* separador para permitir scroll y alcanzar los botones inferiores */
 .spacer{height:0;background:transparent}
@@ -416,8 +416,8 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
   }
   /* Botones: un poco más pequeños, pero siguen grandes */
   .icon{ width: clamp(210px, 72vw, 360px) !important }
-  /* Ajustes finos solicitados: rojo baja, azul sube, verde igual */
-  .icon-red{ margin-top: clamp(12px, 2.8vw, 18px) !important }
+  /* Subir el rojo (se actualizó el icono rojo) */
+  .icon-red{ margin-top: 0px !important }
   /* Subir verde ~1 línea y que el azul suba con él */
   .icon-green{ margin-top: calc(-1 * (clamp(28px, 7vw, 48px) + 16px)) !important }
   /* Bajar azul ~1 línea para no tapar el verde */
