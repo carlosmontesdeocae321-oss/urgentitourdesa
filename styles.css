@@ -236,12 +236,12 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
     animation-name: emoji-float-tilt-right;
   }
   /* Parasol izquierdo: misma altura que el parasol derecho */
-  .car-pair1-b{ left: -2%; top: 2%; width: clamp(96px, 22vw, 176px); animation-name: emoji-float-tilt-left15; z-index: 780; }
+  .car-pair1-b{ left: -2%; top: 2%; width: clamp(96px, 22vw, 176px); animation-name: emoji-float-tilt-left15; z-index: 820; }
 
   /* Lado derecho */
   .car-pair2-a{ left: 82%; top: 14%; animation-name: emoji-float-tilt-right; }
   /* Parasol derecho: un poco más a la izquierda y más arriba (esquina del coche) */
-  .car-pair2-b{ left: 56%; top: -11%; width: clamp(96px, 22vw, 176px); animation-name: emoji-float-tilt-right; z-index: 780; }
+  .car-pair2-b{ left: 56%; top: -11%; width: clamp(96px, 22vw, 176px); animation-name: emoji-float-tilt-right; z-index: 820; }
 
   /* Emoji de gafas del lado derecho: subir hasta la zona del título */
   .car-pair3-a{
@@ -496,9 +496,9 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
   /* Subir el rojo (se actualizó el icono rojo) */
   .icon-red{ margin-top: calc(-1 * clamp(10px, 2.5vw, 18px)) !important }
   /* Subir verde ~1 línea y que el azul suba con él */
-  .icon-green{ margin-top: calc(-1 * (clamp(28px, 7vw, 48px) + 16px)) !important }
+  .icon-green{ margin-top: var(--cta-green-mt, calc(-1 * (clamp(28px, 7vw, 48px) + 16px))) !important }
   /* Bajar azul ~1 línea para no tapar el verde */
-  .icon-blue{ margin-top: calc(-1 * (var(--cta-offset) + 40px)) !important }
+  .icon-blue{ margin-top: var(--cta-blue-mt, calc(-1 * (var(--cta-offset) + 40px))) !important }
   /* Hotspots: acompaña el nuevo tamaño de los botones */
   .hotspot-red,.hotspot-green,.hotspot-blue{ width: clamp(210px, 72vw, 360px) !important }
   /* Subir el carro en móvil (menos aire entre logo y carro) */

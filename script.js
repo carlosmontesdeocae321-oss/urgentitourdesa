@@ -69,6 +69,18 @@ document.addEventListener('DOMContentLoaded', () => {
       maxY = Math.max(maxY, r.bottom);
     }
 
+    // Capturar offsets base (a scale=1) para mantener el solape de CTAs aunque haya scale.
+    let baseGreenMtPx = null;
+    let baseBlueMtPx = null;
+    try{
+      const g = document.querySelector('.icon-green');
+      const b = document.querySelector('.icon-blue');
+      if (g) baseGreenMtPx = parseFloat(getComputedStyle(g).marginTop || '0');
+      if (b) baseBlueMtPx = parseFloat(getComputedStyle(b).marginTop || '0');
+    }catch(e){
+      // ignore
+    }
+
     // Restaurar el scale previo antes de aplicar el nuevo.
     if (prevScale) root.style.setProperty('--content-scale', prevScale);
     else root.style.removeProperty('--content-scale');
@@ -83,6 +95,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // En iPhone 8 (pantalla baja) puede necesitarse más reducción.
     scale = Math.max(0.5, scale);
     root.style.setProperty('--content-scale', scale.toFixed(3));
+
+    // Ajustar márgenes de solape de CTAs en función del scale.
+    // Si no lo hacemos, al reducir el contenido (scale<1) el solape se “afloja”
+    // y en iPhone 8 el azul puede separarse del verde.
+    if (baseGreenMtPx !== null && isFinite(baseGreenMtPx)) {
+      root.style.setProperty('--cta-green-mt', `${(baseGreenMtPx / scale).toFixed(1)}px`);
+    }
+    if (baseBlueMtPx !== null && isFinite(baseBlueMtPx)) {
+      root.style.setProperty('--cta-blue-mt', `${(baseBlueMtPx / scale).toFixed(1)}px`);
+    }
   }
 
   // Pixel-perfect para CTAs: un PNG con transparencia no debe “robar” el toque
