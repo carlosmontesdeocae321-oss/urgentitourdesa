@@ -198,6 +198,21 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
 .car-pair3-a{left:calc(50% + 28vw); top: 14vh; animation:emoji-float 4.7s ease-in-out infinite; animation-delay:0.28s}
 .car-pair3-a{top: 14dvh}
 
+/* Móvil: posiciones estables alrededor del carro (3 gafas + 2 parasol) */
+@media (max-width:700px){
+  .car-emoji{ width: clamp(44px, 12vw, 92px); }
+  /* gafas (izq arriba) */
+  .car-pair1-a{ left: 6%; top: 18%; }
+  /* parasol (izq medio) */
+  .car-pair1-b{ left: 8%; top: 56%; }
+  /* gafas (der arriba) */
+  .car-pair2-a{ left: 84%; top: 16%; }
+  /* parasol (der medio) */
+  .car-pair2-b{ left: 86%; top: 54%; }
+  /* gafas (arriba centro, fuera del carro) */
+  .car-pair3-a{ left: 46%; top: 8%; }
+}
+
 /* Escritorio: recolocar emojis alrededor del carro (evitar que queden debajo/centrados) */
 @media (min-width:701px){
   .car-pair1-a{ left: calc(50% - 38vw); top: 10vh; }
