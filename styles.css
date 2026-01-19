@@ -292,7 +292,7 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
 .cta-link:visited{color:inherit;}
 .cta-link > img{ display:block; }
 .cta-red{ position:relative; z-index:900; }
-.cta-green{ position:relative; z-index:910; }
+.cta-green{ position:relative; z-index:940; }
 .cta-blue{ position:relative; z-index:920; }
 /* Cada botón está posicionado absolutamente dentro de .ctas para superponerse visualmente
   pero seguir siendo enlaces individuales y clicables. .ctas tiene pointer-events:none
