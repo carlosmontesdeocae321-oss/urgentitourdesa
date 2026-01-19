@@ -120,6 +120,13 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('mouseenter', () => console.log('icon mouseenter ->', pair.btn));
     btn.addEventListener('mouseleave', () => console.log('icon mouseleave ->', pair.btn));
     btn.addEventListener('click', (e) => {
+      // Si el ícono está envuelto en un link real, dejar que el navegador navegue
+      // (evita fallos en móvil por la prueba de píxel/canvas y mantiene el tap natural).
+      const link = btn.closest && btn.closest('a');
+      if (link && link.classList && link.classList.contains('cta-link') && link.getAttribute('href')) {
+        return;
+      }
+
       e.preventDefault();
       // vibrar solo con un gesto explícito del usuario (clic/toque)
       try{ if (navigator.vibrate) navigator.vibrate(20); }catch(e){}
