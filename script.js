@@ -105,6 +105,51 @@ document.addEventListener('DOMContentLoaded', () => {
     if (baseBlueMtPx !== null && isFinite(baseBlueMtPx)) {
       root.style.setProperty('--cta-blue-mt', `${(baseBlueMtPx / scale).toFixed(1)}px`);
     }
+
+    // En pantallas bajas (ej. iPhone 8) el ajuste anterior puede hacer que el azul
+    // cubra demasiado al verde. Relajar el solape solo lo necesario para que el verde
+    // quede visible, sin cambiar el z-index (azul sigue encima visualmente).
+    try{
+      const green = document.querySelector('.cta-green .icon-green');
+      const blue = document.querySelector('.cta-blue .icon-blue');
+      if (green && blue) {
+        const greenRect = () => green.getBoundingClientRect();
+        const blueRect = () => blue.getBoundingClientRect();
+
+        const getBlueMt = () => {
+          const v = getComputedStyle(root).getPropertyValue('--cta-blue-mt').trim();
+          const n = parseFloat(v);
+          if (isFinite(n)) return n;
+          return parseFloat(getComputedStyle(blue).marginTop || '0') || 0;
+        };
+
+        const setBlueMt = (px) => root.style.setProperty('--cta-blue-mt', `${px.toFixed(1)}px`);
+
+        // Objetivo: al menos ~35% del alto del verde visible (no cubierto verticalmente por el azul).
+        const minVisibleRatio = 0.35;
+        const maxIters = 18;
+        const step = 10 / scale; // px antes de scale
+
+        for (let i = 0; i < maxIters; i++) {
+          const g = greenRect();
+          const b = blueRect();
+          const gH = Math.max(1, g.height);
+
+          const overlapTop = Math.max(g.top, b.top);
+          const overlapBottom = Math.min(g.bottom, b.bottom);
+          const overlapH = Math.max(0, overlapBottom - overlapTop);
+          const visibleH = Math.max(0, gH - overlapH);
+
+          if (visibleH / gH >= minVisibleRatio) break;
+
+          // Empujar el azul hacia abajo: hacer su margin-top menos negativo.
+          const cur = getBlueMt();
+          setBlueMt(cur + step);
+        }
+      }
+    }catch(e){
+      // ignore
+    }
   }
 
   // Pixel-perfect para CTAs: un PNG con transparencia no debe “robar” el toque
