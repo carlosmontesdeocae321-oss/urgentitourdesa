@@ -224,7 +224,7 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
   .car-pair3-a{
     position: fixed;
     left: auto;
-    right: 26px;
+    right: 58px;
     top: calc(env(safe-area-inset-top) + 70px);
     z-index: 952;
   }
