@@ -254,20 +254,56 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
   }
 }
 
-/* Escritorio: recolocar emojis alrededor del carro (evitar que queden debajo/centrados) */
-@media (min-width:701px){
-  .car-pair1-a{ left: calc(50% - 38vw); top: 10vh; }
-  .car-pair1-a{ top: 10dvh; }
-  .car-pair1-b{ left: calc(50% - 30vw); top: 26vh; }
-  .car-pair1-b{ top: 26dvh; }
+/* Escritorio: vista tipo "celular" (misma composición), pero con scroll */
+@media (hover: hover) and (pointer: fine){
+  /* Centrar el póster y limitar ancho para que se vea igual que móvil */
+  .poster-content{ max-width: 520px; width: 100%; margin: 0 auto; }
 
-  .car-pair2-a{ left: calc(50% + 26vw); top: 8vh; }
-  .car-pair2-a{ top: 8dvh; }
-  .car-pair2-b{ left: calc(50% + 34vw); top: 26vh; }
-  .car-pair2-b{ top: 26dvh; }
+  /* Reutilizar los mismos tokens/sizes de móvil para CTAs */
+  :root{
+    --cta-gap: clamp(2px, 1vw, 6px);
+    --cta-offset: clamp(88px, 16vw, 150px);
+  }
+  .icon{ width: clamp(210px, 72vw, 360px) !important }
+  .icon-red{ margin-top: calc(-1 * clamp(10px, 2.5vw, 18px)) !important }
+  .icon-green{ margin-top: var(--cta-green-mt, calc(-1 * (clamp(28px, 7vw, 48px) + 16px))) !important }
+  .icon-blue{ margin-top: var(--cta-blue-mt, calc(-1 * (var(--cta-offset) + 40px))) !important }
 
-  .car-pair3-a{ left: calc(50% + 10vw); top: 34vh; }
-  .car-pair3-a{ top: 34dvh; }
+  /* Mantener la misma elevación/compactación del carro que en móvil */
+  .scene{ margin-top: clamp(8px, 2vw, 22px) !important; padding-top: calc(clamp(140px,36vw,320px) * 0.18) !important }
+  .car{ margin: calc(-1 * (var(--car-lift) + 32px)) auto 0 !important }
+  .buttons-stage{ gap: 4px; padding-top: 2px; margin-top: 0 !important; }
+  .scene{ flex: 0 0 auto; padding-bottom: 0 !important; }
+  .site-footer{ padding-top: 0 !important; padding-bottom: 4px !important; }
+
+  /* Emojis: mismos tamaños/posiciones que en móvil */
+  .car-emoji{ width: clamp(44px, 12vw, 92px); }
+  .car-pair1-a,
+  .car-pair2-a,
+  .car-pair3-a{ width: clamp(54px, 14vw, 110px); }
+  .car-pair1-b,
+  .car-pair2-b{ width: clamp(66px, 16vw, 132px); }
+
+  .car-pair1-a{
+    position: fixed;
+    left: 38px;
+    top: calc(env(safe-area-inset-top) + 62px);
+    z-index: 980;
+    animation-name: emoji-float-tilt-right;
+  }
+  .car-pair1-b{ left: -2%; top: 2%; width: clamp(96px, 22vw, 176px); animation-name: emoji-float-tilt-left15; z-index: 820; }
+
+  .car-pair2-a{ left: 82%; top: 14%; animation-name: emoji-float-tilt-right; }
+  .car-pair2-b{ left: 56%; top: -11%; width: clamp(96px, 22vw, 176px); animation-name: emoji-float-tilt-right; z-index: 820; }
+
+  .car-pair3-a{
+    position: fixed;
+    left: auto;
+    right: 58px;
+    top: calc(env(safe-area-inset-top) + 6px);
+    z-index: 980;
+    animation-name: emoji-float-tilt;
+  }
 }
 
 /* Pares de emojis en el área de botones (dos pares) colocados alrededor de los CTAs pero por debajo de ellos (no encima) */
