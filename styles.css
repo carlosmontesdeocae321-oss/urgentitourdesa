@@ -416,15 +416,18 @@ a, img{ -webkit-tap-highlight-color: rgba(0,0,0,0) !important; }
   }
   /* Botones: un poco más pequeños, pero siguen grandes */
   .icon{ width: clamp(210px, 72vw, 360px) !important }
+  /* Ajustes finos solicitados: rojo baja, azul sube, verde igual */
+  .icon-red{ margin-top: 32px !important }
   .icon-green{ margin-top: calc(-1 * clamp(28px, 7vw, 48px)) !important }
-  .icon-blue{ margin-top: calc(-1 * var(--cta-offset)) !important }
+  .icon-blue{ margin-top: calc(-1 * (var(--cta-offset) + 32px)) !important }
   /* Hotspots: acompaña el nuevo tamaño de los botones */
   .hotspot-red,.hotspot-green,.hotspot-blue{ width: clamp(210px, 72vw, 360px) !important }
   .hotspot-green{ top: 104px !important }
   .hotspot-blue{ top: 204px !important }
   /* Subir el carro en móvil (menos aire entre logo y carro) */
   .scene{ margin-top: clamp(8px, 2vw, 22px) !important; padding-top: calc(clamp(140px,36vw,320px) * 0.18) !important }
-  .car{ margin: calc(-1 * (var(--car-lift) + 64px)) auto 0 !important }
+  /* Bajar el carro ~2 líneas */
+  .car{ margin: calc(-1 * (var(--car-lift) + 32px)) auto 0 !important }
   /* Compactar separación general */
   .buttons-stage{ gap: 6px; padding-top: 4px; }
 }
