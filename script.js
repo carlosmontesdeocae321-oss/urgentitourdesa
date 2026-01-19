@@ -36,17 +36,52 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Medir el alto real del contenido sin depender del transform (scrollHeight no se escala)
-    const contentH = Math.max(1, posterContentEl.scrollHeight);
-    const viewportH = (window.visualViewport && window.visualViewport.height) ? window.visualViewport.height : window.innerHeight;
+    const vv = window.visualViewport;
+    const viewportW = (vv && vv.width) ? vv.width : window.innerWidth;
+    const viewportH = (vv && vv.height) ? vv.height : window.innerHeight;
     const posterStyle = getComputedStyle(posterEl);
     const padTop = parseFloat(posterStyle.paddingTop || '0') || 0;
     const padBottom = parseFloat(posterStyle.paddingBottom || '0') || 0;
+    const padLeft = parseFloat(posterStyle.paddingLeft || '0') || 0;
+    const padRight = parseFloat(posterStyle.paddingRight || '0') || 0;
+    const availableW = Math.max(1, viewportW - padLeft - padRight - 6);
     const availableH = Math.max(1, viewportH - padTop - padBottom - 6);
 
-    let scale = Math.min(1, availableH / contentH);
-    // Evitar que se haga demasiado pequeño; si llega a este límite, aún se verá compacto.
-    scale = Math.max(0.65, scale);
+    // Medir el tamaño real del contenido en pantalla. Para evitar que el propio scale
+    // afecte la medición, forzar temporalmente scale=1.
+    const prevScale = getComputedStyle(root).getPropertyValue('--content-scale').trim();
+    root.style.setProperty('--content-scale', '1');
+
+    const elementsToMeasure = [
+      posterContentEl,
+      ...Array.from(document.querySelectorAll('.car-emoji')),
+      ...Array.from(document.querySelectorAll('.brand-title-img, .footer-title-img')),
+      ...Array.from(document.querySelectorAll('.ctas'))
+    ].filter(Boolean);
+
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    for (const el of elementsToMeasure) {
+      const r = el.getBoundingClientRect();
+      if (!r || !isFinite(r.left) || !isFinite(r.top)) continue;
+      minX = Math.min(minX, r.left);
+      minY = Math.min(minY, r.top);
+      maxX = Math.max(maxX, r.right);
+      maxY = Math.max(maxY, r.bottom);
+    }
+
+    // Restaurar el scale previo antes de aplicar el nuevo.
+    if (prevScale) root.style.setProperty('--content-scale', prevScale);
+    else root.style.removeProperty('--content-scale');
+
+    // Si no se pudo medir, no tocar.
+    if (!isFinite(minX) || !isFinite(minY) || !isFinite(maxX) || !isFinite(maxY)) return;
+
+    const contentW = Math.max(1, maxX - minX);
+    const contentH = Math.max(1, maxY - minY);
+
+    let scale = Math.min(1, availableW / contentW, availableH / contentH);
+    // En iPhone 8 (pantalla baja) puede necesitarse más reducción.
+    scale = Math.max(0.5, scale);
     root.style.setProperty('--content-scale', scale.toFixed(3));
   }
 
