@@ -14,6 +14,94 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.toggle('has-bg-photo', visible);
   }
   applyBgPhotoMode();
+
+  // Pixel-perfect para CTAs: un PNG con transparencia no debe “robar” el toque
+  // si el usuario está tocando una zona transparente (ej: parte superior del azul).
+  const imgCanvases = new WeakMap();
+  const getCanvasForImg = (img) => {
+    let canvas = imgCanvases.get(img);
+    if (!canvas) {
+      canvas = document.createElement('canvas');
+      imgCanvases.set(img, canvas);
+    }
+    return canvas;
+  };
+
+  const redrawImgCanvas = (img) => {
+    if (!img) return;
+    const rect = img.getBoundingClientRect();
+    const w = Math.max(1, Math.round(rect.width));
+    const h = Math.max(1, Math.round(rect.height));
+    const canvas = getCanvasForImg(img);
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width = w;
+      canvas.height = h;
+      canvas._lastSize = '';
+    }
+    const sizeKey = `${w}x${h}`;
+    if (canvas._lastSize === sizeKey) return;
+    const ctx = canvas.getContext && canvas.getContext('2d', { willReadFrequently: true });
+    if (!ctx) return;
+    try{
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      canvas._lastSize = sizeKey;
+    }catch(err){
+      // ignorar
+    }
+  };
+
+  const isOpaqueAtImg = (img, clientX, clientY) => {
+    if (!img) return false;
+    const rect = img.getBoundingClientRect();
+    if (!rect) return false;
+    const x = Math.floor(clientX - rect.left);
+    const y = Math.floor(clientY - rect.top);
+    if (x < 0 || y < 0 || x >= rect.width || y >= rect.height) return false;
+    const canvas = getCanvasForImg(img);
+    redrawImgCanvas(img);
+    const ctx = canvas.getContext && canvas.getContext('2d', { willReadFrequently: true });
+    if (!ctx) return true;
+    try{
+      const d = ctx.getImageData(x, y, 1, 1).data;
+      return d[3] > 10;
+    }catch(err){
+      return true;
+    }
+  };
+
+  const ctasEl = document.querySelector('.ctas');
+  if (ctasEl) {
+    ctasEl.addEventListener('click', (e) => {
+      const links = Array.from(ctasEl.querySelectorAll('a.cta-link'));
+      if (!links.length) return;
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Ordenar por z-index (visual): mayor primero
+      const ordered = links
+        .map((link) => ({
+          link,
+          z: parseInt((getComputedStyle(link).zIndex || '0'), 10) || 0,
+          img: link.querySelector('img')
+        }))
+        .sort((a, b) => b.z - a.z);
+
+      for (const item of ordered) {
+        const href = item.link && item.link.getAttribute && item.link.getAttribute('href');
+        if (!href || href === '#') continue;
+        const img = item.img;
+        if (!img) continue;
+        if (isOpaqueAtImg(img, e.clientX, e.clientY)) {
+          // Navegar al CTA cuyo píxel tocado es opaco
+          window.location.href = href;
+          return;
+        }
+      }
+      // Si todo fue transparente, no hacer nada.
+    }, true);
+  }
   // Mapear hotspots a botones para que hover y clic funcionen cuando se superponen
   // Mapear hotspots a imágenes de íconos (los botones fueron reemplazados por imágenes simples)
   const map = [
@@ -120,18 +208,22 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('mouseenter', () => console.log('icon mouseenter ->', pair.btn));
     btn.addEventListener('mouseleave', () => console.log('icon mouseleave ->', pair.btn));
     btn.addEventListener('click', (e) => {
+      // Si está dentro de un CTA real, el handler de .ctas (captura) decide por píxel.
+      const link = btn.closest && btn.closest('a.cta-link');
+      if (link && link.getAttribute && link.getAttribute('href')) return;
+
       e.preventDefault();
       // vibrar solo con un gesto explícito del usuario (clic/toque)
       try{ if (navigator.vibrate) navigator.vibrate(20); }catch(e){}
 
       const ok = isOpaqueAt(e.clientX, e.clientY);
-      const link = btn.closest && btn.closest('a.cta-link');
+      const link2 = btn.closest && btn.closest('a.cta-link');
 
       if (ok) {
         console.log('icon clicked ->', pair.btn);
         // Prioridad: link real del CTA; si no existe, usar el href del hotspot (legacy)
-        const target = (link && link.getAttribute && link.getAttribute('href') && link.getAttribute('href') !== '#')
-          ? link
+        const target = (link2 && link2.getAttribute && link2.getAttribute('href') && link2.getAttribute('href') !== '#')
+          ? link2
           : ((hot && hot.getAttribute && hot.getAttribute('href') && hot.getAttribute('href') !== '#') ? hot : btn);
         handleAction(target);
         return;
@@ -140,14 +232,14 @@ document.addEventListener('DOMContentLoaded', () => {
       // Si el punto es transparente, NO dispares este botón.
       // En su lugar, intenta “pasar” el toque al botón que esté debajo.
       console.log('icon click ignored (transparent) ->', pair.btn);
-      if (link && typeof document.elementFromPoint === 'function') {
-        const prev = link.style.pointerEvents;
-        link.style.pointerEvents = 'none';
+      if (link2 && typeof document.elementFromPoint === 'function') {
+        const prev = link2.style.pointerEvents;
+        link2.style.pointerEvents = 'none';
         const under = document.elementFromPoint(e.clientX, e.clientY);
-        link.style.pointerEvents = prev;
+        link2.style.pointerEvents = prev;
 
         const underLink = under && under.closest ? under.closest('a.cta-link') : null;
-        if (underLink && underLink !== link && underLink.getAttribute && underLink.getAttribute('href')) {
+        if (underLink && underLink !== link2 && underLink.getAttribute && underLink.getAttribute('href')) {
           handleAction(underLink);
         }
       }
