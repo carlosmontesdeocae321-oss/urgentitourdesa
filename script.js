@@ -234,7 +234,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!img) continue;
         if (isOpaqueAtImg(img, e.clientX, e.clientY)) {
           // Navegar al CTA cuyo píxel tocado es opaco
-          window.location.href = href;
+          const target = item.link && item.link.getAttribute ? item.link.getAttribute('target') : null;
+          if (target === '_blank') {
+            const w = window.open(href, '_blank', 'noopener,noreferrer');
+            try { if (w) w.opener = null; } catch (e) {}
+          } else {
+            window.location.assign(href);
+          }
           return;
         }
       }
@@ -259,9 +265,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const handleAction = (el) => {
       // Si el elemento es un ancla/imagen con href o data-href, navegar a él.
-      const href = (el && el.getAttribute) ? (el.getAttribute('href') || el.dataset.href) : null;
+      const href = (el && el.getAttribute) ? (el.getAttribute('href') || (el.dataset && el.dataset.href)) : null;
       if (!href || href === '#') return;
-      window.location.href = href;
+
+      // Respetar target="_blank" (importante para wa.me y enlaces externos en iOS/Android).
+      let target = null;
+      try {
+        if (el && el.getAttribute) target = el.getAttribute('target');
+        if (!target && el && el.closest) {
+          const a = el.closest('a');
+          if (a && a.getAttribute) target = a.getAttribute('target');
+        }
+      } catch (e) {
+        // ignore
+      }
+
+      if (target === '_blank') {
+        const w = window.open(href, '_blank', 'noopener,noreferrer');
+        try { if (w) w.opener = null; } catch (e) {}
+        return;
+      }
+
+      window.location.assign(href);
     };
 
     // Hover píxel-perfect: dibujar la imagen del botón en un canvas fuera de pantalla
