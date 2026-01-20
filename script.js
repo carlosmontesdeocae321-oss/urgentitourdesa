@@ -31,10 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function applyContentFitScale(){
     if (!posterEl || !posterContentEl) return;
 
-    if (!isMobileCoarse()) {
-      root.style.setProperty('--content-scale', '1');
-      return;
-    }
+    const coarse = isMobileCoarse();
 
     const vv = window.visualViewport;
     const viewportW = (vv && vv.width) ? vv.width : window.innerWidth;
@@ -91,9 +88,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const contentW = Math.max(1, maxX - minX);
     const contentH = Math.max(1, maxY - minY);
 
-    let scale = Math.min(1, availableW / contentW, availableH / contentH);
-    // En iPhone 8 (pantalla baja) puede necesitarse más reducción.
-    scale = Math.max(0.5, scale);
+    // En móvil (touch) ajustar por ancho y alto (una sola pantalla).
+    // En escritorio, ajustar solo por ancho para mantener composición y permitir scroll vertical.
+    let scale = coarse
+      ? Math.min(1, availableW / contentW, availableH / contentH)
+      : Math.min(1, availableW / contentW);
+
+    // Límites: en móvil aceptamos más reducción, en escritorio mantener legible.
+    scale = Math.max(coarse ? 0.5 : 0.72, scale);
     root.style.setProperty('--content-scale', scale.toFixed(3));
 
     // Ajustar márgenes de solape de CTAs en función del scale.
@@ -449,6 +451,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const car = document.querySelector('.car');
       if (!car) return;
       const rect = car.getBoundingClientRect();
+
       // colocar la división un poco debajo de la base del carro para mantener la línea entre carro y CTAs
       // usar una separación menor para que la línea quede más cerca del carro (elevada)
       const gap = Math.max(6, Math.round(rect.height * 0.02));

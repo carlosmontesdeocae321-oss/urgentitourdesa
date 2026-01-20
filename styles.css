@@ -259,19 +259,35 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
 @media (min-width:701px){
   .poster-content{ max-width: 980px; width: 100%; margin: 0 auto; }
 
-  /* En escritorio: solo 2 emojis con gafas junto al título */
-  .car-pair2-a{ display:none !important; }
+  /* En escritorio: añadir gafas al lado del auto (derecha) */
+  .car-pair2-a{
+    display:block;
+    position:absolute;
+    left: calc(50% + 18vw);
+    top: 16vh;
+    width: clamp(96px, 9vw, 144px);
+    z-index: 790;
+    animation-name: emoji-float-tilt-left15;
+  }
+  .car-pair2-a{ top: 16dvh; }
+
+  /* En escritorio: mantener 2 emojis con gafas junto al título */
   .car-pair1-a,
   .car-pair3-a{
     position: fixed;
     top: 18px;
-    width: clamp(64px, 6vw, 96px);
+    width: clamp(96px, 9vw, 144px);
     z-index: 980;
     animation-name: emoji-float-tilt;
   }
   /* Alinear con el centro del contenido (980px) sin que se vayan a los bordes */
-  .car-pair1-a{ left: clamp(16px, calc(50% - 490px + 18px), 180px); }
-  .car-pair3-a{ left: auto; right: clamp(16px, calc(50% - 490px + 18px), 180px); }
+  .car-pair1-a{
+    left: clamp(16px, calc(50% - 490px + 18px), 180px);
+    top: calc(18px + 23vh);
+    animation-name: emoji-float-tilt-right;
+  }
+  /* Gafas derecha: bajar ~4 líneas y mover ~3 líneas hacia la izquierda (más hacia el centro) */
+  .car-pair3-a{ top: calc(18px + 4vh); left: auto; right: clamp(16px, calc(50% - 490px + 18px), 180px); }
 
   /* Parasol: +50% y acomodado alrededor del carro */
   .car-pair1-b,
@@ -279,10 +295,10 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
     width: clamp(144px, 18vw, 264px);
     z-index: 820;
   }
-  .car-pair1-b{ left: calc(50% - 30vw); top: 23vh; }
-  .car-pair1-b{ top: 23dvh; }
-  .car-pair2-b{ left: calc(50% + 12vw); top: 17vh; }
-  .car-pair2-b{ top: 17dvh; }
+  .car-pair1-b{ left: calc(50% - 27vw); top: 13vh; animation-name: emoji-float-tilt-left15; }
+  .car-pair1-b{ top: 13dvh; }
+  .car-pair2-b{ left: calc(50% + 4vw); top: 5vh; z-index: 790; animation-name: emoji-float-tilt-right; }
+  .car-pair2-b{ top: 5dvh; }
 }
 
 /* Pares de emojis en el área de botones (dos pares) colocados alrededor de los CTAs pero por debajo de ellos (no encima) */
@@ -327,6 +343,18 @@ body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI
   0%{transform:translateY(0) rotate(-15deg)}
   50%{transform:translateY(-8px) rotate(-19deg)}
   100%{transform:translateY(0) rotate(-15deg)}
+}
+
+@keyframes emoji-float-tilt-right30{
+  0%{transform:translateY(0) rotate(30deg)}
+  50%{transform:translateY(-8px) rotate(34deg)}
+  100%{transform:translateY(0) rotate(30deg)}
+}
+
+@keyframes emoji-float-tilt-right60{
+  0%{transform:translateY(0) rotate(60deg)}
+  50%{transform:translateY(-8px) rotate(64deg)}
+  100%{transform:translateY(0) rotate(60deg)}
 }
 /* CTAs superpuestos en pila: centrados absolutamente, botones posicionados por offsets superiores */
 /* (deduplicado: base .buttons-stage definida arriba con position:relative) */
