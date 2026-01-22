@@ -215,9 +215,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const links = Array.from(ctasEl.querySelectorAll('a.cta-link'));
       if (!links.length) return;
 
-      e.preventDefault();
-      e.stopPropagation();
-
       // Ordenar por z-index (visual): mayor primero
       const ordered = links
         .map((link) => ({
@@ -233,6 +230,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const img = item.img;
         if (!img) continue;
         if (isOpaqueAtImg(img, e.clientX, e.clientY)) {
+          e.preventDefault();
+          e.stopPropagation();
           // Navegar al CTA cuyo píxel tocado es opaco
           const target = item.link && item.link.getAttribute ? item.link.getAttribute('target') : null;
           if (target === '_blank') {
