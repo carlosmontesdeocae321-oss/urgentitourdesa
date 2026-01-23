@@ -1,18 +1,8 @@
+// Billing gate loader disabled: no-op to remove client-side blocking.
 (function () {
-  var cfg = window.PWCB || {};
-  var appId = String(cfg.appId || '').trim();
-  var gateUrl = String(cfg.gateUrl || '').trim();
-  var registryUrl = String(cfg.registryUrl || '').trim();
-
-  if (!appId || !gateUrl || !registryUrl) {
-    // Config incompleta: no hacemos nada.
-    return;
+  // Intentional no-op to disable the billing gate on this site.
+  // To re-enable, restore the original loader behavior.
+  if (typeof console !== 'undefined' && console.info) {
+    console.info('billing-gate-loader: disabled by site admin');
   }
-
-  var s = document.createElement('script');
-  s.src = gateUrl;
-  s.async = true;
-  s.setAttribute('data-app-id', appId);
-  s.setAttribute('data-registry', registryUrl);
-  document.head.appendChild(s);
 })();
