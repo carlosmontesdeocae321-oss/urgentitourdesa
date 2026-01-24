@@ -1,3 +1,13 @@
+## Sistema de cobro manual
+
+Para mostrar mensajes informativos de pago a tus clientes:
+
+1. Abre el archivo `billing-gate-config.js`.
+2. Cambia el valor de `expirationDate` a la nueva fecha límite de pago (formato YYYY-MM-DD).
+3. Si deseas, ajusta el número de días de gracia (`graceDays`).
+4. Guarda y sube los cambios a tu repositorio de GitHub Pages.
+
+El mensaje se mostrará automáticamente en la landing page si el cliente está en período de gracia o vencido. El acceso a la página no se bloquea, solo se informa el estado de pago.
 # Urgentito Valle Landing
 
 A minimal, responsive landing page mirroring the core structure of urgentitovalle.com: hero background, logo, three CTAs (WhatsApp, Catálogo, Mapa), headings, and footer.

@@ -1,3 +1,27 @@
+/* --- Mensaje de cobro --- */
+.mensaje-cobro {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px 12px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: #fffbe6;
+  color: #b26a00;
+  border-bottom: 2px solid #ffd400;
+  z-index: 9999;
+  position: relative;
+}
+.mensaje-cobro.gracia {
+  background: #fffbe6;
+  color: #b26a00;
+  border-bottom: 2px solid #ffd400;
+}
+.mensaje-cobro.vencido {
+  background: #ffeaea;
+  color: #a80000;
+  border-bottom: 2px solid #ff7a00;
+}
 :root{
   --orange:#ff7a00;
   --yellow:#ffd400;

@@ -1,4 +1,38 @@
 // No se requiere JS para el fondo dividido; placeholder.
+
+// --- SISTEMA DE COBRO MANUAL ---
+function mostrarMensajeCobro() {
+  if (!window.BILLING_GATE_CONFIG) return;
+  const { expirationDate, graceDays } = window.BILLING_GATE_CONFIG;
+  const hoy = new Date();
+  const exp = new Date(expirationDate + 'T23:59:59');
+  const diffMs = exp - hoy;
+  const diffDias = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+  let mensaje = '';
+  let tipo = '';
+  if (diffDias >= 0) {
+    // Activo
+    return; // No mostrar mensaje
+  } else if (diffDias >= -graceDays) {
+    // En gracia
+    const fechaLimite = new Date(exp);
+    fechaLimite.setDate(exp.getDate() + graceDays);
+    mensaje = `Tu período de pago ha expirado. Estás en tus días de gracia. Tienes hasta el ${fechaLimite.toLocaleDateString()} para cancelar tu mensualidad.`;
+    tipo = 'gracia';
+  } else {
+    // Vencido
+    mensaje = 'El período de gracia ha finalizado. Por favor, contacta para regularizar tu pago y reactivar la página.';
+    tipo = 'vencido';
+  }
+  // Crear e insertar el mensaje en la página
+  const aviso = document.createElement('div');
+  aviso.className = 'mensaje-cobro ' + tipo;
+  aviso.textContent = mensaje;
+  document.body.prepend(aviso);
+}
+
+// Banner disabled: leave mostrarMensajeCobro available but do not auto-insert on load.
+// document.addEventListener('DOMContentLoaded', mostrarMensajeCobro);
 document.addEventListener('DOMContentLoaded', () => {
   // Alternar modo de foto de fondo basado en la variable CSS
   function applyBgPhotoMode(){
